@@ -2,66 +2,251 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalina VG Lab</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    html { scroll-behavior: smooth; }
-    .brain-bullet::before { content: "\1F9E0  "; }
-    @keyframes slide {
-      0%   { transform: translateX(0); }
-      33.33%  { transform: translateX(-100%); }
-      66.66%  { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 150px;
     }
-    .animate-slide {
+    body {
+      text-align: justify;
+      background-color: #f9fafb;
+      color: #1f2937;
+      padding-top: 64px; /* To prevent content hidden behind fixed navbar */
+    }
+    .brain-bullet::before {
+      content: "\1F9E0  ";
+    }
+    .slide-container {
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+      background-color: white;
+      max-width: 600px;
+      margin: 1.5rem auto;
+      border-radius: 1rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    #slidesWrapper {
       display: flex;
-      width: 300%;
-      animation: slide 15s infinite ease-in-out;
-    }
-    .animate-slide img {
-      width: 100%;
+      transition: transform 0.5s ease-in-out;
       height: 100%;
+    }
+    #slidesWrapper > div {
+      min-width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #slidesWrapper img {
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
       object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      user-select: none;
+    }
+    /* Arrow buttons */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      user-select: none;
+      z-index: 10;
+    }
+    .arrow-btn:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+    #arrowLeft {
+      left: 10px;
+    }
+    #arrowRight {
+      right: 10px;
+    }
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    /* Navbar styles */
+    #navbar {
+      background-color: #9dd5d6;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: fixed;
+      top: 0; left: 0; width: 100%;
+      z-index: 50;
+      transition: transform 0.3s ease;
+    }
+    #navbar .menu-links a {
+      color: white;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+    }
+    #navbar .menu-links a:hover {
+      text-decoration: underline;
+      color: #155e75;
+    }
+    /* Mobile menu styles */
+    #mobile-menu a {
+      color: #1f2937;
+      padding: 0.75rem 1.5rem;
+      display: block;
+      border-bottom: 1px solid #e5e7eb;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    #mobile-menu a:hover {
+      background-color: #d1d5db;
     }
   </style>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-md">
+  <nav id="navbar" class="shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <!-- Logo -->
       <div class="flex items-center space-x-3">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
-        <span class="font-bold text-lg">Catalina VG Lab</span>
+        <span class="font-bold text-lg text-white select-none">Catalina VG Lab</span>
       </div>
-      <div class="space-x-6">
-        <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="research.html" class="hover:text-blue-600">Research</a>
-        <a href="people.html" class="hover:text-blue-600">People</a>
-        <a href="publications.html" class="hover:text-blue-600">Publications</a>
-        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+
+      <!-- Hamburger button -->
+      <button id="menu-btn" class="block md:hidden focus:outline-none">
+        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+
+      <!-- Desktop Menu -->
+      <div id="menu" class="hidden md:flex space-x-6 menu-links">
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="people.html">People</a>
+        <a href="publications.html">Publications</a>
+        <a href="contact.html">Contact</a>
       </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow-md">
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="people.html">People</a>
+      <a href="publications.html">Publications</a>
+      <a href="contact.html">Contact</a>
     </div>
   </nav>
 
-  <!-- Sliding Hero Images -->
-  <div class="w-full h-96 overflow-hidden relative">
-    <div class="animate-slide">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture1.jpg" alt="Slide 1">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture2.jpg" alt="Slide 2">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture3.jpg" alt="Slide 3">
+  <!-- Slide show container -->
+  <section class="slide-container">
+    <div id="slidesWrapper">
+      <div class="flex flex-col items-center">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" />
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" />
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" />
+      </div>
+      <div class="flex flex-col items-center">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" />
+      </div>
     </div>
-  </div>
+    <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
+      <svg class="arrow-icon" viewBox="0 0 24 24">
+        <polyline points="15 18 9 12 15 6"></polyline>
+      </svg>
+    </button>
+    <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
+      <svg class="arrow-icon" viewBox="0 0 24 24">
+        <polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </button>
+  </section>
 
-  <!-- Intro Section -->
-  <div class="max-w-4xl mx-auto px-4 mt-10 text-center">
-    <h1 class="text-4xl font-bold mb-4">Catalina Vallejo-Giraldo</h1>
-    <p class="text-lg text-gray-700 mb-6">
-      Welcome to the Catalina VG Lab, where research meets innovation in the fields of biomaterials,
-      brain mechanobiology, and medicine. Explore our research, meet our team, and discover our publications.
+  <!-- Introduction content -->
+  <main class="max-w-4xl mx-auto px-4 mt-12 mb-20">
+    <h1 class="text-3xl font-bold mb-6 text-center">Catalina Vallejo-Giraldo</h1>
+    <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture1.jpg" alt="Catalina Vallejo-Giraldo" class="rounded-full w-48 h-48 object-cover mx-auto mb-6" />
+    <p>
+      Dr. Catalina Vallejo-Giraldo is an Associate Professor in the School of Engineering (Biomedical Engineering) and the School of Medicine at the University of Galway. Her research focuses on the intersection of biomaterials, brain mechanobiology, and medicine. Catalina has received extensive international training, including academic experience at Universidad EIA in Colombia, Imperial College London, UK, Cardiff University, UK, and the University of Galway in Ireland. She has also gained industry experience at Neurent Medical in Ireland and clinical experience at the Mayo Clinic in the USA.
     </p>
-  </div>
+    <p class="mt-4">
+      Dr. Vallejo-Giraldo has published over 22 peer-reviewed papers in high-impact international journals, 3 refereed book chapters, 16 conference proceedings, and one pre-print. She has received several prestigious academic awards, including the Donegan Medal from the Royal Academy of Medicine in Ireland (RAMI, BME Section) and the Trainee Award at the 10th World Biomaterials Congress, recognizing her contributions to the field of biomaterials for neural interfaces and tissue engineering. Recently, Dr. Vallejo-Giraldo was awarded an ERC starting grant to develop a novel treatment modality for Glioblastoma (GB). Additionally, she serves as a referee for several international journals, is an early-career editorial board member of the FASEB Journal, and is a member of the Editorial Review Board for the Journal of Tissue Engineering (JTE).
+    </p>
+  </main>
+
+  <script>
+    // Slide show functionality
+    const slidesWrapper = document.getElementById('slidesWrapper');
+    const slides = slidesWrapper.children;
+    const totalSlides = slides.length;
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      if(index < 0) index = totalSlides - 1;
+      if(index >= totalSlides) index = 0;
+      currentIndex = index;
+      slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    document.getElementById('arrowLeft').addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+
+    document.getElementById('arrowRight').addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 5000);
+
+    // Hamburger toggle
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // Hide/show navbar on scroll
+    let lastScroll = 0;
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll <= 0) {
+        navbar.style.transform = 'translateY(0)';
+        return;
+      }
+      if (currentScroll > lastScroll) {
+        // scrolling down → hide navbar
+        navbar.style.transform = 'translateY(-100%)';
+      } else {
+        // scrolling up → show navbar
+        navbar.style.transform = 'translateY(0)';
+      }
+      lastScroll = currentScroll;
+    });
+  </script>
 
 </body>
 </html>
