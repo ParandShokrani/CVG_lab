@@ -3,29 +3,74 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>People - CVG Lab</title>
+  <title>People - Catalina VG Lab</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .brain-bullet::before { content: "\1F9E0  "; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
-  <nav class="bg-white shadow">
+  <nav class="bg-white shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="index.html"><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-10"></a>
+      <div class="flex items-center space-x-3">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
+        <span class="font-bold text-lg">Catalina VG Lab</span>
+      </div>
       <div class="space-x-6">
-        <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
-        <a href="research.html" class="text-gray-700 hover:text-blue-600">Research</a>
-        <a href="people.html" class="text-gray-700 hover:text-blue-600">People</a>
-        <a href="publications.html" class="text-gray-700 hover:text-blue-600">Publications</a>
-        <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="research.html" class="hover:text-blue-600">Research</a>
+        <a href="people.html" class="hover:text-blue-600">People</a>
+        <a href="publications.html" class="hover:text-blue-600">Publications</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Content -->
-  <div class="max-w-4xl mx-auto px-4 mt-8">
-    <h1 class="text-3xl font-bold mb-4">People</h1>
-    <p class="text-lg text-gray-600">Meet the team members of the CVG Lab.</p>
+  <!-- People Section -->
+  <div class="max-w-6xl mx-auto px-4 mt-10">
+    <h1 class="text-3xl font-bold mb-6">Our Team</h1>
+
+    <!-- PI -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">Principal Investigator</h2>
+      <div class="flex items-center space-x-6">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture1.jpg" alt="Catalina Vallejo-Giraldo" class="rounded-full w-40 h-40 object-cover"/>
+        <div>
+          <h3 class="text-xl font-bold">Dr. Catalina Vallejo-Giraldo</h3>
+          <p class="text-lg" style="text-align: justify;">
+            Associate Professor in the School of Engineering (Biomedical Engineering) and the School of Medicine at the University of Galway.
+            Expert in biomaterials, brain mechanobiology, and medicine.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PhD Students -->
+    <div class="mb-8">
+      <h2 class="text-2xl font-semibold mb-4">PhD Students</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+        <!-- Example Student -->
+        <div class="bg-white shadow-md rounded-lg p-4">
+          <img src="https://via.placeholder.com/150" alt="DEF" class="rounded-full w-32 h-32 object-cover mx-auto mb-4"/>
+          <h3 class="text-center font-bold">DEF</h3>
+          <p class="text-sm text-gray-700 text-center">Researching organoids and biomaterial interactions.</p>
+        </div>
+
+        <!-- More students can be added here -->
+        <div class="bg-white shadow-md rounded-lg p-4">
+          <img src="https://via.placeholder.com/150" alt="Student Name" class="rounded-full w-32 h-32 object-cover mx-auto mb-4"/>
+          <h3 class="text-center font-bold">Student Name</h3>
+          <p class="text-sm text-gray-700 text-center">Research focus details here.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <a href="index.html" class="text-blue-600 hover:underline mt-4 block">← Back to homepage</a>
   </div>
 
 </body>
