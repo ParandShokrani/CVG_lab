@@ -15,38 +15,37 @@
       background-color: #f9fafb;
       color: #1f2937;
       padding-top: 64px; /* To prevent content hidden behind fixed navbar */
-    }
-    .brain-bullet::before {
-      content: "\1F9E0  ";
+      margin: 0;
+      font-family: system-ui, sans-serif;
     }
     .slide-container {
-      height: 380px;
+      width: 100vw;
+      max-width: 100%;
+      height: 400px;
       position: relative;
       overflow: hidden;
       background-color: white;
-      max-width: 600px;
-      margin: 1.5rem auto;
-      border-radius: 1rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin: 0 auto;
     }
     #slidesWrapper {
       display: flex;
       transition: transform 0.5s ease-in-out;
       height: 100%;
+      width: 100%;
     }
     #slidesWrapper > div {
-      min-width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      min-width: 100vw;
+      height: 100%;
+      flex-shrink: 0;
+      position: relative;
     }
     #slidesWrapper img {
-      width: 350px;
-      height: 350px;
-      border-radius: 50%;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       user-select: none;
+      pointer-events: none;
+      display: block;
     }
     /* Arrow buttons */
     .arrow-btn {
@@ -92,28 +91,81 @@
       top: 0; left: 0; width: 100%;
       z-index: 50;
       transition: transform 0.3s ease;
-    }
-    #navbar .menu-links a {
-      color: white;
-      font-weight: 600;
       padding: 0.5rem 1rem;
-      text-decoration: none;
     }
-    #navbar .menu-links a:hover {
-      text-decoration: underline;
-      color: #155e75;
+    #navbar .logo-title {
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
-    /* Mobile menu styles */
-    #mobile-menu a {
-      color: #1f2937;
-      padding: 0.75rem 1.5rem;
+    #navbar .logo-title img {
+      height: 3rem;
+      width: auto;
+    }
+    #menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
       display: block;
-      border-bottom: 1px solid #e5e7eb;
+      color: white;
+    }
+    #menu-btn svg {
+      width: 30px;
+      height: 30px;
+    }
+    #menu {
+      display: none;
+      flex-direction: column;
+      background-color: #e0f2f1;
+      position: absolute;
+      top: 100%;
+      right: 1rem;
+      width: 180px;
+      border-radius: 0 0 0.5rem 0.5rem;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 40;
+    }
+    #menu a {
+      padding: 0.75rem 1rem;
+      color: #1f2937;
       text-decoration: none;
       font-weight: 600;
+      border-bottom: 1px solid #cbd5e1;
     }
-    #mobile-menu a:hover {
-      background-color: #d1d5db;
+    #menu a:last-child {
+      border-bottom: none;
+    }
+    #menu a:hover {
+      background-color: #b2dfdb;
+      color: #004d40;
+    }
+    @media(min-width: 768px) {
+      #menu-btn {
+        display: none;
+      }
+      #menu {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        box-shadow: none;
+        width: auto;
+        border-radius: 0;
+      }
+      #menu a {
+        border: none;
+        padding: 0 1rem;
+        color: white;
+      }
+      #menu a:hover {
+        background: none;
+        text-decoration: underline;
+        color: #155e75;
+      }
     }
   </style>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
@@ -121,54 +173,42 @@
 <body>
 
   <!-- Navbar -->
-  <nav id="navbar" class="shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <!-- Logo -->
-      <div class="flex items-center space-x-3">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
-        <span class="font-bold text-lg text-white select-none">Catalina VG Lab</span>
-      </div>
+  <nav id="navbar" class="flex justify-between items-center max-w-7xl mx-auto">
+    <a href="index.html" class="logo-title">
+      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" />
+      Catalina VG Lab
+    </a>
 
-      <!-- Hamburger button -->
-      <button id="menu-btn" class="block md:hidden focus:outline-none">
-        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
+    <button id="menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="menu">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+      </svg>
+    </button>
 
-      <!-- Desktop Menu -->
-      <div id="menu" class="hidden md:flex space-x-6 menu-links">
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="people.html">People</a>
-        <a href="publications.html">Publications</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden md:hidden bg-white border-t shadow-md">
-      <a href="index.html">Home</a>
-      <a href="research.html">Research</a>
-      <a href="people.html">People</a>
-      <a href="publications.html">Publications</a>
-      <a href="contact.html">Contact</a>
+    <div id="menu" role="menu" aria-hidden="true">
+      <a href="index.html" role="menuitem">Home</a>
+      <a href="research.html" role="menuitem">Research</a>
+      <a href="people.html" role="menuitem">People</a>
+      <a href="publications.html" role="menuitem">Publications</a>
+      <a href="contact.html" role="menuitem">Contact</a>
     </div>
   </nav>
 
   <!-- Slide show container -->
-  <section class="slide-container">
+  <section class="slide-container" aria-label="Image slideshow">
     <div id="slidesWrapper">
-      <div class="flex flex-col items-center">
+      <div>
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" />
       </div>
-      <div class="flex flex-col items-center">
+      <div>
         <img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" />
       </div>
-      <div class="flex flex-col items-center">
+      <div>
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" />
       </div>
-      <div class="flex flex-col items-center">
+      <div>
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" />
       </div>
     </div>
@@ -204,10 +244,10 @@
     let currentIndex = 0;
 
     function showSlide(index) {
-      if(index < 0) index = totalSlides - 1;
-      if(index >= totalSlides) index = 0;
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
       currentIndex = index;
-      slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slidesWrapper.style.transform = `translateX(-${currentIndex * 100}vw)`;
     }
 
     document.getElementById('arrowLeft').addEventListener('click', () => {
@@ -224,8 +264,14 @@
     }, 5000);
 
     // Hamburger toggle
-    document.getElementById('menu-btn').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
+    const menuBtn = document.getElementById('menu-btn');
+    const menu = document.getElementById('menu');
+
+    menuBtn.addEventListener('click', () => {
+      const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
+      menuBtn.setAttribute('aria-expanded', !expanded);
+      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
+      menu.setAttribute('aria-hidden', !(menu.style.display === 'flex'));
     });
 
     // Hide/show navbar on scroll
