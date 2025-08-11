@@ -3,29 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - CVG Lab</title>
+  <title>Contact - Catalina VG Lab</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    .brain-bullet::before { content: "\1F9E0  "; }
+  </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
-  <nav class="bg-white shadow">
+  <nav class="bg-white shadow-md">
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <a href="index.html"><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-10"></a>
+      <div class="flex items-center space-x-3">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
+        <span class="font-bold text-lg">Catalina VG Lab</span>
+      </div>
       <div class="space-x-6">
-        <a href="about.html" class="text-gray-700 hover:text-blue-600">About</a>
-        <a href="research.html" class="text-gray-700 hover:text-blue-600">Research</a>
-        <a href="people.html" class="text-gray-700 hover:text-blue-600">People</a>
-        <a href="publications.html" class="text-gray-700 hover:text-blue-600">Publications</a>
-        <a href="contact.html" class="text-gray-700 hover:text-blue-600">Contact</a>
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="research.html" class="hover:text-blue-600">Research</a>
+        <a href="people.html" class="hover:text-blue-600">People</a>
+        <a href="publications.html" class="hover:text-blue-600">Publications</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Content -->
-  <div class="max-w-4xl mx-auto px-4 mt-8">
-    <h1 class="text-3xl font-bold mb-4">Contact</h1>
-    <p class="text-lg text-gray-600">Email: example@universityofgalway.ie</p>
+  <!-- Contact Section -->
+  <div class="max-w-6xl mx-auto px-4 mt-10">
+    <h1 class="text-3xl font-bold mb-6">Contact</h1>
+    <p class="text-lg mb-4">
+      For inquiries regarding research collaborations, student opportunities, or other lab-related questions, please contact us using the details below.
+    </p>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-2">Email</h2>
+      <p class="text-gray-700">catalina.vallejo-giraldo@universityofgalway.ie</p>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-2">Address</h2>
+      <p class="text-gray-700">
+        School of Engineering & School of Medicine <br/>
+        University of Galway <br/>
+        Galway, Ireland
+      </p>
+    </div>
+
+    <div class="bg-white shadow-md rounded-lg p-6 mb-6">
+      <h2 class="text-xl font-semibold mb-2">Social Media</h2>
+      <p class="text-gray-700">
+        Twitter: <a href="#" class="text-blue-600 hover:underline">@CVGLab</a><br/>
+        LinkedIn: <a href="#" class="text-blue-600 hover:underline">CVG Lab</a>
+      </p>
+    </div>
+
+    <a href="index.html" class="text-blue-600 hover:underline mt-4 block">← Back to homepage</a>
   </div>
 
 </body>
