@@ -1,326 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Catalina VG Lab</title>
-
-  <!-- Tailwind CDN -->
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
-
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    :root {
-      --nav-height: 64px;
+    html { scroll-behavior: smooth; }
+    @keyframes slide {
+      0%   { transform: translateX(0); }
+      33.33%  { transform: translateX(-100%); }
+      66.66%  { transform: translateX(-200%); }
+      100% { transform: translateX(0); }
     }
-    html { scroll-behavior: smooth; scroll-padding-top: var(--nav-height); }
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: #1f2937;
-      background: #f8fafc;
-      padding-top: var(--nav-height); /* avoid content under fixed navbar */
-    }
-
-    /* NAVBAR */
-    #navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--nav-height);
-      background: #9dd5d6;
+    .animate-slide {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 60;
-      transition: transform 0.28s ease;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+      width: 300%;
+      animation: slide 15s infinite ease-in-out;
     }
-    .nav-inner {
+    .animate-slide img {
       width: 100%;
-      max-width: 1180px;
-      padding: 0 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      height: 500px;
+      object-fit: cover;
     }
-    .logo-title { display:flex; align-items:center; gap:.75rem; color:white; font-weight:700; text-decoration:none; }
-    .logo-title img { height:44px; width:auto; display:block; }
-
-    /* desktop links */
-    .menu-desktop { display:none; gap:1rem; align-items:center; }
-    .menu-desktop a { color:white; font-weight:600; padding:0.35rem .75rem; text-decoration:none; }
-    .menu-desktop a:hover { color:#064e3b; text-decoration:underline; }
-
-    /* hamburger button */
-    #menu-btn { background:transparent; border:0; display:block; color:white; cursor:pointer; padding:.25rem; }
-    #menu-btn svg { width:28px; height:28px; }
-
-    /* mobile menu panel */
-    #mobileMenu {
-      display:none; /* toggled by JS */
-      position: absolute;
-      right: 1rem;
-      top: calc(var(--nav-height) + 8px);
-      background: #e6f6f3;
-      border-radius: 8px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    .menu-hidden {
+      max-height: 0;
       overflow: hidden;
-      min-width: 180px;
-      z-index: 55;
+      transition: max-height 0.4s ease;
     }
-    #mobileMenu a {
-      display:block;
-      padding: 0.65rem 1rem;
-      color:#04493b;
-      text-decoration:none;
-      font-weight:700;
-      border-bottom: 1px solid rgba(0,0,0,0.04);
+    .menu-visible {
+      max-height: 500px; /* enough space for menu */
+      transition: max-height 0.4s ease;
     }
-    #mobileMenu a:last-child { border-bottom: none; }
-    #mobileMenu a:hover { background:#bdeadd; color:#002f26; }
-
-    /* Responsive: show desktop menu at md and hide hamburger */
-    @media (min-width: 768px) {
-      #menu-btn { display:none; }
-      #mobileMenu { display:block !important; position:static; background:transparent; box-shadow:none; border-radius:0; min-width:auto; }
-      #mobileMenu a { color:white; padding:0 .5rem; border-bottom:none; font-weight:600; }
-      #mobileMenu a:hover { background:transparent; color:#064e3b; text-decoration:underline; }
-      .menu-desktop { display:flex; }
-      /* place inline menu instead of absolute panel */
-      #mobileMenu { display:flex; gap: .5rem; align-items:center; }
-    }
-
-    /* SLIDER */
-    .slide-container {
-      width:100vw;
-      max-width:100%;
-      height:60vh;
-      min-height:320px;
-      position:relative;
-      overflow:hidden;
-      margin:0;
-    }
-    #slidesWrapper {
-      display:flex;
-      width:100%;
-      height:100%;
-      transition: transform .55s ease;
-    }
-    #slidesWrapper > div {
-      min-width:100vw;
-      height:100%;
-      flex-shrink:0;
-    }
-    #slidesWrapper img {
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      user-select:none;
-      pointer-events:none;
-    }
-    .arrow-btn {
-      position:absolute;
-      top:50%;
-      transform:translateY(-50%);
-      width:44px; height:44px;
-      border-radius:999px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background: rgba(0,0,0,0.35);
-      color: white;
-      cursor:pointer;
-      z-index:30;
-      transition: background .18s ease;
-    }
-    .arrow-btn:hover { background: rgba(0,0,0,0.6); }
-    #arrowLeft { left: 14px; }
-    #arrowRight { right: 14px; }
-    .arrow-icon { width:20px; height:20px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-
-    /* content area */
-    main.container { max-width:980px; margin: 2.25rem auto; padding: 0 1rem; }
-
-    footer { text-align:center; padding: 1.25rem; background:#0f172a; color:white; margin-top:2rem; }
   </style>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-800">
 
-  <!-- NAVBAR -->
-  <nav id="navbar" role="navigation" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="index.html" class="logo-title" aria-label="Catalina VG Lab home">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo">
-        <span class="hidden sm:inline">Catalina VG Lab</span>
-      </a>
-
-      <!-- desktop menu / mobile menu (same element toggled via CSS/JS) -->
-      <div id="mobileMenu" aria-hidden="true">
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="people.html">People</a>
-        <a href="publications.html">Publications</a>
-        <a href="contact.html">Contact</a>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
+      <div class="flex items-center space-x-2">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-10">
+        <span class="font-bold text-lg">CVG Lab</span>
       </div>
-
-      <!-- hamburger for small screens -->
-      <button id="menu-btn" aria-controls="mobileMenu" aria-expanded="false" aria-label="Toggle menu">
-        <!-- 3-lines icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+      <!-- Hamburger Button -->
+      <button id="menu-btn" class="focus:outline-none">
+        <svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 6h16M4 12h16m-7 6h7"/>
+        </svg>
       </button>
+    </div>
+    <!-- Menu Links -->
+    <div id="menu" class="menu-hidden bg-gray-100">
+      <div class="flex flex-col px-4 py-2 space-y-2">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="research.html" class="hover:text-blue-600">Research</a>
+        <a href="people.html" class="hover:text-blue-600">People</a>
+        <a href="publications.html" class="hover:text-blue-600">Publications</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+      </div>
     </div>
   </nav>
 
-  <!-- SLIDER (full width) -->
-  <section class="slide-container" aria-label="Hero slideshow">
-    <div id="slidesWrapper" aria-live="polite">
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Research image 1"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Research image 2"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Research image 3"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Research image 4"></div>
+  <!-- Hero Slider -->
+  <div class="mt-16 overflow-hidden">
+    <div class="animate-slide">
+      <img src="https://placehold.co/1200x500/ff9999/333?text=Slide+1" alt="Slide 1">
+      <img src="https://placehold.co/1200x500/99ccff/333?text=Slide+2" alt="Slide 2">
+      <img src="https://placehold.co/1200x500/99ff99/333?text=Slide+3" alt="Slide 3">
     </div>
+  </div>
 
-    <button id="arrowLeft" class="arrow-btn" aria-label="Previous slide">
-      <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-    </button>
-    <button id="arrowRight" class="arrow-btn" aria-label="Next slide">
-      <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-    </button>
-  </section>
+  <!-- Main Content -->
+  <div class="max-w-4xl mx-auto px-4 mt-8">
+    <h1 class="text-3xl font-bold mb-4">Biomaterials | Galway | Manus Biggs</h1>
+    <p class="text-lg mb-6">Welcome to the Biggs Lab Homepage. The Biggs group conducts multi-disciplinary bioengineering research at the National University of Ireland.</p>
 
-  <!-- NEWS (replaces Catalina bio) -->
-  <main class="container" id="news">
-    <h1 class="text-3xl font-bold text-center mb-6">Latest News</h1>
-
-    <ul class="space-y-6">
-      <li class="bg-white rounded-md p-5 shadow-sm">
-        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+    <h2 class="text-2xl font-semibold mb-3">News</h2>
+    <ul class="list-disc pl-6 space-y-2">
+      <li>
+        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="text-blue-600 hover:underline">
           Galway researcher looks for ‘gold standard’ brain cancer treatment
-        </a>
-        <p class="mt-2 text-gray-700">Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
+        </a> — Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.
       </li>
-
-      <li class="bg-white rounded-md p-5 shadow-sm">
-        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+      <li>
+        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="text-blue-600 hover:underline">
           20 women scoring big in STEM
-        </a>
-        <p class="mt-2 text-gray-700">SiliconRepublic.com highlights the groundbreaking work of women across STEM.</p>
+        </a> — SiliconRepublic.com has highlighted groundbreaking work by women in STEM.
       </li>
-
-      <li class="bg-white rounded-md p-5 shadow-sm">
-        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
-          CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo
-        </a>
-        <p class="mt-2 text-gray-700">University of Galway’s online publication featuring top researchers and their work.</p>
+      <li>
+        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="text-blue-600 hover:underline">
+          CÚRAM Spotlight On: Dr Catalina Vallejo Giraldo
+        </a> — University of Galway’s online publication highlighting leading researchers.
       </li>
-
-      <li class="bg-white rounded-md p-5 shadow-sm">
-        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
-          Donegan Medal Awarded by The Royal Academy of Medicine Ireland
-        </a>
-        <p class="mt-2 text-gray-700">Recognition by the Section of Biomedical Sciences, University of Galway.</p>
+      <li>
+        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="text-blue-600 hover:underline">
+          Donegan Medal Awarded by RAMI
+        </a> — Recognising contributions in biomedical sciences.
       </li>
     </ul>
 
-    <p class="mt-6 text-center text-sm text-gray-600">
-      Contact: <a href="https://research.universityofgalway.ie/en/persons/catalina-vallejo-giraldo" class="text-blue-600 hover:underline" target="_blank">Catalina Vallejo Giraldo — University of Galway</a>
+    <h2 class="text-2xl font-semibold mt-6 mb-3">Contact Us</h2>
+    <p>
+      <a href="https://research.universityofgalway.ie/en/persons/catalina-vallejo-giraldo" target="_blank" class="text-blue-600 hover:underline">
+        Catalina Vallejo Giraldo — University of Galway
+      </a>
     </p>
-  </main>
-
-  <footer>
-    <small>© Catalina VG Lab</small>
-  </footer>
+  </div>
 
   <script>
-    /* SLIDER */
-    const slidesWrapper = document.getElementById('slidesWrapper');
-    const slides = slidesWrapper.children;
-    const total = slides.length;
-    let idx = 0;
-    function show(i){
-      idx = (i + total) % total;
-      slidesWrapper.style.transform = `translateX(-${idx * 100}vw)`;
-    }
-    document.getElementById('arrowLeft').addEventListener('click', ()=> show(idx - 1));
-    document.getElementById('arrowRight').addEventListener('click', ()=> show(idx + 1));
-    // autoplay
-    let autoplay = setInterval(()=> show(idx + 1), 5000);
-    // pause autoplay while user interacts (optional)
-    [ 'arrowLeft','arrowRight' ].forEach(id=>{
-      document.getElementById(id).addEventListener('click', ()=> {
-        clearInterval(autoplay);
-        autoplay = setInterval(()=> show(idx + 1), 5000);
-      });
-    });
-
-    /* HAMBURGER MENU TOGGLE */
     const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobileMenu');
+    const menu = document.getElementById('menu');
     menuBtn.addEventListener('click', () => {
-      const isHidden = mobileMenu.style.display === '' || mobileMenu.style.display === 'none';
-      // toggle
-      mobileMenu.style.display = isHidden ? 'block' : 'none';
-      menuBtn.setAttribute('aria-expanded', isHidden ? 'true' : 'false');
-      // Ensure navbar visible when opening menu
-      if (isHidden) document.getElementById('navbar').style.transform = 'translateY(0)';
-    });
-    // Close menu on resize to desktop
-    window.addEventListener('resize', () => {
-      if (window.innerWidth >= 768) {
-        mobileMenu.style.display = 'flex';
-        menuBtn.setAttribute('aria-expanded', 'false');
-      } else {
-        mobileMenu.style.display = 'none';
-        menuBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
-    // Initialize mobileMenu display based on screen size
-    if (window.innerWidth >= 768) {
-      mobileMenu.style.display = 'flex';
-    } else {
-      mobileMenu.style.display = 'none';
-    }
-    // Close mobile menu when a link is clicked (mobile)
-    mobileMenu.querySelectorAll('a').forEach(a=>{
-      a.addEventListener('click', ()=> {
-        if (window.innerWidth < 768) {
-          mobileMenu.style.display = 'none';
-          menuBtn.setAttribute('aria-expanded','false');
-        }
-      });
-    });
-
-    /* HIDE / SHOW NAVBAR ON SCROLL */
-    const navbar = document.getElementById('navbar');
-    let lastScroll = window.pageYOffset || 0;
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (ticking) return;
-      window.requestAnimationFrame(() => {
-        const current = window.pageYOffset || 0;
-        // if mobile menu open, keep navbar shown
-        const mobileOpen = (mobileMenu.style.display === 'block');
-        if (mobileOpen) {
-          navbar.style.transform = 'translateY(0)';
-          lastScroll = current;
-          ticking = false;
-          return;
-        }
-        if (current <= 10) {
-          navbar.style.transform = 'translateY(0)';
-        } else if (current > lastScroll) {
-          // scrolling down - hide
-          navbar.style.transform = 'translateY(-110%)';
-        } else {
-          // scrolling up - show
-          navbar.style.transform = 'translateY(0)';
-        }
-        lastScroll = current;
-        ticking = false;
-      });
-      ticking = true;
+      menu.classList.toggle('menu-visible');
+      menu.classList.toggle('menu-hidden');
     });
   </script>
 </body>
