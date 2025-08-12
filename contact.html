@@ -20,20 +20,34 @@
     </p>
   </div>
 
-  <!-- Inquiry Form -->
-  <div class="mt-10 bg-white shadow-lg rounded-lg p-6 max-w-xl">
-    <h4 class="text-xl font-semibold mb-4">Send us an inquiry</h4>
-    <form action="mailto:catalina.vallejogiraldo@universityofgalway.ie" method="post" enctype="text/plain" class="space-y-4">
-      <input type="text" name="name" placeholder="Your Name" required
-             class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-      <input type="email" name="email" placeholder="Your Email" required
-             class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
-      <textarea name="message" placeholder="Your Message" rows="4" required
-                class="w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-      <button type="submit"
-              class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition">
-        Send
-      </button>
-    </form>
-  </div>
+<!-- Inquiry Form -->
+<div class="mt-10 bg-white shadow-lg rounded-xl p-8 max-w-xl border border-gray-200">
+  <h4 class="text-2xl font-semibold mb-6 text-gray-700">Send us an inquiry</h4>
+  <form action="https://formspree.io/f/xldlznvb" method="POST" class="space-y-5">
+    
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-600">Your Name</label>
+      <input type="text" name="name" placeholder="Enter your full name" required
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-600">Email Address</label>
+      <input type="email" name="email" placeholder="Enter your email" required
+             class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm font-medium text-gray-600">Your Message</label>
+      <textarea name="message" placeholder="Type your message here..." rows="5" required
+                class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+
+    <button type="submit"
+            class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-all">
+      Send Message
+    </button>
+  </form>
+</div>
+
 </section>
