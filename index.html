@@ -2,120 +2,303 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalina VG Lab</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    html { scroll-behavior: smooth; }
-    @keyframes slide {
-      0%   { transform: translateX(0); }
-      33.33%  { transform: translateX(-100%); }
-      66.66%  { transform: translateX(-200%); }
-      100% { transform: translateX(0); }
+    html {
+      scroll-padding-top: 150px;
+      scroll-behavior: smooth;
     }
-    .animate-slide {
-      display: flex;
-      width: 300%;
-      animation: slide 15s infinite ease-in-out;
+    section[id] {
+      scroll-margin-top: 150px;
     }
-    .animate-slide img {
-      width: 100%;
-      height: 500px;
-      object-fit: cover;
+    body {
+      text-align: justify;
     }
-    .menu-hidden {
-      max-height: 0;
+    .custom-container {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .brain-bullet::before {
+      content: "\1F9E0  ";
+    }
+    .slide-container {
+      height: 380px;
+      position: relative;
       overflow: hidden;
-      transition: max-height 0.4s ease;
+      background-color: white;
+      width: 100vw;
     }
-    .menu-visible {
-      max-height: 500px; /* enough space for menu */
-      transition: max-height 0.4s ease;
+    #slidesWrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+      width: 400%; /* 4 images */
+    }
+    #slidesWrapper > div {
+      min-width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    #slidesWrapper img {
+      width: 100vw;
+      height: 380px;
+      object-fit: cover;
+      user-select: none;
+    }
+    /* Arrow buttons */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      user-select: none;
+      z-index: 10;
+    }
+    .arrow-btn:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+    #arrowLeft {
+      left: 10px;
+    }
+    #arrowRight {
+      right: 10px;
+    }
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Hamburger Navbar */
+    header {
+      background-color: #9dd5d6;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      user-select: none;
+    }
+    .nav-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger div {
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* Animate hamburger to X when open */
+    .hamburger.open div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open div:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    nav ul {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      background-color: #9dd5d6;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px;
+      border-radius: 0 0 0 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    nav ul.show {
+      display: flex;
+    }
+    nav ul li {
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    nav ul li:last-child {
+      border-bottom: none;
+    }
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      padding: 1rem;
+      display: block;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* Always hamburger for desktop: nav always hidden until toggled */
+    @media (min-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 220px;
+      }
+    }
+
+    /* News cards */
+    .news-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .news-card {
+      display: flex;
+      background: white;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+    .news-image {
+      width: 150px;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .news-content {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .news-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1a202c; /* dark slate */
+    }
+    .news-desc {
+      flex-grow: 1;
+      color: #4a5568; /* gray-600 */
+      margin-bottom: 0.5rem;
+    }
+    .news-link {
+      color: #3182ce; /* blue-600 */
+      font-weight: 600;
+      text-decoration: underline;
+      align-self: flex-start;
+    }
+    .news-link:hover {
+      color: #2b6cb0; /* blue-700 */
     }
   </style>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
 </head>
 <body class="bg-gray-50 text-gray-800">
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-16">
-      <div class="flex items-center space-x-2">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-10">
-        <span class="font-bold text-lg">CVG Lab</span>
+  <header>
+    <div class="nav-container">
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-      <!-- Hamburger Button -->
-      <button id="menu-btn" class="focus:outline-none">
-        <svg class="w-8 h-8 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M4 6h16M4 12h16m-7 6h7"/>
-        </svg>
-      </button>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="research.html" target="_blank" rel="noopener noreferrer">Research</a></li>
+          <li><a href="people.html" target="_blank" rel="noopener noreferrer">People</a></li>
+          <li><a href="publications.html" target="_blank" rel="noopener noreferrer">Publications</a></li>
+          <li><a href="contact.html" target="_blank" rel="noopener noreferrer">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-    <!-- Menu Links -->
-    <div id="menu" class="menu-hidden bg-gray-100">
-      <div class="flex flex-col px-4 py-2 space-y-2">
-        <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="research.html" class="hover:text-blue-600">Research</a>
-        <a href="people.html" class="hover:text-blue-600">People</a>
-        <a href="publications.html" class="hover:text-blue-600">Publications</a>
-        <a href="contact.html" class="hover:text-blue-600">Contact</a>
-      </div>
-    </div>
-  </nav>
+  </header>
 
   <!-- Hero Slider -->
-  <div class="mt-16 overflow-hidden">
-    <div class="animate-slide">
-      <img src="https://placehold.co/1200x500/ff9999/333?text=Slide+1" alt="Slide 1">
-      <img src="https://placehold.co/1200x500/99ccff/333?text=Slide+2" alt="Slide 2">
-      <img src="https://placehold.co/1200x500/99ff99/333?text=Slide+3" alt="Slide 3">
+  <section id="home" class="bg-white">
+    <div class="slide-container">
+      <div id="slidesWrapper">
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" /></div>
+      </div>
+      <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
-  </div>
+  </section>
 
-  <!-- Main Content -->
-  <div class="max-w-4xl mx-auto px-4 mt-8">
-    <h1 class="text-3xl font-bold mb-4">Biomaterials | Galway | Manus Biggs</h1>
-    <p class="text-lg mb-6">Welcome to the Biggs Lab Homepage. The Biggs group conducts multi-disciplinary bioengineering research at the National University of Ireland.</p>
+  <!-- News Section -->
+  <section class="news-section" aria-label="News">
+    <h2 class="text-3xl font-bold mb-6 text-center">Latest News</h2>
 
-    <h2 class="text-2xl font-semibold mb-3">News</h2>
-    <ul class="list-disc pl-6 space-y-2">
-      <li>
-        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="text-blue-600 hover:underline">
-          Galway researcher looks for ‘gold standard’ brain cancer treatment
-        </a> — Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.
-      </li>
-      <li>
-        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="text-blue-600 hover:underline">
-          20 women scoring big in STEM
-        </a> — SiliconRepublic.com has highlighted groundbreaking work by women in STEM.
-      </li>
-      <li>
-        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="text-blue-600 hover:underline">
-          CÚRAM Spotlight On: Dr Catalina Vallejo Giraldo
-        </a> — University of Galway’s online publication highlighting leading researchers.
-      </li>
-      <li>
-        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="text-blue-600 hover:underline">
-          Donegan Medal Awarded by RAMI
-        </a> — Recognising contributions in biomedical sciences.
-      </li>
-    </ul>
+    <article class="news-card">
+      <img class="news-image" src="https://images.siliconrepublic.com/wp-content/uploads/2022/11/23084925/brain-cancer-patient-scan-shutterstock-900x600.jpg" alt="Brain Cancer Research" />
+      <div class="news-content">
+        <h3 class="news-title">Galway researcher looks for ‘gold standard’ brain cancer treatment</h3>
+        <p class="news-desc">Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
+        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
 
-    <h2 class="text-2xl font-semibold mt-6 mb-3">Contact Us</h2>
-    <p>
-      <a href="https://research.universityofgalway.ie/en/persons/catalina-vallejo-giraldo" target="_blank" class="text-blue-600 hover:underline">
-        Catalina Vallejo Giraldo — University of Galway
-      </a>
-    </p>
-  </div>
+    <article class="news-card">
+      <img class="news-image" src="https://images.siliconrepublic.com/wp-content/uploads/2023/03/08135718/STEM-women-1024x576.jpg" alt="Women in STEM" />
+      <div class="news-content">
+        <h3 class="news-title">20 women scoring big in STEM</h3>
+        <p class="news-desc">SiliconRepublic.com has put together a list to highlight some of the groundbreaking work of women across STEM.</p>
+        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
 
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
-    menuBtn.addEventListener('click', () => {
-      menu.classList.toggle('menu-visible');
-      menu.classList.toggle('menu-hidden');
-    });
-  </script>
-</body>
-</html>
+    <article class="news-card">
+      <img class="news-image" src="https://impact.universityofgalway.ie/sites/default/files/styles/impact_gallery_800x600/public/2022-12/Dr_Catalina_Vallejo_Giraldo.jpg" alt="Spotlight On Dr Catalina Vallejo Giraldo" />
+      <div class="news-content">
+        <h3 class="news-title">Cois Coiribe CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo</h3>
+        <p class="news-desc">Cois Coiribe is University of Galway’s online publication, highlighting the views and opinions of some of the university’s top academics and researchers.</p>
+        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img class="news-image" src="https://research.universityofgalway.ie/sites/default/files/styles/large/public/2023-06/Donegan_Medal_2023-06-02_0.jpg" alt="Donegan Medal Awarded by RAMI" />
+      <div class="news-content">
+        <h3
