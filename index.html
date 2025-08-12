@@ -7,47 +7,42 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
     html {
-      scroll-behavior: smooth;
       scroll-padding-top: 150px;
+      scroll-behavior: smooth;
+    }
+    section[id] {
+      scroll-margin-top: 150px;
     }
     body {
       text-align: justify;
-      background-color: #f9fafb;
-      color: #1f2937;
-      padding-top: 64px; /* To prevent content hidden behind fixed navbar */
-      margin: 0;
-      font-family: system-ui, sans-serif;
+    }
+    .custom-container {
+      max-width: 1440px;
+      margin: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
     .slide-container {
-      width: 100vw;
-      max-width: 100%;
-      height: 400px;
       position: relative;
       overflow: hidden;
       background-color: white;
-      margin: 0 auto;
+      height: 60vh;
     }
     #slidesWrapper {
       display: flex;
       transition: transform 0.5s ease-in-out;
       height: 100%;
-      width: 100%;
     }
     #slidesWrapper > div {
-      min-width: 100vw;
+      min-width: 100%;
       height: 100%;
-      flex-shrink: 0;
-      position: relative;
     }
     #slidesWrapper img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       user-select: none;
-      pointer-events: none;
-      display: block;
     }
-    /* Arrow buttons */
     .arrow-btn {
       position: absolute;
       top: 50%;
@@ -60,239 +55,106 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      transition: background-color 0.3s ease;
       color: white;
-      user-select: none;
       z-index: 10;
     }
     .arrow-btn:hover {
       background-color: rgba(0,0,0,0.7);
     }
-    #arrowLeft {
-      left: 10px;
-    }
-    #arrowRight {
-      right: 10px;
-    }
-    .arrow-icon {
-      width: 20px;
-      height: 20px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-    /* Navbar styles */
-    #navbar {
-      background-color: #9dd5d6;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      position: fixed;
-      top: 0; left: 0; width: 100%;
-      z-index: 50;
-      transition: transform 0.3s ease;
-      padding: 0.5rem 1rem;
-    }
-    #navbar .logo-title {
-      color: white;
-      font-weight: 700;
-      font-size: 1.25rem;
-      user-select: none;
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-    #navbar .logo-title img {
-      height: 3rem;
-      width: auto;
-    }
-    #menu-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      display: block;
-      color: white;
-    }
-    #menu-btn svg {
-      width: 30px;
-      height: 30px;
-    }
-    #menu {
-      display: none;
-      flex-direction: column;
-      background-color: #e0f2f1;
-      position: absolute;
-      top: 100%;
-      right: 1rem;
-      width: 180px;
-      border-radius: 0 0 0.5rem 0.5rem;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      z-index: 40;
-    }
-    #menu a {
-      padding: 0.75rem 1rem;
-      color: #1f2937;
-      text-decoration: none;
-      font-weight: 600;
-      border-bottom: 1px solid #cbd5e1;
-    }
-    #menu a:last-child {
-      border-bottom: none;
-    }
-    #menu a:hover {
-      background-color: #b2dfdb;
-      color: #004d40;
-    }
-    @media(min-width: 768px) {
-      #menu-btn {
-        display: none;
-      }
-      #menu {
-        display: flex !important;
-        position: static;
-        flex-direction: row;
-        background: transparent;
-        box-shadow: none;
-        width: auto;
-        border-radius: 0;
-      }
-      #menu a {
-        border: none;
-        padding: 0 1rem;
-        color: white;
-      }
-      #menu a:hover {
-        background: none;
-        text-decoration: underline;
-        color: #155e75;
-      }
-    }
+    #arrowLeft { left: 10px; }
+    #arrowRight { right: 10px; }
   </style>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav id="navbar" class="flex justify-between items-center max-w-7xl mx-auto">
-    <a href="index.html" class="logo-title">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" />
-      Catalina VG Lab
-    </a>
+<!-- Header -->
+<div class="w-full bg-gray-800 bg-opacity-30 relative py-6 flex items-center justify-start px-6">
+  <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12 sm:h-16 md:h-20 lg:h-28 object-contain max-w-[25vw] sm:max-w-[20vw] md:max-w-none"/>
+  <p class="ml-6 text-white font-bold text-lg sm:text-xl md:hidden select-none whitespace-nowrap">Catalina Vallejo Giraldo Lab</p>
+  <p class="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white font-bold text-4xl sm:text-5xl select-none whitespace-nowrap text-center">Catalina Vallejo Giraldo Lab</p>
+</div>
 
-    <button id="menu-btn" aria-label="Toggle Menu" aria-expanded="false" aria-controls="menu">
-      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
-    </button>
+<!-- Hero -->
+<section id="home" class="bg-white">
+  <div class="slide-container">
+    <div id="slidesWrapper">
+      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" /></div>
+      <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" /></div>
+      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" /></div>
+      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" /></div>
+    </div>
+    <button id="arrowLeft" class="arrow-btn">&#10094;</button>
+    <button id="arrowRight" class="arrow-btn">&#10095;</button>
+  </div>
+</section>
 
-    <div id="menu" role="menu" aria-hidden="true">
-      <a href="index.html" role="menuitem">Home</a>
-      <a href="research.html" role="menuitem">Research</a>
-      <a href="people.html" role="menuitem">People</a>
-      <a href="publications.html" role="menuitem">Publications</a>
-      <a href="contact.html" role="menuitem">Contact</a>
+<!-- Navbar -->
+<header class="bg-white shadow-md sticky top-0 z-20">
+  <nav class="py-4" style="background-color: #9dd5d6;">
+    <div class="custom-container flex justify-center">
+      <ul class="flex space-x-12">
+        <li><a href="#research" class="text-white font-bold hover:underline">Research</a></li>
+        <li><a href="#people" class="text-white font-bold hover:underline">People</a></li>
+        <li><a href="#publications" class="text-white font-bold hover:underline">Publications</a></li>
+        <li><a href="#contact" class="text-white font-bold hover:underline">Contact</a></li>
+      </ul>
     </div>
   </nav>
+</header>
 
-  <!-- Slide show container -->
-  <section class="slide-container" aria-label="Image slideshow">
-    <div id="slidesWrapper">
-      <div>
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" />
-      </div>
-      <div>
-        <img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" />
-      </div>
-      <div>
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" />
-      </div>
-      <div>
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" />
-      </div>
-    </div>
-    <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
-      <svg class="arrow-icon" viewBox="0 0 24 24">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-    <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
-      <svg class="arrow-icon" viewBox="0 0 24 24">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
-  </section>
+<!-- News Section -->
+<section id="news" class="py-12 bg-gray-50">
+  <div class="custom-container">
+    <h2 class="text-3xl font-bold text-center mb-8">Latest News</h2>
+    <ul class="space-y-6">
+      <li>
+        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+          Galway researcher looks for ‘gold standard’ brain cancer treatment
+        </a>
+        <p>Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
+      </li>
+      <li>
+        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+          20 women scoring big in STEM
+        </a>
+        <p>Highlighting groundbreaking work of women across STEM fields.</p>
+      </li>
+      <li>
+        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+          CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo
+        </a>
+        <p>University of Galway’s online publication featuring top researchers and their work.</p>
+      </li>
+      <li>
+        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="text-xl font-semibold text-blue-700 hover:underline">
+          Donegan Medal Awarded by The Royal Academy of Medicine Ireland
+        </a>
+        <p>Recognition by the Section of Biomedical Sciences, University of Galway.</p>
+      </li>
+    </ul>
+  </div>
+</section>
 
-  <!-- Introduction content -->
-  <main class="max-w-4xl mx-auto px-4 mt-12 mb-20">
-    <h1 class="text-3xl font-bold mb-6 text-center">Catalina Vallejo-Giraldo</h1>
-    <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture1.jpg" alt="Catalina Vallejo-Giraldo" class="rounded-full w-48 h-48 object-cover mx-auto mb-6" />
-    <p>
-      Dr. Catalina Vallejo-Giraldo is an Associate Professor in the School of Engineering (Biomedical Engineering) and the School of Medicine at the University of Galway. Her research focuses on the intersection of biomaterials, brain mechanobiology, and medicine. Catalina has received extensive international training, including academic experience at Universidad EIA in Colombia, Imperial College London, UK, Cardiff University, UK, and the University of Galway in Ireland. She has also gained industry experience at Neurent Medical in Ireland and clinical experience at the Mayo Clinic in the USA.
-    </p>
-    <p class="mt-4">
-      Dr. Vallejo-Giraldo has published over 22 peer-reviewed papers in high-impact international journals, 3 refereed book chapters, 16 conference proceedings, and one pre-print. She has received several prestigious academic awards, including the Donegan Medal from the Royal Academy of Medicine in Ireland (RAMI, BME Section) and the Trainee Award at the 10th World Biomaterials Congress, recognizing her contributions to the field of biomaterials for neural interfaces and tissue engineering. Recently, Dr. Vallejo-Giraldo was awarded an ERC starting grant to develop a novel treatment modality for Glioblastoma (GB). Additionally, she serves as a referee for several international journals, is an early-career editorial board member of the FASEB Journal, and is a member of the Editorial Review Board for the Journal of Tissue Engineering (JTE).
-    </p>
-  </main>
+<!-- Footer -->
+<footer class="py-6 bg-gray-800 text-white text-center">
+  <p>Contact: <a href="https://research.universityofgalway.ie/en/persons/catalina-vallejo-giraldo" class="underline" target="_blank">Catalina Vallejo Giraldo</a> - University of Galway</p>
+</footer>
 
-  <script>
-    // Slide show functionality
-    const slidesWrapper = document.getElementById('slidesWrapper');
-    const slides = slidesWrapper.children;
-    const totalSlides = slides.length;
-    let currentIndex = 0;
-
-    function showSlide(index) {
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      currentIndex = index;
-      slidesWrapper.style.transform = `translateX(-${currentIndex * 100}vw)`;
-    }
-
-    document.getElementById('arrowLeft').addEventListener('click', () => {
-      showSlide(currentIndex - 1);
-    });
-
-    document.getElementById('arrowRight').addEventListener('click', () => {
-      showSlide(currentIndex + 1);
-    });
-
-    // Auto slide every 5 seconds
-    setInterval(() => {
-      showSlide(currentIndex + 1);
-    }, 5000);
-
-    // Hamburger toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const menu = document.getElementById('menu');
-
-    menuBtn.addEventListener('click', () => {
-      const expanded = menuBtn.getAttribute('aria-expanded') === 'true' || false;
-      menuBtn.setAttribute('aria-expanded', !expanded);
-      menu.style.display = menu.style.display === 'flex' ? 'none' : 'flex';
-      menu.setAttribute('aria-hidden', !(menu.style.display === 'flex'));
-    });
-
-    // Hide/show navbar on scroll
-    let lastScroll = 0;
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      const currentScroll = window.pageYOffset;
-      if (currentScroll <= 0) {
-        navbar.style.transform = 'translateY(0)';
-        return;
-      }
-      if (currentScroll > lastScroll) {
-        // scrolling down → hide navbar
-        navbar.style.transform = 'translateY(-100%)';
-      } else {
-        // scrolling up → show navbar
-        navbar.style.transform = 'translateY(0)';
-      }
-      lastScroll = currentScroll;
-    });
-  </script>
+<!-- Slider Script -->
+<script>
+  const slidesWrapper = document.getElementById('slidesWrapper');
+  const slides = slidesWrapper.children;
+  let currentIndex = 0;
+  document.getElementById('arrowLeft').addEventListener('click', () => {
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+  });
+  document.getElementById('arrowRight').addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % slides.length;
+    slidesWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+  });
+</script>
 
 </body>
 </html>
