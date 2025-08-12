@@ -11,8 +11,8 @@
       padding: 0;
       overflow-x: hidden;
       font-family: system-ui, sans-serif;
-      background-color: #f9fafb; /* Tailwind gray-50 */
-      color: #2d3748; /* Tailwind gray-800 */
+      background-color: #f9fafb;
+      color: #2d3748;
       text-align: justify;
     }
     header {
@@ -91,13 +91,22 @@
       background-color: rgba(255,255,255,0.2);
     }
 
+    /* Banner image */
+    .banner-img {
+      width: 100%;
+      height: auto;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
     /* People grid */
     .custom-container {
       max-width: 1440px;
       margin-left: auto;
       margin-right: auto;
-      padding-left: 3rem; /* More margin on sides */
-      padding-right: 3rem; /* More margin on sides */
+      padding-left: 3rem;
+      padding-right: 3rem;
       padding-top: 4rem;
       padding-bottom: 4rem;
     }
@@ -117,8 +126,8 @@
       opacity: 0.9;
     }
     a.person-card img {
-      width: 180px;  /* Bigger image */
-      height: 180px; /* Bigger image */
+      width: 180px;
+      height: 180px;
       margin: 0 auto;
       border-radius: 50%;
       object-fit: cover;
@@ -129,7 +138,7 @@
       font-size: 1.25rem;
       font-weight: 600;
       color: #1a202c;
-      white-space: nowrap; /* Keep name on one line */
+      white-space: nowrap;
     }
     a.person-card p {
       font-size: 1rem;
@@ -159,6 +168,12 @@
       </nav>
     </div>
   </header>
+
+  <!-- Banner Image -->
+  <section class="banner">
+    <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/group.jpg" 
+         alt="Catalina VG Lab Team" class="banner-img" />
+  </section>
 
   <!-- People Section -->
   <section id="people" class="custom-container">
@@ -197,7 +212,6 @@
   </section>
 
   <script>
-    // Hamburger toggle
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
 
@@ -216,7 +230,6 @@
       }
     });
 
-    // Close menu when clicking a nav link
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
