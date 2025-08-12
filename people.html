@@ -3,101 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catalina VG Lab</title>
+  <title>Catalina VG Lab - People</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <style>
-    /* Prevent horizontal scroll */
     body, html {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
-    }
-    html {
-      scroll-padding-top: 150px;
-      scroll-behavior: smooth;
-    }
-    section[id] {
-      scroll-margin-top: 150px;
-    }
-    body {
-      text-align: justify;
+      font-family: system-ui, sans-serif;
       background-color: #f9fafb; /* Tailwind gray-50 */
       color: #2d3748; /* Tailwind gray-800 */
-      font-family: system-ui, sans-serif;
+      text-align: justify;
     }
-    .custom-container {
-      max-width: 1440px;
-      margin-left: auto;
-      margin-right: auto;
-      padding-left: 1rem;
-      padding-right: 1rem;
-    }
-    .slide-container {
-      height: 380px;
-      position: relative;
-      overflow: hidden;
-      background-color: white;
-      width: 100vw;
-    }
-    #slidesWrapper {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-      height: 100%;
-      width: calc(100vw * 4); /* 4 images */
-    }
-    #slidesWrapper > div {
-      min-width: 100vw;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    #slidesWrapper img {
-      width: 100vw;
-      height: 380px;
-      object-fit: cover;
-      user-select: none;
-      pointer-events: none;
-    }
-    /* Arrow buttons */
-    .arrow-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.4);
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      color: white;
-      user-select: none;
-      z-index: 10;
-      border: none;
-    }
-    .arrow-btn:hover {
-      background-color: rgba(0,0,0,0.7);
-    }
-    #arrowLeft {
-      left: 10px;
-    }
-    #arrowRight {
-      right: 10px;
-    }
-    .arrow-icon {
-      width: 20px;
-      height: 20px;
-      stroke-width: 2;
-      stroke: currentColor;
-      fill: none;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    /* Hamburger Navbar */
     header {
       background-color: #9dd5d6;
       position: sticky;
@@ -129,7 +46,6 @@
       border-radius: 2px;
       transition: all 0.3s ease;
     }
-    /* Animate hamburger to X when open */
     .hamburger.open div:nth-child(1) {
       transform: rotate(45deg) translate(5px, 5px);
     }
@@ -175,57 +91,49 @@
       background-color: rgba(255,255,255,0.2);
     }
 
-    /* News cards */
-    .news-section {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1rem;
+    /* People grid */
+    .custom-container {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      padding-top: 4rem;
+      padding-bottom: 4rem;
     }
-    .news-card {
-      display: flex;
-      background: white;
-      margin-bottom: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      overflow: hidden;
-      transition: transform 0.2s ease;
-      flex-direction: row;
+    .grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }
-    .news-card:hover {
-      transform: translateY(-5px);
+    a.person-card {
+      text-align: center;
+      display: block;
+      transition: opacity 0.3s ease;
+      color: inherit;
+      text-decoration: none;
     }
-    .news-image {
-      width: 150px;
-      height: 100%;
+    a.person-card:hover {
+      opacity: 0.9;
+    }
+    a.person-card img {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto;
+      border-radius: 50%;
       object-fit: cover;
-      flex-shrink: 0;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     }
-    .news-content {
-      padding: 1rem;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .news-title {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 0.5rem;
-      color: #1a202c; /* dark slate */
-    }
-    .news-desc {
-      flex-grow: 1;
-      color: #4a5568; /* gray-600 */
-      margin-bottom: 0.5rem;
-    }
-    .news-link {
-      color: #3182ce; /* blue-600 */
+    a.person-card h4 {
+      margin-top: 1rem;
+      font-size: 1.125rem;
       font-weight: 600;
-      text-decoration: underline;
-      align-self: flex-start;
+      color: #1a202c;
     }
-    .news-link:hover {
-      color: #2b6cb0; /* blue-700 */
+    a.person-card p {
+      font-size: 0.875rem;
+      color: #718096; /* Tailwind gray-600 */
+      margin-top: 0.25rem;
     }
   </style>
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
@@ -251,61 +159,41 @@
     </div>
   </header>
 
-  <!-- Hero Slider -->
-  <section id="home" class="bg-white">
-    <div class="slide-container" role="region" aria-label="Hero image slider">
-      <div id="slidesWrapper">
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" /></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" /></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" /></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" /></div>
-      </div>
-      <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-      <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
-        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
+  <!-- People Section -->
+  <section id="people" class="custom-container">
+    <div class="grid">
+      <a href="catalina1.html" class="person-card">
+        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina Vallejo Giraldo" />
+        <h4>Catalina Vallejo Giraldo</h4>
+        <p>Principal Investigator</p>
+      </a>
+      <a href="akash.html" class="person-card">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" alt="Akash Garhwal" />
+        <h4>Akash Garhwal</h4>
+        <p>PhD Student</p>
+      </a>
+      <a href="Taryn.html" class="person-card">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" alt="Taryn Clarke" />
+        <h4>Taryn Clarke</h4>
+        <p>PhD Student</p>
+      </a>
+      <a href="Jose.html" class="person-card">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" alt="José Miguel Fernández Real" />
+        <h4>José Miguel Fernández Real</h4>
+        <p>PhD Student</p>
+      </a>
+      <a href="Andre.html" class="person-card">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG-lab/main/JDC_7553.jpg" alt="Andres P. Carreño" />
+        <h4>Andres P. Carreño</h4>
+        <p>PhD Student</p>
+      </a>
+      <a href="Yvonne.html" class="person-card">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG-lab/main/Yvonne1.jpg" alt="Yvonne Fahy" />
+        <h4>Yvonne Fahy</h4>
+        <p>PhD Student</p>
+      </a>
     </div>
   </section>
-
-<!-- People -->
-<section id="people" class="scroll-mt-32 py-16 bg-white text-justify">
-  <div class="custom-container">
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-8">
-      <a href="catalina1.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">Catalina Vallejo Giraldo</h4>
-        <p class="text-sm text-gray-600">Principal Investigator</p>
-      </a>
-      <a href="akash.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" alt="Akash" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">Akash Garhwal</h4>
-        <p class="text-sm text-gray-600">PhD Student</p>
-      </a>
-      <a href="Taryn.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" alt="Taryn" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">Taryn Clarke</h4>
-        <p class="text-sm text-gray-600">PhD Student</p>
-      </a>
-      <a href="Jose.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" alt="Jose" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">José Miguel Fernández Real</h4>
-        <p class="text-sm text-gray-600">PhD Student</p>
-      </a>
-           <a href="Andre.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG-lab/refs/heads/main/JDC_7553.jpg?token=GHSAT0AAAAAADI66TOK33NLVS6K4WIQ3H5K2E3IEEQ" alt="Andre" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">Andres P. Carreño</h4>
-        <p class="text-sm text-gray-600">PhD Student</p>
-      </a>
-          <a href="Yvonne.html" class="text-center block hover:opacity-90 transition">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG-lab/refs/heads/main/Yvonne1.jpg?token=GHSAT0AAAAAADI66TOLMZAJHERSZ4IUHKOY2E3IFNQ" alt="Yvonne" class="w-32 h-32 mx-auto rounded-full object-cover shadow-md" />
-        <h4 class="mt-4 text-lg font-semibold">Yvonne Fahy</h4>
-        <p class="text-sm text-gray-600">PhD Student</p>
-      </a>
-    </div>
-  </div>
-</section>
 
   <script>
     // Hamburger toggle
@@ -327,7 +215,7 @@
       }
     });
 
-    // Close menu when clicking a nav link (good UX)
+    // Close menu when clicking a nav link
     navMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
@@ -335,31 +223,6 @@
         navMenu.classList.remove('show');
       });
     });
-
-    // Simple slider logic
-    const slidesWrapper = document.getElementById('slidesWrapper');
-    const totalSlides = slidesWrapper.children.length;
-    let currentSlide = 0;
-
-    document.getElementById('arrowLeft').addEventListener('click', () => {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlide();
-    });
-    document.getElementById('arrowRight').addEventListener('click', () => {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlide();
-    });
-
-    function updateSlide() {
-      slidesWrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
-    }
-
-    // Optional: Auto-slide every 5s
-    // setInterval(() => {
-    //   currentSlide = (currentSlide + 1) % totalSlides;
-    //   updateSlide();
-    // }, 5000);
   </script>
-
 </body>
 </html>
