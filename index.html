@@ -9,7 +9,366 @@
     html {
       scroll-padding-top: 150px;
       scroll-behavior: smooth;
+    }<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalina VG Lab</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    html {
+      scroll-padding-top: 150px;
+      scroll-behavior: smooth;
     }
+    section[id] {
+      scroll-margin-top: 150px;
+    }
+    body {
+      text-align: justify;
+    }
+    .custom-container {
+      max-width: 1440px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    .brain-bullet::before {
+      content: "\1F9E0  ";
+    }
+    .slide-container {
+      height: 380px;
+      position: relative;
+      overflow: hidden;
+      background-color: white;
+      width: 100vw;
+    }
+    #slidesWrapper {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      height: 100%;
+      width: 400%; /* 4 images */
+    }
+    #slidesWrapper > div {
+      min-width: 100vw;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    #slidesWrapper img {
+      width: 100vw;
+      height: 380px;
+      object-fit: cover;
+      user-select: none;
+    }
+    /* Arrow buttons */
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.4);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      color: white;
+      user-select: none;
+      z-index: 10;
+    }
+    .arrow-btn:hover {
+      background-color: rgba(0,0,0,0.7);
+    }
+    #arrowLeft {
+      left: 10px;
+    }
+    #arrowRight {
+      right: 10px;
+    }
+    .arrow-icon {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+      stroke: currentColor;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    /* Hamburger Navbar */
+    header {
+      background-color: #9dd5d6;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      user-select: none;
+    }
+    .nav-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .hamburger {
+      width: 30px;
+      height: 22px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .hamburger div {
+      height: 4px;
+      background-color: white;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+    /* Animate hamburger to X when open */
+    .hamburger.open div:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.open div:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.open div:nth-child(3) {
+      transform: rotate(-45deg) translate(6px, -6px);
+    }
+    nav ul {
+      list-style: none;
+      display: none;
+      flex-direction: column;
+      margin: 0;
+      padding: 0;
+      background-color: #9dd5d6;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px;
+      border-radius: 0 0 0 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    }
+    nav ul.show {
+      display: flex;
+    }
+    nav ul li {
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+    nav ul li:last-child {
+      border-bottom: none;
+    }
+    nav ul li a {
+      color: white;
+      font-weight: bold;
+      padding: 1rem;
+      display: block;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+    }
+    nav ul li a:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+
+    /* Always hamburger for desktop: nav always hidden until toggled */
+    @media (min-width: 768px) {
+      nav ul {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 220px;
+      }
+    }
+
+    /* News cards */
+    .news-section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .news-card {
+      display: flex;
+      background: white;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s ease;
+    }
+    .news-card:hover {
+      transform: translateY(-5px);
+    }
+    .news-image {
+      width: 150px;
+      height: 100%;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+    .news-content {
+      padding: 1rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .news-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: #1a202c; /* dark slate */
+    }
+    .news-desc {
+      flex-grow: 1;
+      color: #4a5568; /* gray-600 */
+      margin-bottom: 0.5rem;
+    }
+    .news-link {
+      color: #3182ce; /* blue-600 */
+      font-weight: 600;
+      text-decoration: underline;
+      align-self: flex-start;
+    }
+    .news-link:hover {
+      color: #2b6cb0; /* blue-700 */
+    }
+  </style>
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+  <!-- Navbar -->
+  <header>
+    <div class="nav-container">
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="research.html" target="_blank" rel="noopener noreferrer">Research</a></li>
+          <li><a href="people.html" target="_blank" rel="noopener noreferrer">People</a></li>
+          <li><a href="publications.html" target="_blank" rel="noopener noreferrer">Publications</a></li>
+          <li><a href="contact.html" target="_blank" rel="noopener noreferrer">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Slider -->
+  <section id="home" class="bg-white">
+    <div class="slide-container">
+      <div id="slidesWrapper">
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Hero Image 1" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Hero Image 2" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Hero Image 3" loading="lazy" draggable="false" /></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Hero Image 4" loading="lazy" draggable="false" /></div>
+      </div>
+      <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
+        <svg class="arrow-icon" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- News Section -->
+  <section class="news-section" aria-label="News">
+    <h2 class="text-3xl font-bold mb-6 text-center">Latest News</h2>
+
+    <article class="news-card">
+      <img class="news-image" src="https://images.siliconrepublic.com/wp-content/uploads/2022/11/23084925/brain-cancer-patient-scan-shutterstock-900x600.jpg" alt="Brain Cancer Research" />
+      <div class="news-content">
+        <h3 class="news-title">Galway researcher looks for ‘gold standard’ brain cancer treatment</h3>
+        <p class="news-desc">Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
+        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img class="news-image" src="https://images.siliconrepublic.com/wp-content/uploads/2023/03/08135718/STEM-women-1024x576.jpg" alt="Women in STEM" />
+      <div class="news-content">
+        <h3 class="news-title">20 women scoring big in STEM</h3>
+        <p class="news-desc">SiliconRepublic.com has put together a list to highlight some of the groundbreaking work of women across STEM.</p>
+        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img class="news-image" src="https://impact.universityofgalway.ie/sites/default/files/styles/impact_gallery_800x600/public/2022-12/Dr_Catalina_Vallejo_Giraldo.jpg" alt="Spotlight On Dr Catalina Vallejo Giraldo" />
+      <div class="news-content">
+        <h3 class="news-title">Cois Coiribe CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo</h3>
+        <p class="news-desc">Cois Coiribe is University of Galway’s online publication, highlighting the views and opinions of some of the university’s top academics and researchers.</p>
+        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <img class="news-image" src="https://research.universityofgalway.ie/sites/default/files/styles/large/public/2023-06/Donegan_Medal_2023-06-02_0.jpg" alt="Donegan Medal Awarded by RAMI" />
+      <div class="news-content">
+        <h3 class="news-title">Donegan Medal Awarded by The Royal Academy of Medicine Ireland (RAMI)</h3>
+        <p class="news-desc">Awarded by RAMI Section of Biomedical Sciences - University of Galway</p>
+        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" rel="noopener noreferrer" class="news-link">Read more</a>
+      </div>
+    </article>
+
+  </section>
+
+  <script>
+    // Hamburger toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMenu.classList.toggle('show');
+      hamburger.setAttribute('aria-expanded', hamburger.classList.contains('open'));
+    });
+
+    // Allow toggling hamburger via keyboard (Enter and Space)
+    hamburger.addEventListener('keydown', (e) => {
+      if(e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        hamburger.click();
+      }
+    });
+
+    // Slider logic
+    const slidesWrapper = document.getElementById('slidesWrapper');
+    const slidesCount = slidesWrapper.children.length;
+    const arrowLeft = document.getElementById('arrowLeft');
+    const arrowRight = document.getElementById('arrowRight');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+      if (index < 0) index = slidesCount - 1;
+      if (index >= slidesCount) index = 0;
+      currentIndex = index;
+      slidesWrapper.style.transform = `translateX(-${index * 100}vw)`;
+    }
+
+    arrowLeft.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+
+    arrowRight.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      showSlide(currentIndex + 1);
+    }, 5000);
+  </script>
+</body>
+</html>
+
     section[id] {
       scroll-margin-top: 150px;
     }
