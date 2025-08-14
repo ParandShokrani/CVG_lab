@@ -1,235 +1,230 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Catalina VG Lab</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <style>
-    /* Reset & Clean Layout */
-    *, *::before, *::after { box-sizing: border-box; }
-    body, html { margin: 0; padding: 0; overflow-x: hidden; }
-    body { font-family: system-ui, sans-serif; background: #f9fafb; color: #2d3748; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catalina VG Lab</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<style>
+/* Reset & Clean Layout */
+*, *::before, *::after { box-sizing: border-box; }
+body, html { margin: 0; padding: 0; overflow-x: hidden; }
+body { font-family: system-ui, sans-serif; background: #f9fafb; color: #2d3748; }
 
-    /* Navbar */
-    header {
-      position: sticky; top: 0; left: 0; right: 0;
-      background: #9dd5d6; z-index: 30;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .nav-container {
-      max-width: 1440px; margin: auto;
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 0.75rem 1rem;
-    }
-    .hamburger {
-      width: 30px; height: 22px;
-      display: flex; flex-direction: column;
-      justify-content: space-between; cursor: pointer;
-    }
-    .hamburger div {
-      height: 4px; background: white; border-radius: 2px;
-      transition: all 0.3s ease;
-    }
-    .hamburger.open div:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
-    .hamburger.open div:nth-child(2) { opacity: 0; }
-    .hamburger.open div:nth-child(3) { transform: rotate(-45deg) translate(6px,-6px); }
+/* Header Image */
+.header-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
 
-    nav ul {
-      list-style: none; display: none;
-      flex-direction: column; position: absolute;
-      top: 60px; right: 1rem; background: #9dd5d6;
-      width: 220px; border-radius: 0 0 0 5px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.15); padding: 0;
-      margin: 0;
-    }
-    nav ul.show { display: flex; }
-    nav ul li { border-bottom: 1px solid rgba(255,255,255,0.3); }
-    nav ul li:last-child { border-bottom: none; }
-    nav ul li a {
-      display: block; color: white; text-decoration: none;
-      padding: 0.9rem 1rem; font-weight: bold;
-      transition: background 0.2s ease;
-    }
-    nav ul li a:hover { background: rgba(255,255,255,0.2); }
+/* Navbar */
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: #9dd5d6;
+    z-index: 30;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.nav-container {
+    max-width: 1440px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+}
+.nav-logos {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.nav-logos img {
+    height: 40px;
+}
 
-    /* Slider */
-    .slide-container {
-      width: 100vw; height: 380px;
-      overflow: hidden; position: relative;
-    }
-    #slidesWrapper {
-      display: flex; height: 100%;
-      transition: transform 0.5s ease-in-out;
-    }
-    #slidesWrapper > div {
-      flex: 0 0 100vw; height: 100%;
-    }
-    #slidesWrapper img {
-      width: 100vw; height: 100%; object-fit: cover;
-      display: block; user-select: none; pointer-events: none;
-    }
-    .arrow-btn {
-      position: absolute; top: 50%; transform: translateY(-50%);
-      width: 40px; height: 40px; background: rgba(0,0,0,0.4);
-      border: none; border-radius: 50%;
-      color: white; cursor: pointer; z-index: 20;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.3s ease;
-    }
-    .arrow-btn:hover { background: rgba(0,0,0,0.7); }
-    .arrow-btn svg { width: 20px; height: 20px; stroke: currentColor; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
-    #arrowLeft { left: 10px; }
-    #arrowRight { right: 10px; }
+/* Hamburger */
+.hamburger {
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+.hamburger div {
+    height: 4px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+.hamburger.open div:nth-child(1) {
+    transform: rotate(45deg) translate(5px,5px);
+}
+.hamburger.open div:nth-child(2) { opacity: 0; }
+.hamburger.open div:nth-child(3) {
+    transform: rotate(-45deg) translate(6px,-6px);
+}
 
-    /* News Cards */
-    .news-section {
-      max-width: 900px; margin: 2rem auto; padding: 0 1rem;
-    }
-    .news-card {
-      display: flex; background: white;
-      border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      margin-bottom: 1.5rem; overflow: hidden;
-      transition: transform 0.2s ease;
-    }
-    .news-card:hover { transform: translateY(-4px); }
-    .news-image {
-      width: 150px; object-fit: cover; flex-shrink: 0;
-    }
-    .news-content {
-      padding: 1rem; flex: 1;
-    }
-    .news-title {
-      font-size: 1.1rem; font-weight: bold;
-      margin-bottom: 0.5rem; color: #1a202c;
-    }
-    .news-desc {
-      color: #4a5568; margin-bottom: 0.5rem;
-    }
-    .news-link {
-      color: #3182ce; font-weight: 600;
-      text-decoration: underline; display: inline-block;
-    }
-    .news-link:hover { color: #2b6cb0; }
-  </style>
+nav ul {
+    list-style: none;
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    right: 1rem;
+    background: #9dd5d6;
+    width: 220px;
+    border-radius: 0 0 0 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    padding: 0;
+    margin: 0;
+}
+nav ul.show { display: flex; }
+nav ul li { border-bottom: 1px solid rgba(255,255,255,0.3); }
+nav ul li:last-child { border-bottom: none; }
+nav ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 0.9rem 1rem;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+nav ul li a:hover { background: rgba(255,255,255,0.2); }
+
+/* Slider */
+.slide-container { width: 100vw; height: 380px; overflow: hidden; position: relative; }
+#slidesWrapper { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
+#slidesWrapper > div { flex: 0 0 100vw; height: 100%; }
+#slidesWrapper img {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+}
+.arrow-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    background: rgba(0,0,0,0.4);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+.arrow-btn:hover { background: rgba(0,0,0,0.7); }
+.arrow-btn svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+#arrowLeft { left: 10px; }
+#arrowRight { right: 10px; }
+</style>
 </head>
 <body>
 
-  <header>
-    <div class="nav-container">
-      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
-        <div></div><div></div><div></div>
-      </div>
-      <nav>
-        <ul id="nav-menu">
-          <li><a href="research.html">Research</a></li>
-          <li><a href="people.html">Lab Members</a></li>
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+<!-- Header Image -->
+<img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" class="header-image">
 
-  <section class="slide-container">
+<!-- Navbar -->
+<header>
+    <div class="nav-container">
+        <div class="nav-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/University_of_Galway_Logo.svg/2560px-University_of_Galway_Logo.svg.png" alt="Left Logo">
+        </div>
+        
+        <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+            <div></div><div></div><div></div>
+        </div>
+
+        <div class="nav-logos">
+            <img src="https://upload.wikimedia.org/wikipedia/en/7/79/University_of_Galway_logo_2022.png?20220906000612" alt="Right Logo">
+        </div>
+
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="research.html">Research</a></li>
+                <li><a href="people.html">Lab Members</a></li>
+                <li><a href="publications.html">Publications</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Slider -->
+<section class="slide-container">
     <div id="slidesWrapper">
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Slide 1"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Slide 2"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Slide 3"></div>
-      <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Slide 4"></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Slide 1"></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Slide 2"></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Slide 3"></div>
+        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Slide 4"></div>
     </div>
     <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
-      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
     </button>
     <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
-      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
     </button>
-  </section>
+</section>
 
-  <section class="news-section">
-    <h2 class="text-3xl font-bold mb-6">Latest News</h2>
-    <article class="news-card">
-      <img class="news-image" src="https://www.siliconrepublic.com/wp-content/uploads/2024/10/Dr_Catalina_Vallejo_Giraldo.jpg" alt="Brain Cancer Research">
-      <div class="news-content">
-        <h3 class="news-title">Galway researcher looks for ‘gold standard’ brain cancer treatment</h3>
-        <p class="news-desc">Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
-        <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="news-link">Read more</a>
-      </div>
-    </article>
-    <article class="news-card">
-      <img class="news-image" src="https://as1.ftcdn.net/jpg/03/97/66/02/1000_F_397660265_w2F1Gs5iX6YtitA52Q6BLOPmJDsuYyvL.jpg" alt="Women in STEM">
-      <div class="news-content">
-        <h3 class="news-title">20 women scoring big in STEM</h3>
-        <p class="news-desc">SiliconRepublic.com has put together a list to highlight some of the groundbreaking work of women across STEM.</p>
-        <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="news-link">Read more</a>
-      </div>
-    </article>
-    <article class="news-card">
-      <img class="news-image" src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Untitled-design-27.png" alt="Spotlight On">
-      <div class="news-content">
-        <h3 class="news-title">Cois Coiribe CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo</h3>
-        <p class="news-desc">University of Galway’s online publication highlighting top academics and researchers.</p>
-        <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="news-link">Read more</a>
-      </div>
-    </article>
-    <article class="news-card">
-      <img class="news-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/RAMI.jpg" alt="Donegan Medal">
-      <div class="news-content">
-        <h3 class="news-title">Donegan Medal Awarded by RAMI</h3>
-        <p class="news-desc">Awarded by the Section of Biomedical Sciences, University of Galway.</p>
-        <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="news-link">Read more</a>
-      </div>
-    </article>
-
-   <article class="news-card">
-      <img class="news-image" src="https://yt3.googleusercontent.com/qeldv7bcjk9vpOLzBI0KCTRDCl5icE3Zf9GqztyfKnvHEqNvKquhGfRS5G-vs9uHRnblxUN2Iac=s900-c-k-c0x00ffffff-no-rj" alt="Gloabal Talent Ireland">
-      <div class="news-content">
-        <h3 class="news-title">A driving force for engineering more effective brain treatments</h3>
-        <p class="news-desc">Managed by Research Ireland, Global Talent Ireland will support the recruitment of both mid-career rising stars and established research leaders.Read more about Catalina's research career journey:</p>
-        <a href="https://www.researchireland.ie/news/associate-professor-catalina-vallejo-giraldo/" target="_blank" class="news-link">Here</a>
-      </div>
-    </article>
-    </section>
-   <section class="news-section">
-    <h2 class="text-3xl font-bold mb-6">Upcoming Events</h2>
-    <article class="news-card">
-      <img class="news-image" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1046799673%2F2794018164951%2F1%2Foriginal.20250605-173601?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C85%2C1018%2C509&s=35fbd6f116932c76a6f1e8248bc0ae2e" alt="Brain Cancer Research">
-      <div class="news-content">
-        <h3 class="news-title">Irish Neuro-oncology Society meeting 2025</h3>
-        <p class="news-desc">A focused gathering aimed at advancing collaboration and innovation in Irish brain tumour research.</p>
-        <a href="https://www.eventbrite.com/e/irish-neuro-oncology-society-meeting-2025-tickets-1400108435019" target="_blank" class="news-link">Sign Up Here</a>
-      </div>
-    </article>
-   </section>
-  <script>
-    // Hamburger Toggle
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    function toggleMenu() {
-      const expanded = hamburger.classList.toggle('open');
-      navMenu.classList.toggle('show');
-      hamburger.setAttribute('aria-expanded', expanded);
+<script>
+// Hamburger Toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('nav-menu');
+function toggleMenu() {
+    const expanded = hamburger.classList.toggle('open');
+    navMenu.classList.toggle('show');
+    hamburger.setAttribute('aria-expanded', expanded);
+}
+hamburger.addEventListener('click', toggleMenu);
+hamburger.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
     }
-    hamburger.addEventListener('click', toggleMenu);
-    hamburger.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
-    });
-    navMenu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
+});
+navMenu.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         navMenu.classList.remove('show');
         hamburger.setAttribute('aria-expanded', 'false');
-      });
     });
+});
 
-    // Slider Functionality
-    const slidesWrapper = document.getElementById('slidesWrapper');
-    const totalSlides = slidesWrapper.children.length;
-    let current = 0;
-    document.getElementById('arrowLeft').onclick = () => { current = (current - 1 + totalSlides) % totalSlides; updateSlide(); };
-    document.getElementById('arrowRight').onclick = () => { current = (current + 1) % totalSlides; updateSlide(); };
-    function updateSlide() { slidesWrapper.style.transform = `translateX(-${current * 100}vw)`; }
-  </script>
-
+// Slider
+const slidesWrapper = document.getElementById('slidesWrapper');
+const totalSlides = slidesWrapper.children.length;
+let current = 0;
+document.getElementById('arrowLeft').onclick = () => {
+    current = (current - 1 + totalSlides) % totalSlides;
+    updateSlide();
+};
+document.getElementById('arrowRight').onclick = () => {
+    current = (current + 1) % totalSlides;
+    updateSlide();
+};
+function updateSlide() {
+    slidesWrapper.style.transform = `translateX(-${current * 100}vw)`;
+}
+</script>
 </body>
 </html>
