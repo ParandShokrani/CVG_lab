@@ -6,25 +6,33 @@
 <title>Catalina VG Lab</title>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <style>
-/* Reset & Clean Layout */
+/* Reset */
 *, *::before, *::after { box-sizing: border-box; }
 body, html { margin: 0; padding: 0; overflow-x: hidden; }
 body { font-family: system-ui, sans-serif; background: #f9fafb; color: #2d3748; }
 
-/* Header Image */
-.header-image {
+/* Header Image Container */
+.header-container {
+    position: relative;
     width: 100%;
     height: 200px;
-    object-fit: cover;
-    display: block;
 }
+.header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.logo-left, .logo-right {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 60px;
+}
+.logo-left { left: 20px; }
+.logo-right { right: 20px; }
 
 /* Navbar */
 header {
-    position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
     background: #9dd5d6;
     z-index: 30;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
@@ -33,17 +41,10 @@ header {
     max-width: 1440px;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 0.75rem 1rem;
-}
-.nav-logos {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-.nav-logos img {
-    height: 40px;
+    position: relative;
 }
 
 /* Hamburger */
@@ -75,7 +76,6 @@ nav ul {
     flex-direction: column;
     position: absolute;
     top: 60px;
-    right: 1rem;
     background: #9dd5d6;
     width: 220px;
     border-radius: 0 0 0 5px;
@@ -95,70 +95,23 @@ nav ul li a {
     transition: background 0.2s ease;
 }
 nav ul li a:hover { background: rgba(255,255,255,0.2); }
-
-/* Slider */
-.slide-container { width: 100vw; height: 380px; overflow: hidden; position: relative; }
-#slidesWrapper { display: flex; height: 100%; transition: transform 0.5s ease-in-out; }
-#slidesWrapper > div { flex: 0 0 100vw; height: 100%; }
-#slidesWrapper img {
-    width: 100vw;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    user-select: none;
-    pointer-events: none;
-}
-.arrow-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background: rgba(0,0,0,0.4);
-    border: none;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    z-index: 20;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.3s ease;
-}
-.arrow-btn:hover { background: rgba(0,0,0,0.7); }
-.arrow-btn svg {
-    width: 20px;
-    height: 20px;
-    stroke: currentColor;
-    stroke-width: 2;
-    fill: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-}
-#arrowLeft { left: 10px; }
-#arrowRight { right: 10px; }
 </style>
 </head>
 <body>
 
-<!-- Header Image -->
-<img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" class="header-image">
+<!-- Header with Logos on Image -->
+<div class="header-container">
+    <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Header Image" class="header-image">
+    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/University_of_Galway_Logo.svg/2560px-University_of_Galway_Logo.svg.png" alt="Left Logo" class="logo-left">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Logo_example.png" alt="Right Logo" class="logo-right">
+</div>
 
 <!-- Navbar -->
 <header>
     <div class="nav-container">
-        <div class="nav-logos">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/University_of_Galway_Logo.svg/2560px-University_of_Galway_Logo.svg.png" alt="Left Logo">
-        </div>
-        
         <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
             <div></div><div></div><div></div>
         </div>
-
-        <div class="nav-logos">
-            <img src="https://upload.wikimedia.org/wikipedia/en/7/79/University_of_Galway_logo_2022.png?20220906000612" alt="Right Logo">
-        </div>
-
         <nav>
             <ul id="nav-menu">
                 <li><a href="research.html">Research</a></li>
@@ -169,22 +122,6 @@ nav ul li a:hover { background: rgba(255,255,255,0.2); }
         </nav>
     </div>
 </header>
-
-<!-- Slider -->
-<section class="slide-container">
-    <div id="slidesWrapper">
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Slide 1"></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Slide 2"></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Slide 3"></div>
-        <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Slide 4"></div>
-    </div>
-    <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
-        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
-        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-</section>
 
 <script>
 // Hamburger Toggle
@@ -209,22 +146,7 @@ navMenu.querySelectorAll('a').forEach(link => {
         hamburger.setAttribute('aria-expanded', 'false');
     });
 });
-
-// Slider
-const slidesWrapper = document.getElementById('slidesWrapper');
-const totalSlides = slidesWrapper.children.length;
-let current = 0;
-document.getElementById('arrowLeft').onclick = () => {
-    current = (current - 1 + totalSlides) % totalSlides;
-    updateSlide();
-};
-document.getElementById('arrowRight').onclick = () => {
-    current = (current + 1) % totalSlides;
-    updateSlide();
-};
-function updateSlide() {
-    slidesWrapper.style.transform = `translateX(-${current * 100}vw)`;
-}
 </script>
+
 </body>
 </html>
