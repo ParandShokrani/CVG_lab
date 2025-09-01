@@ -1,267 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Catalina VG Lab</title>
-<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-<style>
-/* Reset */
-*,*::before,*::after{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; overflow-x:hidden; font-family:system-ui,sans-serif; background:#f9fafb; color:#2d3748; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Catalina VG Lab - People</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
+  <style>
+    /* Base */
+    *,*::before,*::after{ box-sizing:border-box; }
+    html,body{
+      margin:0; padding:0; overflow-x:hidden;
+      font-family:system-ui,sans-serif;
+      background:#f9fafb; color:#2d3748;
+      text-align: justify;
+    }
 
-/* ===== Header image with overlaid logos ===== */
-.header-hero{
-  position:relative;
-  width:100%;
-  height:240px;
-  overflow:hidden;
-}
-.header-hero img.header-image{
-  position:relative;
-  z-index:1;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-/* optional, improves contrast for logos; tweak opacity if you like */
-.header-hero::after{
-  content:"";
-  position:absolute; inset:0;
-  background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
-  z-index:2;
-}
-.header-hero .logo{
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  height:64px;
-  max-width:40vw;
-  object-fit:contain;
-  z-index:3; /* ensure logos are on top */
-  pointer-events:none;
-  background:transparent;
-}
-.header-hero .logo.left{ left:16px; }
-.header-hero .logo.right{ right:16px; }
+    /* ===== Header image with overlaid logos (same as index) ===== */
+    .header-hero{
+      position:relative; width:100%; height:240px; overflow:hidden;
+    }
+    .header-hero img.header-image{
+      position:relative; z-index:1; width:100%; height:100%;
+      object-fit:cover; display:block;
+    }
+    .header-hero::after{
+      content:""; position:absolute; inset:0;
+      background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
+      z-index:2;
+    }
+    .header-hero .logo{
+      position:absolute; top:50%; transform:translateY(-50%);
+      height:64px; max-width:40vw; object-fit:contain;
+      z-index:3; pointer-events:none; background:transparent;
+    }
+    .header-hero .logo.left{ left:16px; }
+    .header-hero .logo.right{ right:16px; }
 
-/* ===== Navbar (below header image, LEFT aligned) ===== */
-header{
-  position:sticky;
-  top:0; left:0; right:0;
-  background:#9dd5d6;
-  z-index:30;
-  box-shadow:0 2px 5px rgba(0,0,0,0.1);
-}
-.nav-container{
-  max-width:1440px;
-  margin:0 auto;
-  display:flex;
-  justify-content:flex-start; /* LEFT aligned */
-  align-items:center;
-  gap:12px;
-  padding:0.75rem 1rem;
-  position:relative; /* anchor dropdown */
-}
+    /* Bigger left logo override (same as index) */
+    .header-hero .logo.left{ height:96px; max-width:48vw; }
+    @media (max-width:480px){
+      .header-hero{ height:200px; }
+      .header-hero .logo{ height:52px; }
+      .header-hero .logo.left{ height:72px; max-width:60vw; }
+    }
 
-/* Bigger, more tappable hamburger */
-.hamburger{
-  width:44px; height:34px;
-  padding:8px;
-  display:flex; flex-direction:column; justify-content:space-between;
-  cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
-}
-.hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-.hamburger div{
-  height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
-}
-.hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
-.hamburger.open div:nth-child(2){ opacity:0; }
-.hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
+    /* ===== Navbar (same as index, LEFT aligned) ===== */
+    header{
+      position:sticky; top:0; left:0; right:0;
+      background:#9dd5d6; z-index:30;
+      box-shadow:0 2px 5px rgba(0,0,0,0.1);
+    }
+    .nav-container{
+      max-width:1440px; margin:0 auto;
+      display:flex; justify-content:flex-start; align-items:center; gap:12px;
+      padding:0.75rem 1rem; position:relative;
+    }
+    .hamburger{
+      width:44px; height:34px; padding:8px;
+      display:flex; flex-direction:column; justify-content:space-between;
+      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
+    }
+    .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
+    .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
+    .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
+    .hamburger.open div:nth-child(2){ opacity:0; }
+    .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
-/* Dropdown menu appears under hamburger, left aligned */
-nav ul{
-  list-style:none;
-  display:none;
-  flex-direction:column;
-  position:absolute;
-  top:64px;
-  left:0;              /* left edge of container */
-  transform:none;      /* no centering */
-  background:#9dd5d6;
-  width:260px;
-  border-radius:0 0 8px 8px;
-  box-shadow:0 2px 5px rgba(0,0,0,0.15);
-  padding:0; margin:0;
-  z-index:50;
-  text-align:left;     /* left text alignment */
-}
-nav ul.show{ display:flex; }
-nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
-nav ul li:last-child{ border-bottom:none; }
-nav ul li a{
-  display:block; padding:1rem 1.25rem;
-  color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-  letter-spacing:.2px;
-  transition:background .2s ease;
-}
-nav ul li a:hover{ background:rgba(255,255,255,0.2); }
+    nav ul{
+      list-style:none; display:none; flex-direction:column;
+      position:absolute; top:64px; left:0; transform:none;
+      background:#9dd5d6; width:260px;
+      border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      padding:0; margin:0; z-index:50; text-align:left;
+    }
+    nav ul.show{ display:flex; }
+    nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
+    nav ul li:last-child{ border-bottom:none; }
+    nav ul li a{
+      display:block; padding:1rem 1.25rem;
+      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
+      letter-spacing:.2px; transition:background .2s ease;
+    }
+    nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
-/* ===== News cards ===== */
-.news-section{ max-width:900px; margin:2rem auto; padding:0 1rem; }
-.news-card{
-  display:flex; background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  margin-bottom:1.5rem; overflow:hidden; transition:transform .2s ease;
-}
-.news-card:hover{ transform:translateY(-4px); }
-.news-image{ width:150px; height:100%; object-fit:cover; flex-shrink:0; }
-.news-content{ padding:1rem; flex:1; }
-.news-title{ font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; color:#1a202c; }
-.news-desc{ color:#4a5568; margin-bottom:0.5rem; }
-.news-link{ color:#3182ce; font-weight:600; text-decoration:underline; display:inline-block; }
-.news-link:hover{ color:#2b6cb0; }
+    /* ===== Banner image (show full image, no cropping) ===== */
+    .banner{
+      max-width:1440px; margin:2rem auto 0; padding:0 1rem;
+    }
+    .banner-img{
+      display:block; max-width:100%; height:auto;
+      margin:0 auto;
+    }
 
-/* Mobile tweaks */
-@media (max-width:480px){
-  .header-hero{ height:200px; }
-  .header-hero .logo{ height:52px; }
-}
+    /* ===== People grid ===== */
+    .custom-container{
+      max-width:1440px; margin:0 auto; padding:3rem 3rem 4rem;
+    }
+    .grid{
+      display:grid; gap:2rem; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+    }
+    a.person-card{
+      text-align:center; display:block; transition:opacity .3s ease;
+      color:inherit; text-decoration:none;
+    }
+    a.person-card:hover{ opacity:.9; }
+    a.person-card img{
+      width:180px; height:180px; margin:0 auto; border-radius:50%;
+      object-fit:cover; box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    }
+    a.person-card h4{
+      margin-top:1rem; font-size:1.25rem; font-weight:600; color:#1a202c; white-space:nowrap;
+    }
+    a.person-card p{ font-size:1rem; color:#718096; margin-top:.5rem; }
 
-/* Bigger left logo override */
-.header-hero .logo.left{
-  height:200px;      /* was 64px */
-  max-width:48vw;
-}
-@media (max-width:480px){
-  .header-hero .logo.left{
-    height:72px;    /* was 52px on small screens */
-    max-width:60vw;
-  }
-}
-</style>
+    /* ===== Featured person: Catalina first row alone + bigger circle ===== */
+    .grid a[href="catalinabio.html"]{
+      grid-column: 1 / -1;          /* take the full first row */
+    }
+    .grid a[href="catalinabio.html"] img{
+      width: 220px; height: 220px;  /* bigger avatar */
+    }
+    @media (min-width: 768px){
+      .grid a[href="catalinabio.html"] img{
+        width: 240px; height: 240px; /* a touch larger on md+ screens */
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- Header image with overlaid logos -->
-<div class="header-hero">
-  <!-- Use your bubbles image here if desired: /bubbles.png -->
-  <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
-  <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
-  <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="Partner Logo" />
-</div>
-
-<!-- Navbar BELOW the header image (left aligned) -->
-<header>
-  <div class="nav-container">
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
-      <div></div><div></div><div></div>
-    </button>
-
-    <nav role="navigation" aria-label="Main navigation">
-      <ul id="nav-menu">
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">Lab Members</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </nav>
+  <!-- Header image with overlaid logos (same as index) -->
+  <div class="header-hero">
+    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
+    <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
-</header>
 
-<!-- News -->
-<section class="news-section">
-  <h2 class="text-3xl font-bold mb-6">Latest News</h2>
-  <article class="news-card">
-    <img class="news-image" src="https://www.siliconrepublic.com/wp-content/uploads/2024/10/Dr_Catalina_Vallejo_Giraldo.jpg" alt="Brain Cancer Research">
-    <div class="news-content">
-      <h3 class="news-title">Galway researcher looks for ‘gold standard’ brain cancer treatment</h3>
-      <p class="news-desc">Biomedical engineer Dr Catalina Vallejo Giraldo has just received major European funding for a promising new brain cancer therapy.</p>
-      <a href="https://www.siliconrepublic.com/innovation/researcher-brain-cancer-tumour-treatment-biomedical-engineer-galway" target="_blank" class="news-link" rel="noopener">Read more</a>
-    </div>
-  </article>
-  <article class="news-card">
-    <img class="news-image" src="https://as1.ftcdn.net/jpg/03/97/66/02/1000_F_397660265_w2F1Gs5iX6YtitA52Q6BLOPmJDsuYyvL.jpg" alt="Women in STEM">
-    <div class="news-content">
-      <h3 class="news-title">20 women scoring big in STEM</h3>
-      <p class="news-desc">SiliconRepublic.com has put together a list to highlight some of the groundbreaking work of women across STEM.</p>
-      <a href="https://www.siliconrepublic.com/innovation/20-women-stem-research-science-technology-international-womens-day" target="_blank" class="news-link" rel="noopener">Read more</a>
-    </div>
-  </article>
-  <article class="news-card">
-    <img class="news-image" src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Untitled-design-27.png" alt="Spotlight On">
-    <div class="news-content">
-      <h3 class="news-title">Cois Coiribe CÚRAM | Spotlight On: Dr Catalina Vallejo Giraldo</h3>
-      <p class="news-desc">University of Galway’s online publication highlighting top academics and researchers.</p>
-      <a href="https://impact.universityofgalway.ie/articles/curam-spotlight-on-dr-catalina-vallejo-giraldo/" target="_blank" class="news-link" rel="noopener">Read more</a>
-    </div>
-  </article>
-  <article class="news-card">
-    <img class="news-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/RAMI.jpg" alt="Donegan Medal">
-    <div class="news-content">
-      <h3 class="news-title">Donegan Medal Awarded by RAMI</h3>
-      <p class="news-desc">Awarded by the Section of Biomedical Sciences, University of Galway.</p>
-      <a href="https://research.universityofgalway.ie/en/prizes/donegan-medal-awarded-by-the-royal-academy-of-medicine-ireland-ra-2" target="_blank" class="news-link" rel="noopener">Read more</a>
-    </div>
-  </article>
-  <article class="news-card">
-    <img class="news-image" src="https://yt3.googleusercontent.com/qeldv7bcjk9vpOLzBI0KCTRDCl5icE3Zf9GqztyfKnvHEqNvKquhGfRS5G-vs9uHRnblxUN2Iac=s900-c-k-c0x00ffffff-no-rj" alt="Global Talent Ireland">
-    <div class="news-content">
-      <h3 class="news-title">A driving force for engineering more effective brain treatments</h3>
-      <p class="news-desc">Managed by Research Ireland, Global Talent Ireland will support the recruitment of both mid-career rising stars and established research leaders. Read more about Catalina's research career journey:</p>
-      <a href="https://www.researchireland.ie/news/associate-professor-catalina-vallejo-giraldo/" target="_blank" class="news-link" rel="noopener">Here</a>
-    </div>
-  </article>
-</section>
+  <!-- Navbar (same as index) -->
+  <header>
+    <div class="nav-container">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
+        <div></div><div></div><div></div>
+      </button>
 
-<!-- Events -->
-<section class="news-section">
-  <h2 class="text-3xl font-bold mb-6">Upcoming Events</h2>
-  <article class="news-card">
-    <img class="news-image" src="https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F1046799673%2F2794018164951%2F1%2Foriginal.20250605-173601?w=940&auto=format%2Ccompress&q=75&sharp=10&rect=0%2C85%2C1018%2C509&s=35fbd6f116932c76a6f1e8248bc0ae2e" alt="Irish Neuro-oncology Society meeting 2025">
-    <div class="news-content">
-      <h3 class="news-title">Irish Neuro-oncology Society meeting 2025</h3>
-      <p class="news-desc">A focused gathering aimed at advancing collaboration and innovation in Irish brain tumour research.</p>
-      <a href="https://www.eventbrite.com/e/irish-neuro-oncology-society-meeting-2025-tickets-1400108435019" target="_blank" class="news-link" rel="noopener">Sign Up Here</a>
-    </div>
-  </article>
-</section>
-
-<script>
-/* Accessible hamburger toggle */
-const burger = document.getElementById('hamburger');
-const menu   = document.getElementById('nav-menu');
-
-function toggleMenu() {
-  burger.classList.toggle('open');
-  const open = burger.classList.contains('open');
-  burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  menu.classList.toggle('show', open);
-}
-
-burger.addEventListener('click', toggleMenu);
-burger.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
-});
-
-/* Close menu when clicking outside */
-document.addEventListener('click', (e) => {
-  if (!menu.contains(e.target) && !burger.contains(e.target)) {
-    burger.classList.remove('open');
-    burger.setAttribute('aria-expanded', 'false');
-    menu.classList.remove('show');
-  }
-});
-
-/* Close after selecting a link */
-menu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    burger.classList.remove('open');
-    burger.setAttribute('aria-expanded','false');
-    menu.classList.remove('show');
-  });
-});
-</script>
-
-</body>
-</html>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul id="nav-menu">
+          <!-- Keep relative href as fallback; data-page lets JS rewrite to the correct base -->
+          <li><a href="index.html"         data-page="index.html">Home</a></li>
+          <li><a href="research.html"      data-page="research.html">Research</a></li>
+          <li><a href="people.html"        data-page="people.html">Lab Members</a></li>
