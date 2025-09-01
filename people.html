@@ -146,11 +146,12 @@
 
       <nav role="navigation" aria-label="Main navigation">
         <ul id="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="people.html">Lab Members</a></li>
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <!-- Keep relative href as fallback; data-page lets JS rewrite to the correct base -->
+          <li><a href="index.html"         data-page="index.html">Home</a></li>
+          <li><a href="research.html"      data-page="research.html">Research</a></li>
+          <li><a href="people.html"        data-page="people.html">Lab Members</a></li>
+          <li><a href="publications.html"  data-page="publications.html">Publications</a></li>
+          <li><a href="contact.html"       data-page="contact.html">Contact Us</a></li>
         </ul>
       </nav>
     </div>
@@ -168,32 +169,33 @@
   <!-- People Section -->
   <section id="people" class="custom-container">
     <div class="grid">
-      <a href="catalinabio.html" class="person-card">
+      <!-- Keep relative hrefs as fallback; JS will rewrite using data-page -->
+      <a href="catalinabio.html" class="person-card" data-page="catalinabio.html">
         <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina Vallejo Giraldo" />
         <h4>Catalina Vallejo Giraldo</h4>
         <p>Principal Investigator</p>
       </a>
-      <a href="akash.html" class="person-card">
+      <a href="akash.html" class="person-card" data-page="akash.html">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" alt="Akash Garhwal" />
         <h4>Akash Garhwal</h4>
         <p>PhD Student</p>
       </a>
-      <a href="Taryn.html" class="person-card">
+      <a href="Taryn.html" class="person-card" data-page="Taryn.html">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" alt="Taryn Clarke" />
         <h4>Taryn Clarke</h4>
         <p>PhD Student</p>
       </a>
-      <a href="Jose.html" class="person-card">
+      <a href="Jose.html" class="person-card" data-page="Jose.html">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" alt="José Miguel Fernández Real" />
         <h4>José Miguel Fernández Real</h4>
         <p>PhD Student</p>
       </a>
-      <a href="Andre.html" class="person-card">
+      <a href="Andre.html" class="person-card" data-page="Andre.html">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" alt="Andres P. Carreño" />
         <h4>Andres P. Carreño</h4>
         <p>PhD Student</p>
       </a>
-      <a href="Yvonne.html" class="person-card">
+      <a href="Yvonne.html" class="person-card" data-page="Yvonne.html">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" alt="Yvonne Fahy" />
         <h4>Yvonne Fahy</h4>
         <p>PhD Student</p>
@@ -202,7 +204,22 @@
   </section>
 
   <script>
-    // Accessible hamburger toggle (same as index)
+    // ===== Fix internal links to the correct GitHub Pages base =====
+    // Detect base like "/CVG_lab/" (project pages) or "/" (custom domain/user pages)
+    (function fixInternalLinks(){
+      const path = window.location.pathname;              // e.g. "/CVG_lab/people.html"
+      const match = path.match(/^\/[^/]+\/?/);            // "/CVG_lab/" or "/" if at root level
+      const base  = (match && match[0] !== "/") ? match[0] : (path.startsWith("/") ? "/" : "");
+      // For user/org root pages, base becomes "/"; for project pages, "/<repo>/"
+
+      document.querySelectorAll('a[data-page]').forEach(a => {
+        const page = a.getAttribute('data-page');
+        // Ensure exactly one slash between base and page
+        a.href = (base.endsWith('/') ? base : base + '/') + page.replace(/^\//,'');
+      });
+    })();
+
+    // ===== Accessible hamburger toggle (same as index) =====
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
 
