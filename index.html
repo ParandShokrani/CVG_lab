@@ -10,11 +10,11 @@
 *,*::before,*::after{ box-sizing:border-box; }
 html,body{ margin:0; padding:0; overflow-x:hidden; font-family:system-ui,sans-serif; background:#f9fafb; color:#2d3748; }
 
-/* ===== Header image with overlaid logos ===== */
+/* ===== Header image with overlaid logos (uses bubbles) ===== */
 .header-hero{
   position:relative;
   width:100%;
-  height:220px; /* tweak as you like */
+  height:240px; /* a bit taller to showcase bubbles */
 }
 .header-hero img.header-image{
   width:100%;
@@ -29,7 +29,7 @@ html,body{ margin:0; padding:0; overflow-x:hidden; font-family:system-ui,sans-se
   height:64px;
   max-width:40vw;
   object-fit:contain;
-  background:rgba(255,255,255,0.0); /* transparent; add a slight white if needed */
+  background:rgba(255,255,255,0.0);
 }
 .header-hero .logo.left{ left:16px; }
 .header-hero .logo.right{ right:16px; }
@@ -47,85 +47,59 @@ header{
   max-width:1440px;
   margin:0 auto;
   display:flex;
-  justify-content:center; /* centers the hamburger */
+  justify-content:center;
   align-items:center;
   padding:0.75rem 1rem;
-  position:relative; /* anchor for absolute dropdown */
+  position:relative;
 }
 
-/* Hamburger centered */
+/* Bigger, more tappable hamburger */
 .hamburger{
-  width:32px; height:22px;
+  width:44px; height:34px;              /* bigger icon */
+  padding:8px;                           /* larger touch target */
   display:flex; flex-direction:column; justify-content:space-between;
-  cursor:pointer;
+  cursor:pointer; border-radius:8px;
+  outline:none;
 }
+.hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
 .hamburger div{
-  height:4px; border-radius:2px; background:#fff; transition:all .3s ease;
+  height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
 }
-.hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(5px,5px); }
+.hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
 .hamburger.open div:nth-child(2){ opacity:0; }
-.hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(6px,-6px); }
+.hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
 /* Dropdown menu appears centered under hamburger */
 nav ul{
   list-style:none;
-  display:none;            /* hidden by default */
+  display:none;
   flex-direction:column;
   position:absolute;
-  top:60px;
+  top:64px; /* pushed a little further due to bigger hamburger */
   left:50%;
-  transform:translateX(-50%); /* center under hamburger */
+  transform:translateX(-50%);
   background:#9dd5d6;
-  width:240px;
-  border-radius:0 0 0 6px;
+  width:260px; /* a bit wider */
+  border-radius:0 0 0 8px;
   box-shadow:0 2px 5px rgba(0,0,0,0.15);
   padding:0; margin:0;
-  z-index:50;              /* above everything */
+  z-index:50;
   text-align:center;
 }
 nav ul.show{ display:flex; }
 nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
 nav ul li:last-child{ border-bottom:none; }
 nav ul li a{
-  display:block; padding:0.9rem 1rem;
-  color:#fff; text-decoration:none; font-weight:700;
+  display:block; padding:1rem 1.25rem;
+  color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem; /* larger text */
+  letter-spacing:.2px;
   transition:background .2s ease;
 }
 nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
-/* ===== Slider (unchanged) ===== */
-.slide-container{ width:100vw; height:380px; overflow:hidden; position:relative; }
-#slidesWrapper{ display:flex; height:100%; transition:transform .5s ease-in-out; }
-#slidesWrapper > div{ flex:0 0 100vw; height:100%; }
-#slidesWrapper img{ width:100vw; height:100%; object-fit:cover; display:block; user-select:none; pointer-events:none; }
-.arrow-btn{
-  position:absolute; top:50%; transform:translateY(-50%);
-  width:40px; height:40px; background:rgba(0,0,0,0.4); border:none; border-radius:9999px;
-  color:#fff; cursor:pointer; z-index:20; display:flex; align-items:center; justify-content:center;
-  transition:background .3s ease;
-}
-.arrow-btn:hover{ background:rgba(0,0,0,0.7); }
-.arrow-btn svg{ width:20px; height:20px; stroke:currentColor; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
-#arrowLeft{ left:10px; }
-#arrowRight{ right:10px; }
-
-/* ===== News cards (unchanged) ===== */
-.news-section{ max-width:900px; margin:2rem auto; padding:0 1rem; }
-.news-card{
-  display:flex; background:#fff; border-radius:8px; box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  margin-bottom:1.5rem; overflow:hidden; transition:transform .2s ease;
-}
-.news-card:hover{ transform:translateY(-4px); }
-.news-image{ width:150px; object-fit:cover; flex-shrink:0; }
-.news-content{ padding:1rem; flex:1; }
-.news-title{ font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; color:#1a202c; }
-.news-desc{ color:#4a5568; margin-bottom:0.5rem; }
-.news-link{ color:#3182ce; font-weight:600; text-decoration:underline; display:inline-block; }
-.news-link:hover{ color:#2b6cb0; }
-
 /* Optional: make logos smaller on very small screens */
 @media (max-width:480px){
-  .header-hero{ height:180px; }
+  .header-hero{ height:200px; }
   .header-hero .logo{ height:52px; }
 }
 </style>
@@ -134,8 +108,9 @@ nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
 <!-- Header image with overlayed logos -->
 <div class="header-hero">
-  <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Header Image" />
-  <!-- Replace these src values with your real logos -->
+  <!-- header image -->
+  <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
+  <!-- Keep/replace these with your real logos -->
   <img class="logo left"  src="https://upload.wikimedia.org/wikipedia/en/thumb/d/d2/University_of_Galway_Logo.svg/2560px-University_of_Galway_Logo.svg.png" alt="Left Logo" />
   <img class="logo right" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/Logo_example.png" alt="Right Logo" />
 </div>
@@ -143,14 +118,14 @@ nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 <!-- Navbar BELOW the header image -->
 <header>
   <div class="nav-container">
-    <!-- Centered hamburger -->
-    <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+    <!-- Bigger centered hamburger -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
       <div></div><div></div><div></div>
-    </div>
+    </button>
 
     <!-- Dropdown menu (opens centered under hamburger) -->
     <nav>
-      <ul id="nav-menu">
+      <ul id="nav-menu" aria-label="Main navigation">
         <li><a href="research.html">Research</a></li>
         <li><a href="people.html">Lab Members</a></li>
         <li><a href="publications.html">Publications</a></li>
@@ -160,21 +135,40 @@ nav ul li a:hover{ background:rgba(255,255,255,0.2); }
   </div>
 </header>
 
-<!-- Slider -->
-<section class="slide-container">
-  <div id="slidesWrapper">
-    <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Slide 1"></div>
-    <div><img src="https://raw.githubusercontent.com/ParandShokrani/IMAGES/refs/heads/main/Picture5.jpg" alt="Slide 2"></div>
-    <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Slide 3"></div>
-    <div><img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Slide 4"></div>
-  </div>
-  <button id="arrowLeft" class="arrow-btn" aria-label="Previous Slide">
-    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-  </button>
-  <button id="arrowRight" class="arrow-btn" aria-label="Next Slide">
-    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-  </button>
-</section>
+<!-- REMOVED: Hero/slider section as requested -->
+
+<script>
+  // Accessible hamburger toggle
+  const burger = document.getElementById('hamburger');
+  const menu = document.getElementById('nav-menu');
+
+  function toggleMenu() {
+    burger.classList.toggle('open');
+    const open = burger.classList.contains('open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menu.classList.toggle('show', open);
+  }
+
+  burger.addEventListener('click', toggleMenu);
+  burger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu.contains(e.target) && !burger.contains(e.target)) {
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      menu.classList.remove('show');
+    }
+  });
+</script>
+</body>
+</html>
+
 
 <!-- News -->
 <section class="news-section">
