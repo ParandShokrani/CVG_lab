@@ -16,7 +16,7 @@
       text-align: justify;
     }
 
-    /* ===== Header image with overlaid logos (same as index) ===== */
+    /* ===== Header image with overlaid logos ===== */
     .header-hero{
       position:relative; width:100%; height:240px; overflow:hidden;
     }
@@ -36,8 +36,6 @@
     }
     .header-hero .logo.left{ left:16px; }
     .header-hero .logo.right{ right:16px; }
-
-    /* Bigger left logo override (same as index) */
     .header-hero .logo.left{ height:96px; max-width:48vw; }
     @media (max-width:480px){
       .header-hero{ height:200px; }
@@ -45,7 +43,7 @@
       .header-hero .logo.left{ height:72px; max-width:60vw; }
     }
 
-    /* ===== Navbar (same as index, LEFT aligned) ===== */
+    /* ===== Navbar ===== */
     header{
       position:sticky; top:0; left:0; right:0;
       background:#9dd5d6; z-index:30;
@@ -84,13 +82,18 @@
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
-    /* ===== Banner image (show full image, no cropping) ===== */
+    /* ===== Banner images side by side ===== */
     .banner{
       max-width:1440px; margin:2rem auto 0; padding:0 1rem;
+      display:grid; grid-template-columns:1fr; gap:1rem;
+    }
+    @media(min-width:768px){
+      .banner{ grid-template-columns:1fr 1fr; }
     }
     .banner-img{
-      display:block; max-width:100%; height:auto;
-      margin:0 auto;
+      width:100%; height:300px;
+      object-fit:cover; border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
     }
 
     /* ===== People grid ===== */
@@ -114,30 +117,30 @@
     }
     a.person-card p{ font-size:1rem; color:#718096; margin-top:.5rem; }
 
-    /* ===== Featured person: Catalina first row alone + bigger circle ===== */
+    /* ===== Featured person ===== */
     .grid a[href="catalinabio.html"]{
-      grid-column: 1 / -1;          /* take the full first row */
+      grid-column: 1 / -1;
     }
     .grid a[href="catalinabio.html"] img{
-      width: 220px; height: 220px;  /* bigger avatar */
+      width: 220px; height: 220px;
     }
     @media (min-width: 768px){
       .grid a[href="catalinabio.html"] img{
-        width: 240px; height: 240px; /* a touch larger on md+ screens */
+        width: 240px; height: 240px;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Header image with overlaid logos (same as index) -->
+  <!-- Header -->
   <div class="header-hero">
     <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
     <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
     <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
 
-  <!-- Navbar (same as index) -->
+  <!-- Navbar -->
   <header>
     <div class="nav-container">
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
@@ -156,11 +159,16 @@
     </div>
   </header>
 
-  <!-- Banner Image (full image) -->
+  <!-- Banner Images -->
   <section class="banner">
     <img
       src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/group.jpg"
       alt="Catalina VG Lab Team"
+      class="banner-img"
+    />
+    <img
+      src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/lab2.jpg"
+      alt="Catalina VG Lab Work"
       class="banner-img"
     />
   </section>
@@ -168,7 +176,7 @@
   <!-- People Section -->
   <section id="people" class="custom-container">
     <div class="grid">
-        <a href="catalinabio.html" class="person-card">
+      <a href="catalinabio.html" class="person-card">
         <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina Vallejo Giraldo" />
         <h4>Catalina Vallejo Giraldo</h4>
         <p>Principal Investigator</p>
@@ -202,7 +210,7 @@
   </section>
 
   <script>
-    // Accessible hamburger toggle (same as index)
+    // Hamburger toggle
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
 
@@ -218,7 +226,6 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
     });
 
-    // Close menu on outside click
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
@@ -227,7 +234,6 @@
       }
     });
 
-    // Close after selecting a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
