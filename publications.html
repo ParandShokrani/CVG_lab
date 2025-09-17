@@ -1,65 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Catalina VG Lab - Publications</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
-  <style>
-    /* Base */
-    *,*::before,*::after{ box-sizing:border-box; }
-    html,body{
-      margin:0; padding:0; overflow-x:hidden;
-      font-family:system-ui,sans-serif;
-      background:#f9fafb; color:#2d3748;
-    }
+ <header>
+    <div class="nav-container">
+      <div class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false" role="button" tabindex="0">
+        <div></div><div></div><div></div>
+      </div>
+      <nav>
+        <ul id="nav-menu">
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header><!-- Publications -->
+<section id="publications" class="py-32 bg-gray-50 text-justify">
+  <div class="custom-container">
+    <div class="text-center">
+      <h2 class="text-4xl font-extrabold mb-8">Publications</h2>
+      <a href="https://scholar.google.com/citations?user=HZzBPaIAAAAJ&hl"
+         target="_blank"
+         class="inline-block text-white px-8 py-4 text-lg rounded-lg hover:opacity-90 transition"
+         style="background-color: #9dd5d6;">
+         View on Google Scholar
+      </a>
+    </div>
+  </div>
+</section>
 
-    /* ===== Header image with overlaid logos ===== */
-    .header-hero{
-      position:relative; width:100%; height:240px; overflow:hidden;
+  </div>
+</section>
+  <script>
+    // Hamburger Toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    function toggleMenu() {
+      const expanded = hamburger.classList.toggle('open');
+      navMenu.classList.toggle('show');
+      hamburger.setAttribute('aria-expanded', expanded);
     }
-    .header-hero img.header-image{
-      position:relative; z-index:1; width:100%; height:100%;
-      object-fit:cover; display:block;
-    }
-    .header-hero::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
-      z-index:2;
-    }
-    .header-hero .logo{
-      position:absolute; top:50%; transform:translateY(-50%);
-      height:64px; max-width:40vw; object-fit:contain;
-      z-index:3; pointer-events:none; background:transparent;
-    }
-    .header-hero .logo.left{ left:16px; height:96px; max-width:48vw; }
-    .header-hero .logo.right{ right:16px; }
+    hamburger.addEventListener('click', toggleMenu);
+    hamburger.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+    navMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMenu.classList.remove('show');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
 
-    @media (max-width:480px){
-      .header-hero{ height:200px; }
-      .header-hero .logo{ height:52px; }
-      .header-hero .logo.left{ height:72px; max-width:60vw; }
-    }
-
-    /* ===== Navbar ===== */
-    header{
-      position:sticky; top:0; left:0; right:0;
-      background:#9dd5d6; z-index:30;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-    .nav-container{
-      max-width:1440px; margin:0 auto;
-      display:flex; justify-content:flex-start; align-items:center; gap:12px;
-      padding:0.75rem 1rem; position:relative;
-    }
-    .hamburger{
-      width:44px; height:34px; padding:8px;
-      display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
-    }
-    .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-    .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
-    .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
-    .hamburger.open div:nth-child(2){ opacity:0; }
-    .hamburger.open div:nth-child(3){ transform:
