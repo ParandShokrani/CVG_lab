@@ -7,7 +7,6 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-    .brain-bullet::before { content: "\1F9E0  "; }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -19,54 +18,166 @@
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
         <span class="font-bold text-lg">Catalina VG Lab</span>
       </div>
-      <div class="space-x-6">
+      <div class="hidden md:block space-x-6">
         <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="research.html" class="hover:text-blue-600">Research</a>
+        <a href="research.html" class="text-blue-600 font-semibold">Research</a>
         <a href="people.html" class="hover:text-blue-600">People</a>
         <a href="publications.html" class="hover:text-blue-600">Publications</a>
         <a href="contact.html" class="hover:text-blue-600">Contact</a>
       </div>
+      <!-- Simple mobile menu button (optional/no JS toggle for brevity) -->
+      <div class="md:hidden">
+        <a href="#research" class="px-3 py-2 rounded-md text-sm font-medium border hover:bg-gray-50">Menu</a>
+      </div>
     </div>
   </nav>
 
-  <!-- Our Research -->
-<section id="research" class="py-16 custom-container text-justify text-gray-800 bg-white-50">
-  <h3 class="text-2xl font-bold mb-4">Our Research</h3>
-  <p>
-
-  </p>
-  <p>
-    Our work focuses on modifying spatial, temporal, and mechanical signals in healthy and diseased brain cells to influence cell fate. 
-    These changes enable us to explore and develop two key areas:
-  </p>
-
-  <ul class="space-y-2 mt-4">
-    <div>
-      <li class="brain-bullet cursor-pointer text-blue-600 hover:underline" onclick="toggleText('brainCulture')">
-        Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
-      </li>
-      <p id="brainCulture" class="ml-6 mt-2 text-gray-700 hidden">
-        Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury (PhD project, Akash Garhwal)
+  <!-- Our Research (Cards) -->
+  <section id="research" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h1 class="text-3xl font-bold mb-3">Our Research</h1>
+      <p class="text-gray-700 mb-8">
+        We study how spatial, temporal, and mechanical cues shape brain cell fate in health and disease.
+        Our work spans advanced 3D culture systems and biomarker-guided biomaterial design for neuro-oncology.
       </p>
-    </div>
-    <div>
-       <li class="brain-bullet cursor-pointer text-blue-600 hover:underline" onclick="toggleText('brainDesign')">
-        The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.
-      </li>
-      <p id="brainDesign" class="ml-6 mt-2 text-gray-700 hidden">
-        Title <!-- Add project titles here -->
-      </p>
-    </div>
-  </ul>
 
-  <h3 class="text-xl font-bold mt-6 mb-2">Key topics of interest include:</h3>
-  <p>Gliosis, astrocytes, 3D in vitro models, organoids, assembloids, cell-cell interactions, the extracellular matrix (ECM), syndecans, cytoskeletal organization, nucleoskeletal organization, brain tumors, and brain mechanobiology.</p>
-  <p>
-    
-  </p>
-<p>
-  
-</p>
-</section>
+      <!-- Research Pillars -->
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- Pillar 1 -->
+        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+          <div class="p-6">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="text-3xl" aria-hidden="true">🧠</span>
+              <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
+            </div>
+            <p class="text-gray-700">
+              We engineer physiologically relevant 3D systems to probe gliosis, astrocyte behaviour, and ECM remodeling under trauma-mimetic and tumor-like conditions.
+            </p>
+
+            <button
+              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+              onclick="toggleCard('pillar1', this)"
+              aria-controls="pillar1"
+              aria-expanded="false"
+            >
+              See example projects
+            </button>
+
+            <div id="pillar1" class="mt-4 hidden">
+              <div class="border-t pt-4 space-y-3">
+                <!-- Project card -->
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Glycan modulation in gliosis after TBI</h3>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+                  </div>
+                  <p class="text-gray-700 mt-1">
+                    Investigating ECM glycans and astrocyte responses in trauma-mimetic 3D cultures to map the molecular choreography of gliosis.
+                  </p>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
+                </div>
+
+                <!-- (Optional) add more project cards here -->
+                <!--
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Project Title</h3>
+                    <span class="text-xs bg-green-50 text-green-700 px-2 py-0.5 rounded-full">New</span>
+                  </div>
+                  <p class="text-gray-700 mt-1">
+                    Short description about the model, readouts, and key findings/aims.
+                  </p>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: Name</p>
+                </div>
+                -->
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 2 -->
+        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+          <div class="p-6">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="text-3xl" aria-hidden="true">🧪</span>
+              <h2 class="text-xl font-semibold">Biomarker discovery for biomaterial design</h2>
+            </div>
+            <p class="text-gray-700">
+              We identify actionable molecular markers (e.g., syndecans/ECM ligands) to functionalize biomaterials that steer tumor–stroma interactions for neuro-oncology therapies.
+            </p>
+
+            <button
+              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+              onclick="toggleCard('pillar2', this)"
+              aria-controls="pillar2"
+              aria-expanded="false"
+            >
+              See example projects
+            </button>
+
+            <div id="pillar2" class="mt-4 hidden">
+              <div class="border-t pt-4 space-y-3">
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Marker-guided hydrogel functionalization</h3>
+                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">In progress</span>
+                  </div>
+                  <p class="text-gray-700 mt-1">
+                    Screening surface markers to rationally design ligand-decorated hydrogels that modulate GBM-like niches and cell invasion.
+                  </p>
+                  <p class="mt-2 text-sm text-gray-600">Add title &amp; contributor names</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Topics -->
+      <h2 class="text-2xl font-bold mt-12 mb-4">Key Topics</h2>
+      <p class="text-gray-700 mb-4">
+        We explore how cellular and extracellular mechanics shape brain biology across health and disease.
+      </p>
+      <div class="bg-white rounded-xl shadow p-6">
+        <ul class="flex flex-wrap gap-2">
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Gliosis</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Astrocytes</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">3D in&nbsp;vitro models</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Organoids</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Assembloids</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Cell–cell interactions</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Extracellular matrix (ECM)</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Syndecans</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Cytoskeleton</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Nucleoskeleton</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Brain tumors</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Mechanobiology</li>
+        </ul>
+      </div>
+
+      <!-- Callout -->
+      <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6">
+        <h3 class="font-semibold mb-2">Interested in collaborating?</h3>
+        <p class="text-gray-700">
+          We welcome partnerships across biomaterials, neuro-oncology, and advanced 3D culture systems.
+          Get in touch via our <a href="contact.html" class="text-blue-700 underline">Contact</a> page.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tiny helper script -->
+  <script>
+    function toggleCard(id, btn) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('hidden');
+      if (btn) {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        btn.textContent = expanded ? 'See example projects' : 'Hide example projects';
+      }
+    }
+  </script>
 </body>
 </html>
