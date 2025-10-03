@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -10,12 +10,17 @@
   <style>
     /* Base */
     *,*::before,*::after{ box-sizing:border-box; }
+    html{
+      scroll-behavior:smooth;
+    }
     html,body{
       margin:0; padding:0; overflow-x:hidden;
       font-family:system-ui,sans-serif;
       background:#f9fafb; color:#2d3748;
       text-align: justify;
     }
+    /* Prevent sticky header from covering anchors */
+    section{ scroll-margin-top: 84px; }
 
     /* ===== Header image with overlaid logos ===== */
     .header-hero{
@@ -55,9 +60,6 @@
       display:flex; justify-content:flex-start; align-items:center; gap:12px;
       padding:0.75rem 1rem; position:relative;
     }
-    .brand{
-      font-weight:800; color:#ffffff; letter-spacing:.3px;
-    }
     .hamburger{
       width:44px; height:34px; padding:8px;
       display:flex; flex-direction:column; justify-content:space-between;
@@ -69,9 +71,10 @@
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
+    /* Mobile menu (default) */
     nav ul{
       list-style:none; display:none; flex-direction:column;
-      position:absolute; top:64px; left:0; transform:none;
+      position:absolute; top:64px; left:0;
       background:#9dd5d6; width:260px;
       border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
       padding:0; margin:0; z-index:50; text-align:left;
@@ -86,6 +89,19 @@
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.15); }
 
+    /* Desktop menu */
+    @media (min-width: 768px){
+      .hamburger{ display:none; }
+      nav ul{
+        display:flex !important; position:static; flex-direction:row;
+        background:transparent; width:auto; border-radius:0; box-shadow:none;
+        gap:.5rem;
+      }
+      nav ul li{ border-bottom:none; }
+      nav ul li a{ padding:.5rem .75rem; border-radius:.5rem; }
+      nav ul li a:hover{ background:rgba(255,255,255,0.2); }
+    }
+
     /* ===== Publication cards ===== */
     .pub-card {
       background:#fff; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,0.08);
@@ -98,15 +114,12 @@
 
 <body>
 
-  <!-- Hero with logos -->
+<!-- Header -->
   <div class="header-hero">
-    <img class="header-image" src="https://images.unsplash.com/photo-1559757138-9fbe59b43aff?q=80&w=1600&auto=format&fit=crop" alt="Header background" />
-    <!-- Left logo (lab) -->
-    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="Catalina VG Lab logo" />
-    <!-- Right logo (university) -->
-    <img class="logo right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/University_of_Galway_logo.svg/512px-University_of_Galway_logo.svg.png" alt="University of Galway logo" />
+    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
+    <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
-
   <!-- Header / Nav -->
   <header role="banner">
     <div class="nav-container">
@@ -116,7 +129,7 @@
 
       <nav role="navigation" class="ml-2">
         <ul id="nav-menu">
-          <li><a href="/">Home</a></li>
+          <li><a href="#top">Home</a></li>
           <li><a href="#people">People</a></li>
           <li><a href="#publications">Publications</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -124,6 +137,14 @@
       </nav>
     </div>
   </header>
+
+  <!-- People (placeholder) -->
+  <section id="people" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold mb-6">People</h2>
+      <p class="text-gray-700">Add your team profiles here (cards, photos, roles, links).</p>
+    </div>
+  </section>
 
   <!-- Publications -->
   <section id="publications" class="py-32 bg-gray-50 text-justify">
@@ -146,6 +167,14 @@
     </div>
   </section>
 
+  <!-- Contact (placeholder) -->
+  <section id="contact" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="text-4xl font-extrabold mb-6">Contact</h2>
+      <p class="text-gray-700">Add your contact details, address, and a form if needed.</p>
+    </div>
+  </section>
+
   <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
@@ -163,6 +192,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
     });
 
+    // Close menu when clicking outside (mobile)
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
@@ -171,6 +201,7 @@
       }
     });
 
+    // Close menu after clicking a link (mobile), then let anchor scroll
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
@@ -180,10 +211,9 @@
     });
   </script>
 
-  <!-- Publications data + renderer -->
+  <!-- Publications data + renderer (latest first) -->
   <script>
-    // NOTE: Google Scholar blocks client-side scraping (CORS). Keep a curated list here,
-    // or swap to a tiny backend (Netlify/Cloudflare Function) that returns JSON.
+    // Curated list for client-side (replace/extend as needed)
     const publications = [
       {
         title: "Understanding the Mechanobiology of Gliosis May Be the Key to Unlocking Sustained Chronic Performance of Bioelectronic Neural Interfaces",
@@ -209,7 +239,7 @@
         type: "Review",
         url: "https://pubs.rsc.org/en/content/articlelanding/2019/tb/c9tb01628g"
       }
-      // Add more items as needed (newest can go anywhere; list is sorted by year below).
+      // Add more items as needed
     ];
 
     (function renderLatestPubs() {
@@ -218,7 +248,7 @@
 
       const latest = [...publications]
         .sort((a,b) => (b.year || 0) - (a.year || 0))
-        .slice(0, 3);
+        .slice(0, 6); // show newest 6
 
       container.innerHTML = latest.map(p => `
         <article class="pub-card p-6">
