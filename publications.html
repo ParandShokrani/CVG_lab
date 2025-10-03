@@ -6,6 +6,7 @@
   <title>Catalina VG Lab - People</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
+
   <style>
     /* Base */
     *,*::before,*::after{ box-sizing:border-box; }
@@ -54,6 +55,9 @@
       display:flex; justify-content:flex-start; align-items:center; gap:12px;
       padding:0.75rem 1rem; position:relative;
     }
+    .brand{
+      font-weight:800; color:#ffffff; letter-spacing:.3px;
+    }
     .hamburger{
       width:44px; height:34px; padding:8px;
       display:flex; flex-direction:column; justify-content:space-between;
@@ -80,24 +84,60 @@
       color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
       letter-spacing:.2px; transition:background .2s ease;
     }
-  </header><!-- Publications -->
-<section id="publications" class="py-32 bg-gray-50 text-justify">
-  <div class="custom-container">
-    <div class="text-center">
-      <h2 class="text-4xl font-extrabold mb-8">Publications</h2>
-      <a href="https://scholar.google.com/citations?user=HZzBPaIAAAAJ&hl"
-         target="_blank"
-         class="inline-block text-white px-8 py-4 text-lg rounded-lg hover:opacity-90 transition"
-         style="background-color: #9dd5d6;">
-         View on Google Scholar
-      </a>
-    </div>
-  </div>
-</section>
+    nav ul li a:hover{ background:rgba(255,255,255,0.15); }
+  </style>
+</head>
 
+<body>
+
+  <!-- Hero with logos -->
+  <div class="header-hero">
+    <img class="header-image" src="https://images.unsplash.com/photo-1559757138-9fbe59b43aff?q=80&w=1600&auto=format&fit=crop" alt="Header background" />
+    <!-- Left logo (lab) -->
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="Catalina VG Lab logo" />
+    <!-- Right logo (university) -->
+    <img class="logo right" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/University_of_Galway_logo.svg/512px-University_of_Galway_logo.svg.png" alt="University of Galway logo" />
   </div>
-</section>
- <script>
+
+  <!-- Header / Nav -->
+  <header role="banner">
+    <div class="nav-container">
+      <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
+        <div></div><div></div><div></div>
+      </button>
+
+      <a href="/" class="brand text-xl">Catalina VG Lab</a>
+
+      <nav role="navigation" class="ml-2">
+        <ul id="nav-menu">
+          <li><a href="/">Home</a></li>
+          <li><a href="#people">People</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Publications -->
+  <section id="publications" class="py-32 bg-gray-50 text-justify">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center">
+        <h2 class="text-4xl font-extrabold mb-8">Publications</h2>
+        <a
+          href="https://scholar.google.com/citations?user=HZzBPaIAAAAJ&hl"
+          target="_blank"
+          rel="noopener"
+          class="inline-block text-white px-8 py-4 text-lg rounded-lg hover:opacity-90 transition"
+          style="background-color: #9dd5d6;"
+        >
+          View on Google Scholar
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
@@ -132,4 +172,3 @@
   </script>
 </body>
 </html>
-
