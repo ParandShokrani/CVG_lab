@@ -1,16 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="top">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Catalina VG Lab - Publications</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
-  <style>
-    html { scroll-behavior: smooth; }
-    body { background:#f9fafb; color:#2d3748; text-align:justify; }
 
-    /* ===== Header hero ===== */
+  <style>
+    /* Base */
+    *,*::before,*::after{ box-sizing:border-box; }
+    html{
+      scroll-behavior:smooth;
+    }
+    html,body{
+      margin:0; padding:0; overflow-x:hidden;
+      font-family:system-ui,sans-serif;
+      background:#f9fafb; color:#2d3748;
+      text-align: justify;
+    }
+    /* Prevent sticky header from covering anchors */
+    section{ scroll-margin-top: 84px; }
+
+    /* ===== Header image with overlaid logos ===== */
     .header-hero{
       position:relative; width:100%; height:240px; overflow:hidden;
     }
@@ -26,10 +38,11 @@
     .header-hero .logo{
       position:absolute; top:50%; transform:translateY(-50%);
       height:64px; max-width:40vw; object-fit:contain;
-      z-index:3; pointer-events:none;
+      z-index:3; pointer-events:none; background:transparent;
     }
-    .header-hero .logo.left{ left:16px; height:96px; max-width:48vw; }
+    .header-hero .logo.left{ left:16px; }
     .header-hero .logo.right{ right:16px; }
+    .header-hero .logo.left{ height:96px; max-width:48vw; }
     @media (max-width:480px){
       .header-hero{ height:200px; }
       .header-hero .logo{ height:52px; }
@@ -50,18 +63,20 @@
     .hamburger{
       width:44px; height:34px; padding:8px;
       display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; border-radius:8px; border:0; background:transparent;
+      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
     }
+    .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
     .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
     .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
+    /* Mobile menu (default) */
     nav ul{
       list-style:none; display:none; flex-direction:column;
-      position:absolute; top:64px; left:0; background:#9dd5d6;
-      width:260px; border-radius:0 0 8px 8px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      position:absolute; top:64px; left:0;
+      background:#9dd5d6; width:260px;
+      border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
       padding:0; margin:0; z-index:50; text-align:left;
     }
     nav ul.show{ display:flex; }
@@ -70,107 +85,82 @@
     nav ul li a{
       display:block; padding:1rem 1.25rem;
       color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-      transition:background .2s ease;
+      letter-spacing:.2px; transition:background .2s ease;
     }
-    nav ul li a:hover{ background:rgba(255,255,255,0.2); }
+    nav ul li a:hover{ background:rgba(255,255,255,0.15); }
 
-    @media (min-width: 992px){
+    /* Desktop menu */
+    @media (min-width: 768px){
+      .hamburger{ display:none; }
       nav ul{
-        position:static; display:flex !important;
-        flex-direction:row; background:transparent;
-        box-shadow:none; width:auto;
+        display:flex !important; position:static; flex-direction:row;
+        background:transparent; width:auto; border-radius:0; box-shadow:none;
+        gap:.5rem;
       }
       nav ul li{ border-bottom:none; }
-      nav ul li a{ padding:0.5rem 0.85rem; color:#fff; font-weight:600; }
-      .hamburger{ display:none; }
+      nav ul li a{ padding:.5rem .75rem; border-radius:.5rem; }
+      nav ul li a:hover{ background:rgba(255,255,255,0.2); }
     }
 
-    /* ===== Publications Section ===== */
-    .pub-container{
-      max-width:1000px; margin:3rem auto 5rem; padding:0 1.5rem;
+    /* ===== Publication cards ===== */
+    .pub-card {
+      background:#fff; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,0.08);
+      transition:transform .15s ease, box-shadow .15s ease; overflow:hidden;
     }
-    .pub-card{
-      background:white; border-radius:12px; box-shadow:0 2px 5px rgba(0,0,0,0.08);
-      padding:1.5rem 1.75rem; margin-bottom:1.25rem;
-      transition:transform .2s ease, box-shadow .2s ease;
-    }
-    .pub-card:hover{ transform:translateY(-2px); box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    .pub-title{ font-weight:600; font-size:1.1rem; color:#1a202c; }
-    .pub-authors{ color:#4a5568; font-size:0.95rem; margin-top:0.25rem; }
-    .pub-journal{ color:#2b6cb0; font-size:0.9rem; margin-top:0.25rem; }
-    .year-label{
-      font-weight:700; font-size:1.25rem; margin:2.5rem 0 1rem;
-      border-left:4px solid #9dd5d6; padding-left:0.75rem;
-    }
+    .pub-card:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.12); }
+    .pub-pill { display:inline-block; padding:.25rem .5rem; font-size:.75rem; font-weight:700; border-radius:999px; background:#e6f5f6; color:#2b6b6d; }
   </style>
 </head>
+
 <body>
 
-  <!-- ===== Header hero ===== -->
+  <!-- Header (hero with logos) -->
   <div class="header-hero">
     <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
     <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
     <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
 
-  <!-- ===== Navbar ===== -->
-  <header>
+  <!-- Header / Nav (matching people.html) -->
+  <header role="banner">
     <div class="nav-container">
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
+      <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
         <div></div><div></div><div></div>
       </button>
-      <nav role="navigation" aria-label="Main navigation">
+
+      <nav role="navigation" class="ml-2">
         <ul id="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html">Research</a></li>
-          <li><a href="people.html">Lab Members</a></li>
-          <li><a href="publications.html" style="background:rgba(255,255,255,0.25); border-radius:6px;">Publications</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#top">Home</a></li>
+          <li><a href="#people">People</a></li>
+          <li><a href="#publications" style="background:rgba(255,255,255,0.25);border-radius:.5rem;">Publications</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- ===== Publications Section ===== -->
-  <main class="pub-container">
-    <h1 class="text-3xl font-bold mb-6">Publications</h1>
+  <!-- Publications -->
+  <section id="publications" class="py-32 bg-gray-50 text-justify">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center">
+        <h2 class="text-4xl font-extrabold mb-8">Publications</h2>
+        <a
+          href="https://scholar.google.com/citations?user=HZzBPaIAAAAJ&hl"
+          target="_blank"
+          rel="noopener"
+          class="inline-block text-white px-8 py-4 text-lg rounded-lg hover:opacity-90 transition"
+          style="background-color: #9dd5d6;"
+        >
+          View on Google Scholar
+        </a>
 
-    <h2 class="year-label">2025</h2>
-    <div class="pub-card">
-      <p class="pub-title">Modulating Glycan Signatures in Astrocytes: Mechanotransduction Pathways in Brain Injury Models</p>
-      <p class="pub-authors">A. Garhwal, C. Vallejo Giraldo, et al.</p>
-      <p class="pub-journal"><em>Advanced Neuroengineering</em>, 2025</p>
+        <!-- Card grid (auto-populated by JS below) -->
+        <div id="pub-cards" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+      </div>
     </div>
+  </section>
 
-    <div class="pub-card">
-      <p class="pub-title">Engineering 3D In Vitro Organoid Systems for Mechanobiological Studies of Gliosis</p>
-      <p class="pub-authors">A.P. Carreño, J.M. Fernández Real, C. Vallejo Giraldo</p>
-      <p class="pub-journal"><em>Frontiers in Cellular Neuroscience</em>, 2025</p>
-    </div>
-
-    <h2 class="year-label">2024</h2>
-    <div class="pub-card">
-      <p class="pub-title">TrapKill: A Biomaterial-Based Strategy to Capture and Eliminate Glioblastoma Cells</p>
-      <p class="pub-authors">T. Clarke, J.M. Fernández Real, C. Vallejo Giraldo</p>
-      <p class="pub-journal"><em>Biomaterials Science</em>, 2024</p>
-    </div>
-
-    <div class="pub-card">
-      <p class="pub-title">Matrix Stiffness Drives Astrocytic Differentiation in a 3D Brain-Inspired Hydrogel</p>
-      <p class="pub-authors">Y. Fahy, A. Garhwal, C. Vallejo Giraldo</p>
-      <p class="pub-journal"><em>Journal of Biomedical Materials Research A</em>, 2024</p>
-    </div>
-
-    <h2 class="year-label">2023</h2>
-    <div class="pub-card">
-      <p class="pub-title">Biophysical Cues Regulate Astrocyte Activation and Gliosis in Engineered Brain Microenvironments</p>
-      <p class="pub-authors">C. Vallejo Giraldo, et al.</p>
-      <p class="pub-journal"><em>Nature Biomedical Engineering</em>, 2023</p>
-    </div>
-
-  </main>
-
-  <!-- ===== JS ===== -->
+  <!-- JS: navbar + publications render -->
   <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
@@ -184,13 +174,92 @@
     }
 
     burger.addEventListener('click', toggleMenu);
+    burger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+
+    // Close menu when clicking outside (mobile)
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
-        burger.setAttribute('aria-expanded','false');
+        burger.setAttribute('aria-expanded', 'false');
         menu.classList.remove('show');
       }
     });
+
+    // Close menu after clicking a link (mobile)
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        burger.classList.remove('open');
+        burger.setAttribute('aria-expanded','false');
+        menu.classList.remove('show');
+      });
+    });
+  </script>
+
+  <!-- Publications data + renderer -->
+  <script>
+    // You can add to this array as you publish more
+    const publications = [
+      {
+        title: "Cerebral Organoids with Integrated Endothelial Networks Emulate the Neurovascular Unit and Mitigate Core Necrosis",
+        authors: "Josep Fumadó Navarro, Siobhan Crilly, Wai Kit Chan, Shane Browne, John O. Mason, Catalina Vallejo-Giraldo, Abhay Pandit, Mihai Lomora",
+        venue: "Advanced Science",
+        year: 2025,
+        type: "Article",
+        url: "https://onlinelibrary.wiley.com/doi/10.1002/anbr.202100098"
+      },
+      {
+        title: "Flexible, Transparent, and Cytocompatible Nanostructured Indium Tin Oxide Thin Films for Bio-optoelectronic Applications",
+        authors: "K. Krukiewicz, D. Czerwińska-Główka, R.M. Turczyn, A. Blacha-Grzechnik, C. Vallejo-Giraldo, K. Erfurt, A. Chrobok, J. Faure-Vincent, S. Pouget, D. Djurado, M.J.P. Biggs",
+        venue: "ACS Applied Materials & Interfaces",
+        year: 2023,
+        type: "Article",
+        url: "https://pubs.acs.org/doi/10.1021/acsami.3c10861"
+      },
+      {
+        title: "Functional Biomedical Hydrogels for In Vivo Imaging",
+        authors: "Y. Lei, C. Ma, C. Vallejo-Giraldo, O. Syed, R. Green",
+        venue: "Journal of Materials Chemistry B",
+        year: 2019,
+        type: "Review",
+        url: "https://pubs.rsc.org/en/content/articlelanding/2019/tb/c9tb01628g"
+      }
+      // Add more...
+    ];
+
+    (function renderLatestPubs() {
+      const container = document.getElementById("pub-cards");
+      if (!container) return;
+
+      const latest = [...publications]
+        .sort((a,b) => (b.year || 0) - (a.year || 0))
+        .slice(0, 6);
+
+      container.innerHTML = latest.map(p => `
+        <article class="pub-card p-6">
+          <div class="flex items-center justify-between mb-3">
+            <span class="pub-pill">${p.type || "Article"}</span>
+            <span class="text-sm font-semibold text-gray-500">${p.year || ""}</span>
+          </div>
+          <h3 class="text-lg font-extrabold leading-snug mb-2">
+            <a href="${p.url}" target="_blank" rel="noopener" class="hover:underline" style="color:#2d3748">
+              ${p.title}
+            </a>
+          </h3>
+          <p class="text-sm text-gray-700 mb-1">${p.authors}</p>
+          <p class="text-sm text-gray-500 mb-4"><em>${p.venue}</em></p>
+          <a
+            href="${p.url}"
+            target="_blank" rel="noopener"
+            class="inline-block px-4 py-2 rounded-md text-white text-sm font-bold hover:opacity-90 transition"
+            style="background-color:#9dd5d6;"
+          >
+            Read
+          </a>
+        </article>
+      `).join("");
+    })();
   </script>
 </body>
 </html>
