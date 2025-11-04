@@ -7,124 +7,30 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
-
-    /* ===== Navbar (below header image, LEFT aligned) ===== */
-    header{
-      position:sticky;
-      top:0; left:0; right:0;
-      background:#9dd5d6;
-      z-index:30;
-      box-shadow:0 2px 5px rgba(0,0,0,0.1);
-    }
-    .nav-container{
-      max-width:1440px;
-      margin:0 auto;
-      display:flex;
-      justify-content:flex-start; /* LEFT aligned */
-      align-items:center;
-      gap:12px;
-      padding:0.75rem 1rem;
-      position:relative; /* anchor dropdown */
-    }
-
-    /* logo */
-    .lab-logo {
-      height: 48px;
-    }
-
-    /* Bigger, more tappable hamburger */
-    .hamburger{
-      width:44px; height:34px;
-      padding:8px;
-      display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
-    }
-    .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-    .hamburger div{
-      height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
-    }
-    .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
-    .hamburger.open div:nth-child(2){ opacity:0; }
-    .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
-
-    /* Dropdown menu appears under hamburger, left aligned */
-    nav ul{
-      list-style:none;
-      display:none;
-      flex-direction:column;
-      position:absolute;
-      top:64px;
-      left:0;
-      background:#9dd5d6;
-      width:260px;
-      border-radius:0 0 8px 8px;
-      box-shadow:0 2px 5px rgba(0,0,0,0.15);
-      padding:0; margin:0;
-      z-index:50;
-      text-align:left;
-    }
-    nav ul.show{ display:flex; }
-    nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
-    nav ul li:last-child{ border-bottom:none; }
-    nav ul li a{
-      display:block; padding:1rem 1.25rem;
-      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-      letter-spacing:.2px;
-      transition:background .2s ease;
-    }
-    nav ul li a:hover{ background:rgba(255,255,255,0.2); }
-
-    /* optional: show menu horizontally on big screens */
-    @media (min-width: 992px) {
-      nav ul {
-        position:static;
-        display:flex !important;
-        flex-direction:row;
-        background:transparent;
-        box-shadow:none;
-        width:auto;
-      }
-      nav ul li {
-        border-bottom:none;
-      }
-      nav ul li a {
-        color:#fff;
-        padding:0.5rem 0.85rem;
-        font-weight:600;
-      }
-      .hamburger {
-        display:none;
-      }
-    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-  <!-- Navbar (custom) -->
-  <header>
-    <div class="nav-container">
-      <!-- logo -->
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="lab-logo"/>
-
-      <!-- hamburger -->
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
-        <div></div>
-        <div></div>
-        <div></div>
-      </button>
-
-      <!-- nav links -->
-      <nav>
-        <ul id="nav-menu">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="research.html" style="background:rgba(255,255,255,0.2);">Research</a></li>
-          <li><a href="people.html">People</a></li>
-          <li><a href="publications.html">Publications</a></li>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </nav>
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+      <div class="flex items-center space-x-3">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
+  
+      </div>
+      <div class="hidden md:block space-x-6">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="research.html" class="text-blue-600 font-semibold">Research</a>
+        <a href="people.html" class="hover:text-blue-600">People</a>
+        <a href="publications.html" class="hover:text-blue-600">Publications</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+      </div>
+      <!-- Simple mobile menu button (optional/no JS toggle for brevity) -->
+      <div class="md:hidden">
+        <a href="#research" class="px-3 py-2 rounded-md text-sm font-medium border hover:bg-gray-50">Menu</a>
+      </div>
     </div>
-  </header>
+  </nav>
 
   <!-- Our Research (Cards, vertical stack) -->
   <section id="research" class="py-16 bg-gray-50">
@@ -132,7 +38,7 @@
       <h1 class="text-3xl font-bold mb-3">Our Research</h1>
       <p class="text-gray-700 mb-8">
         Our work focuses on modifying spatial, temporal, and mechanical signals in healthy and diseased brain cells to influence cell fate. 
-        These changes enable us to explore and develop two key areas:
+    These changes enable us to explore and develop two key areas:
       </p>
 
       <!-- Vertical cards container -->
@@ -159,6 +65,7 @@
 
             <div id="pillar1" class="mt-4 hidden">
               <div class="border-t pt-4 space-y-3">
+                <!-- Project card -->    <!--Add more projects for 3D in vitro models here-->
                 <div class="rounded-lg border p-4">
                   <div class="flex items-center justify-between">
                     <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
@@ -178,14 +85,15 @@
           </div>
         </article>
 
-        <!-- Pillar 2 -->
+        <!-- Pillar 2 --> <!-- Add more projects for neuro-oncology therapies here -->
         <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
           <div class="p-6">
             <div class="flex items-center space-x-3 mb-3">
               <span class="text-3xl" aria-hidden="true">🧪</span>
               <h2 class="text-xl font-semibold">Neuro-oncology Therapies</h2>
             </div>
-            <p class="text-gray-700">The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.</p>
+            <p class="text-gray-700">The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.
+            </p>
 
             <button
               class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
@@ -203,26 +111,29 @@
                     <h3 class="font-semibold">Developing a biomaterial hydrogel for the treatment of glioblastoma: TrapKill</h3>
                     <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
                   </div>
-                  <p class="mt-2 text-sm text-gray-600">Researcher: José Miguel Fernández Real</p>
+                     <p class="mt-2 text-sm text-gray-600">Researcher: José Miguel Fernández Real</p>
                 </div>
                 <div class="rounded-lg border p-4">
-                  <div class="flex items-center justify-between">
+                       <div class="flex items-center justify-between">
                     <h3 class="font-semibold">Development of In Vitro Trap and Kill Therapy for Glioblastoma</h3>
                     <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
                   </div>
-                  <p class="mt-2 text-sm text-gray-600">Researcher: Taryn Clarke</p>
+                     <p class="mt-2 text-sm text-gray-600">Researcher: Taryn Clarke</p>
+
                 </div>
               </div>
+
+                  </div>
             </div>
           </div>
         </article>
       </div>
 
       <!-- Topics -->
-      <h2 class="text-2xl font-bold mt-12 mb-4 text-center">Key Topics</h2>
+        <h2 class="text-2xl font-bold mt-12 mb-4 text-center">Key Topics</h2>
 
-      <div class="bg-white rounded-xl shadow p-6 max-w-3xl mx-auto text-center">
-        <ul class="flex flex-wrap justify-center gap-2">
+<div class="bg-white rounded-xl shadow p-6 max-w-3xl mx-auto text-center">
+  <ul class="flex flex-wrap justify-center gap-2">
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Gliosis</li>
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Astrocytes</li>
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">3D in&nbsp;vitro models</li>
@@ -241,8 +152,8 @@
     </div>
   </section>
 
+  <!-- Tiny helper script -->
   <script>
-    // expand/collapse project cards
     function toggleCard(id, btn) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -253,18 +164,6 @@
         btn.textContent = expanded ? 'See projects' : 'Hide projects';
       }
     }
-
-    // mobile nav toggle
-    const burger = document.getElementById('hamburger');
-    const menu = document.getElementById('nav-menu');
-
-    burger.addEventListener('click', () => {
-      burger.classList.toggle('open');
-      menu.classList.toggle('show');
-
-      const isOpen = burger.classList.contains('open');
-      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    });
   </script>
 </body>
 </html>
