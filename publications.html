@@ -1,83 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" id="top">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catalina VG Lab - People</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research - Catalina VG Lab</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
-    /* Base */
-    *,*::before,*::after{ box-sizing:border-box; }
-    html{
-      scroll-behavior:smooth;
-    }
-    html,body{
-      margin:0; padding:0; overflow-x:hidden;
-      font-family:system-ui,sans-serif;
-      background:#f9fafb; color:#2d3748;
-      text-align: justify;
-    }
-    /* Prevent sticky header from covering anchors */
-    section{ scroll-margin-top: 84px; }
+    html { scroll-behavior: smooth; }
 
-    /* ===== Header image with overlaid logos ===== */
-    .header-hero{
-      position:relative; width:100%; height:240px; overflow:hidden;
-    }
-    .header-hero img.header-image{
-      position:relative; z-index:1; width:100%; height:100%;
-      object-fit:cover; display:block;
-    }
-    .header-hero::after{
-      content:""; position:absolute; inset:0;
-      background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
-      z-index:2;
-    }
-    .header-hero .logo{
-      position:absolute; top:50%; transform:translateY(-50%);
-      height:64px; max-width:40vw; object-fit:contain;
-      z-index:3; pointer-events:none; background:transparent;
-    }
-    .header-hero .logo.left{ left:16px; }
-    .header-hero .logo.right{ right:16px; }
-    .header-hero .logo.left{ height:96px; max-width:48vw; }
-    @media (max-width:480px){
-      .header-hero{ height:200px; }
-      .header-hero .logo{ height:52px; }
-      .header-hero .logo.left{ height:72px; max-width:60vw; }
-    }
-
-    /* ===== Navbar ===== */
+    /* ===== Navbar (below header image, LEFT aligned) ===== */
     header{
-      position:sticky; top:0; left:0; right:0;
-      background:#9dd5d6; z-index:30;
+      position:sticky;
+      top:0; left:0; right:0;
+      background:#9dd5d6;
+      z-index:30;
       box-shadow:0 2px 5px rgba(0,0,0,0.1);
     }
     .nav-container{
-      max-width:1440px; margin:0 auto;
-      display:flex; justify-content:flex-start; align-items:center; gap:12px;
-      padding:0.75rem 1rem; position:relative;
+      max-width:1440px;
+      margin:0 auto;
+      display:flex;
+      justify-content:flex-start; /* LEFT aligned */
+      align-items:center;
+      gap:12px;
+      padding:0.75rem 1rem;
+      position:relative; /* anchor dropdown */
     }
+
+    /* logo */
+    .lab-logo {
+      height: 48px;
+    }
+
+    /* Bigger, more tappable hamburger */
     .hamburger{
-      width:44px; height:34px; padding:8px;
+      width:44px; height:34px;
+      padding:8px;
       display:flex; flex-direction:column; justify-content:space-between;
       cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
     }
     .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-    .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
+    .hamburger div{
+      height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
+    }
     .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
-    /* Mobile menu (default) */
+    /* Dropdown menu appears under hamburger, left aligned */
     nav ul{
-      list-style:none; display:none; flex-direction:column;
-      position:absolute; top:64px; left:0;
-      background:#9dd5d6; width:260px;
-      border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
-      padding:0; margin:0; z-index:50; text-align:left;
+      list-style:none;
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:64px;
+      left:0;
+      background:#9dd5d6;
+      width:260px;
+      border-radius:0 0 8px 8px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      padding:0; margin:0;
+      z-index:50;
+      text-align:left;
     }
     nav ul.show{ display:flex; }
     nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
@@ -85,178 +69,202 @@
     nav ul li a{
       display:block; padding:1rem 1.25rem;
       color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-      letter-spacing:.2px; transition:background .2s ease;
+      letter-spacing:.2px;
+      transition:background .2s ease;
     }
-    nav ul li a:hover{ background:rgba(255,255,255,0.15); }
+    nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
-    /* Desktop menu */
-    @media (min-width: 768px){
-      .hamburger{ display:none; }
-      nav ul{
-        display:flex !important; position:static; flex-direction:row;
-        background:transparent; width:auto; border-radius:0; box-shadow:none;
-        gap:.5rem;
+    /* optional: show menu horizontally on big screens */
+    @media (min-width: 992px) {
+      nav ul {
+        position:static;
+        display:flex !important;
+        flex-direction:row;
+        background:transparent;
+        box-shadow:none;
+        width:auto;
       }
-      nav ul li{ border-bottom:none; }
-      nav ul li a{ padding:.5rem .75rem; border-radius:.5rem; }
-      nav ul li a:hover{ background:rgba(255,255,255,0.2); }
+      nav ul li {
+        border-bottom:none;
+      }
+      nav ul li a {
+        color:#fff;
+        padding:0.5rem 0.85rem;
+        font-weight:600;
+      }
+      .hamburger {
+        display:none;
+      }
     }
-
-    /* ===== Publication cards ===== */
-    .pub-card {
-      background:#fff; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      transition:transform .15s ease, box-shadow .15s ease; overflow:hidden;
-    }
-    .pub-card:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.12); }
-    .pub-pill { display:inline-block; padding:.25rem .5rem; font-size:.75rem; font-weight:700; border-radius:999px; background:#e6f5f6; color:#2b6b6d; }
   </style>
 </head>
+<body class="bg-gray-50 text-gray-800">
 
-<body>
-
-<!-- Header -->
-  <div class="header-hero">
-    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
-    <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
-    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
-  </div>
-  <!-- Header / Nav -->
-  <header role="banner">
+  <!-- Navbar (custom) -->
+  <header>
     <div class="nav-container">
-      <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
-        <div></div><div></div><div></div>
+      <!-- logo -->
+      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="lab-logo"/>
+
+      <!-- hamburger -->
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <div></div>
+        <div></div>
+        <div></div>
       </button>
 
-      <nav role="navigation" class="ml-2">
+      <!-- nav links -->
+      <nav>
         <ul id="nav-menu">
-          <li><a href="#top">Home</a></li>
-          <li><a href="#people">People</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html" style="background:rgba(255,255,255,0.2);">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- Publications -->
-  <section id="publications" class="py-32 bg-gray-50 text-justify">
-    <div class="max-w-5xl mx-auto px-6">
-      <div class="text-center">
-        <h2 class="text-4xl font-extrabold mb-8">Publications</h2>
-        <a
-          href="https://scholar.google.com/citations?user=HZzBPaIAAAAJ&hl"
-          target="_blank"
-          rel="noopener"
-          class="inline-block text-white px-8 py-4 text-lg rounded-lg hover:opacity-90 transition"
-          style="background-color: #9dd5d6;"
-        >
-          View on Google Scholar
-        </a>
+  <!-- Our Research (Cards, vertical stack) -->
+  <section id="research" class="py-16 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+      <h1 class="text-3xl font-bold mb-3">Our Research</h1>
+      <p class="text-gray-700 mb-8">
+        Our work focuses on modifying spatial, temporal, and mechanical signals in healthy and diseased brain cells to influence cell fate. 
+        These changes enable us to explore and develop two key areas:
+      </p>
 
-        <!-- Card grid (auto-populated by JS below) -->
-        <div id="pub-cards" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
+      <!-- Vertical cards container -->
+      <div class="grid gap-6 grid-cols-1 max-w-3xl mx-auto">
+        <!-- Pillar 1 -->
+        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+          <div class="p-6">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="text-3xl" aria-hidden="true">🧠</span>
+              <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
+            </div>
+            <p class="text-gray-700">
+              Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
+            </p>
+
+            <button
+              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+              onclick="toggleCard('pillar1', this)"
+              aria-controls="pillar1"
+              aria-expanded="false"
+            >
+              See projects
+            </button>
+
+            <div id="pillar1" class="mt-4 hidden">
+              <div class="border-t pt-4 space-y-3">
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
+                </div>
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Engineering an in vitro brain organoid model </h3>
+                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: Andres P. Carreño </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Pillar 2 -->
+        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+          <div class="p-6">
+            <div class="flex items-center space-x-3 mb-3">
+              <span class="text-3xl" aria-hidden="true">🧪</span>
+              <h2 class="text-xl font-semibold">Neuro-oncology Therapies</h2>
+            </div>
+            <p class="text-gray-700">The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.</p>
+
+            <button
+              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+              onclick="toggleCard('pillar2', this)"
+              aria-controls="pillar2"
+              aria-expanded="false"
+            >
+              See projects
+            </button>
+
+            <div id="pillar2" class="mt-4 hidden">
+              <div class="border-t pt-4 space-y-3">
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Developing a biomaterial hydrogel for the treatment of glioblastoma: TrapKill</h3>
+                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: José Miguel Fernández Real</p>
+                </div>
+                <div class="rounded-lg border p-4">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-semibold">Development of In Vitro Trap and Kill Therapy for Glioblastoma</h3>
+                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+                  </div>
+                  <p class="mt-2 text-sm text-gray-600">Researcher: Taryn Clarke</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Topics -->
+      <h2 class="text-2xl font-bold mt-12 mb-4 text-center">Key Topics</h2>
+
+      <div class="bg-white rounded-xl shadow p-6 max-w-3xl mx-auto text-center">
+        <ul class="flex flex-wrap justify-center gap-2">
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Gliosis</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Astrocytes</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">3D in&nbsp;vitro models</li>
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Organoids</li>      
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Mechanobiology</li>
+        </ul>
+      </div>
+
+      <!-- Callout -->
+      <div class="mt-8 bg-blue-50 border border-blue-200 rounded-xl p-6 max-w-3xl mx-auto">
+        <h3 class="font-semibold mb-2">Interested in collaborating?</h3>
+        <p class="text-gray-700">
+          We welcome partnerships. Get in touch via our <a href="contact.html" class="text-blue-700 underline">Contact</a> page.
+        </p>
       </div>
     </div>
   </section>
-  <script>
-    // Hamburger toggle
-    const burger = document.getElementById('hamburger');
-    const menu   = document.getElementById('nav-menu');
 
-    function toggleMenu() {
-      burger.classList.toggle('open');
-      const open = burger.classList.contains('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menu.classList.toggle('show', open);
+  <script>
+    // expand/collapse project cards
+    function toggleCard(id, btn) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.toggle('hidden');
+      if (btn) {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        btn.textContent = expanded ? 'See projects' : 'Hide projects';
+      }
     }
 
-    burger.addEventListener('click', toggleMenu);
-    burger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    // mobile nav toggle
+    const burger = document.getElementById('hamburger');
+    const menu = document.getElementById('nav-menu');
+
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      menu.classList.toggle('show');
+
+      const isOpen = burger.classList.contains('open');
+      burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
     });
-
-    // Close menu when clicking outside (mobile)
-    document.addEventListener('click', (e) => {
-      if (!menu.contains(e.target) && !burger.contains(e.target)) {
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('show');
-      }
-    });
-
-    // Close menu after clicking a link (mobile), then let anchor scroll
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded','false');
-        menu.classList.remove('show');
-      });
-    });
-  </script>
-
-  <!-- Publications data + renderer (latest first) -->
-  <script>
-    // Curated list for client-side (replace/extend as needed)
-    const publications = [
-      {
-        title: "Cerebral Organoids with Integrated Endothelial Networks Emulate the Neurovascular Unit and Mitigate Core Necrosis",
-        authors: "Josep Fumadó Navarro, Siobhan Crilly, Wai Kit Chan, Shane Browne, John O. Mason, Catalina Vallejo-Giraldo, Abhay Pandit, Mihai Lomora",
-        venue: "Advanced Science",
-        year: 2025,
-        type: "Article",
-        url: "https://onlinelibrary.wiley.com/doi/10.1002/anbr.202100098"
-      },
-      {
-        title: "Flexible, Transparent, and Cytocompatible Nanostructured Indium Tin Oxide Thin Films for Bio-optoelectronic Applications",
-        authors: "Katarzyna Krukiewicz,Dominika Czerwińska-Główka,Roman Maria Turczyn, Agata Blacha-Grzechnik, Catalina Vallejo-Giraldo,Karol Erfurt,Anna Chrobok, Jérôme Faure-Vincent, Stéphanie Pouget, David Djurado, and Manus J.P.Biggs*",
-        venue: "ACS Applied Materials & Interfaces",
-        year: 2023,
-        type: "Article",
-        url: "https://pubs.acs.org/doi/10.1021/acsami.3c10861"
-      },
-      {
-        title: "Functional Biomedical Hydrogels for In Vivo Imaging",
-        authors: "Y. Lei, C. Ma, C. Vallejo-Giraldo, O. Syed, R. Green",
-        venue: "Journal of Materials Chemistry B",
-        year: 2019,
-        type: "Review",
-        url: "https://pubs.rsc.org/en/content/articlelanding/2019/tb/c9tb01628g"
-      }
-      // Add more items as needed
-    ];
-
-    (function renderLatestPubs() {
-      const container = document.getElementById("pub-cards");
-      if (!container) return;
-
-      const latest = [...publications]
-        .sort((a,b) => (b.year || 0) - (a.year || 0))
-        .slice(0, 6); // show newest 6
-
-      container.innerHTML = latest.map(p => `
-        <article class="pub-card p-6">
-          <div class="flex items-center justify-between mb-3">
-            <span class="pub-pill">${p.type || "Article"}</span>
-            <span class="text-sm font-semibold text-gray-500">${p.year || ""}</span>
-          </div>
-          <h3 class="text-lg font-extrabold leading-snug mb-2">
-            <a href="${p.url}" target="_blank" rel="noopener" class="hover:underline" style="color:#2d3748">
-              ${p.title}
-            </a>
-          </h3>
-          <p class="text-sm text-gray-700 mb-1">${p.authors}</p>
-          <p class="text-sm text-gray-500 mb-4"><em>${p.venue}</em></p>
-          <a
-            href="${p.url}"
-            target="_blank" rel="noopener"
-            class="inline-block px-4 py-2 rounded-md text-white text-sm font-bold hover:opacity-90 transition"
-            style="background-color:#9dd5d6;"
-          >
-            Read
-          </a>
-        </article>
-      `).join("");
-    })();
   </script>
 </body>
 </html>
