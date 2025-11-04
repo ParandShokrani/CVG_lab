@@ -6,20 +6,16 @@
   <title>Catalina VG Lab - Publications</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
-
   <style>
     /* Base */
     *,*::before,*::after{ box-sizing:border-box; }
-    html{
-      scroll-behavior:smooth;
-    }
+    html{ scroll-behavior:smooth; }
     html,body{
       margin:0; padding:0; overflow-x:hidden;
       font-family:system-ui,sans-serif;
       background:#f9fafb; color:#2d3748;
       text-align: justify;
     }
-    /* Prevent sticky header from covering anchors */
     section{ scroll-margin-top: 84px; }
 
     /* ===== Header image with overlaid logos ===== */
@@ -66,18 +62,29 @@
       cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
     }
     .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-    .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
+    .hamburger div{
+      height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
+    }
     .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
-    /* Mobile menu (default) */
+    /* Menu – hidden until .show */
     nav ul{
-      list-style:none; display:none; flex-direction:column;
-      position:absolute; top:64px; left:0;
-      background:#9dd5d6; width:260px;
-      border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
-      padding:0; margin:0; z-index:50; text-align:left;
+      list-style:none;
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:64px;
+      left:0;
+      background:#9dd5d6;
+      width:260px;
+      border-radius:0 0 8px 8px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      padding:0;
+      margin:0;
+      z-index:50;
+      text-align:left;
     }
     nav ul.show{ display:flex; }
     nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
@@ -89,18 +96,7 @@
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.15); }
 
-    /* Desktop menu */
-    @media (min-width: 768px){
-      .hamburger{ display:none; }
-      nav ul{
-        display:flex !important; position:static; flex-direction:row;
-        background:transparent; width:auto; border-radius:0; box-shadow:none;
-        gap:.5rem;
-      }
-      nav ul li{ border-bottom:none; }
-      nav ul li a{ padding:.5rem .75rem; border-radius:.5rem; }
-      nav ul li a:hover{ background:rgba(255,255,255,0.2); }
-    }
+    /* keep hamburger on desktop too – no @media override */
 
     /* ===== Publication cards ===== */
     .pub-card {
@@ -111,15 +107,15 @@
     .pub-pill { display:inline-block; padding:.25rem .5rem; font-size:.75rem; font-weight:700; border-radius:999px; background:#e6f5f6; color:#2b6b6d; }
   </style>
 </head>
-
 <body>
 
-<!-- Header -->
+  <!-- Header -->
   <div class="header-hero">
     <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
     <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
     <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
+
   <!-- Header / Nav -->
   <header role="banner">
     <div class="nav-container">
@@ -153,11 +149,11 @@
           View on Google Scholar
         </a>
 
-        <!-- Card grid (auto-populated by JS below) -->
         <div id="pub-cards" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </div>
   </section>
+
   <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
@@ -175,7 +171,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
     });
 
-    // Close menu when clicking outside (mobile)
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
@@ -184,7 +180,7 @@
       }
     });
 
-    // Close menu after clicking a link (mobile), then let anchor scroll
+    // Close menu after clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
@@ -194,9 +190,8 @@
     });
   </script>
 
-  <!-- Publications data + renderer (latest first) -->
+  <!-- Publications data + renderer -->
   <script>
-    // Curated list for client-side (replace/extend as needed)
     const publications = [
       {
         title: "Cerebral Organoids with Integrated Endothelial Networks Emulate the Neurovascular Unit and Mitigate Core Necrosis",
@@ -208,7 +203,7 @@
       },
       {
         title: "Flexible, Transparent, and Cytocompatible Nanostructured Indium Tin Oxide Thin Films for Bio-optoelectronic Applications",
-        authors: "Katarzyna Krukiewicz,Dominika Czerwińska-Główka,Roman Maria Turczyn, Agata Blacha-Grzechnik, Catalina Vallejo-Giraldo,Karol Erfurt,Anna Chrobok, Jérôme Faure-Vincent, Stéphanie Pouget, David Djurado, and Manus J.P.Biggs*",
+        authors: "Katarzyna Krukiewicz, Dominika Czerwińska-Główka, Roman Maria Turczyn, Agata Blacha-Grzechnik, Catalina Vallejo-Giraldo, Karol Erfurt, Anna Chrobok, Jérôme Faure-Vincent, Stéphanie Pouget, David Djurado, Manus J.P. Biggs",
         venue: "ACS Applied Materials & Interfaces",
         year: 2023,
         type: "Article",
@@ -222,7 +217,6 @@
         type: "Review",
         url: "https://pubs.rsc.org/en/content/articlelanding/2019/tb/c9tb01628g"
       }
-      // Add more items as needed
     ];
 
     (function renderLatestPubs() {
@@ -231,7 +225,7 @@
 
       const latest = [...publications]
         .sort((a,b) => (b.year || 0) - (a.year || 0))
-        .slice(0, 6); // show newest 6
+        .slice(0, 6);
 
       container.innerHTML = latest.map(p => `
         <article class="pub-card p-6">
