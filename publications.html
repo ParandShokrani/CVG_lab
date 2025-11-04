@@ -22,7 +22,7 @@
     /* Prevent sticky header from covering anchors */
     section{ scroll-margin-top: 84px; }
 
-    /* ===== Header image with overlaid logos ===== */
+    /* ===== Header image with overlaid logos (copied from people page) ===== */
     .header-hero{
       position:relative; width:100%; height:240px; overflow:hidden;
     }
@@ -49,7 +49,7 @@
       .header-hero .logo.left{ height:72px; max-width:60vw; }
     }
 
-    /* ===== Navbar ===== */
+    /* ===== Navbar (exact same behaviour as people.html) ===== */
     header{
       position:sticky; top:0; left:0; right:0;
       background:#9dd5d6; z-index:30;
@@ -71,7 +71,7 @@
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
-    /* Mobile menu (default) */
+    /* Mobile menu */
     nav ul{
       list-style:none; display:none; flex-direction:column;
       position:absolute; top:64px; left:0;
@@ -89,7 +89,7 @@
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.15); }
 
-    /* Desktop menu */
+    /* Desktop */
     @media (min-width: 768px){
       .hamburger{ display:none; }
       nav ul{
@@ -114,14 +114,14 @@
 
 <body>
 
-  <!-- Header (hero with logos) -->
+  <!-- Header (hero) -->
   <div class="header-hero">
     <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
     <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
     <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
 
-  <!-- Header / Nav (matching people.html) -->
+  <!-- Navbar (copied structure) -->
   <header role="banner">
     <div class="nav-container">
       <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
@@ -154,13 +154,21 @@
           View on Google Scholar
         </a>
 
-        <!-- Card grid (auto-populated by JS below) -->
+        <!-- Card grid -->
         <div id="pub-cards" class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"></div>
       </div>
     </div>
   </section>
 
-  <!-- JS: navbar + publications render -->
+  <!-- placeholders so navbar links don't feel broken -->
+  <section id="people" class="py-8 max-w-5xl mx-auto px-6">
+    <!-- optional content or leave empty -->
+  </section>
+  <section id="contact" class="py-8 max-w-5xl mx-auto px-6">
+    <!-- optional content or leave empty -->
+  </section>
+
+  <!-- JS (same logic as people page) -->
   <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
@@ -178,7 +186,7 @@
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
     });
 
-    // Close menu when clicking outside (mobile)
+    // Close on outside click
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
@@ -187,7 +195,7 @@
       }
     });
 
-    // Close menu after clicking a link (mobile)
+    // Close after clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
@@ -195,11 +203,8 @@
         menu.classList.remove('show');
       });
     });
-  </script>
 
-  <!-- Publications data + renderer -->
-  <script>
-    // You can add to this array as you publish more
+    // Publications data
     const publications = [
       {
         title: "Cerebral Organoids with Integrated Endothelial Networks Emulate the Neurovascular Unit and Mitigate Core Necrosis",
@@ -225,7 +230,7 @@
         type: "Review",
         url: "https://pubs.rsc.org/en/content/articlelanding/2019/tb/c9tb01628g"
       }
-      // Add more...
+      // add more here
     ];
 
     (function renderLatestPubs() {
