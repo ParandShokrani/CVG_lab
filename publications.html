@@ -11,65 +11,102 @@
     *,*::before,*::after{ box-sizing:border-box; }
     html{ scroll-behavior:smooth; }
     html,body{
-      margin:0; padding:0; overflow-x:hidden;
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
       font-family:system-ui,sans-serif;
-      background:#f9fafb; color:#2d3748;
+      background:#f9fafb;
+      color:#2d3748;
       text-align: justify;
     }
     section{ scroll-margin-top: 84px; }
 
-    /* ===== Header image with overlaid logos ===== */
+    /* ===== Header image with overlaid logos (same as people/research) ===== */
     .header-hero{
-      position:relative; width:100%; height:240px; overflow:hidden;
+      position:relative;
+      width:100%;
+      height:240px;
+      overflow:hidden;
     }
     .header-hero img.header-image{
-      position:relative; z-index:1; width:100%; height:100%;
-      object-fit:cover; display:block;
+      position:relative;
+      z-index:1;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .header-hero::after{
-      content:""; position:absolute; inset:0;
+      content:"";
+      position:absolute;
+      inset:0;
       background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
       z-index:2;
     }
     .header-hero .logo{
-      position:absolute; top:50%; transform:translateY(-50%);
-      height:64px; max-width:40vw; object-fit:contain;
-      z-index:3; pointer-events:none; background:transparent;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      height:64px;
+      max-width:40vw;
+      object-fit:contain;
+      z-index:3;
+      pointer-events:none;
+      background:transparent;
     }
-    .header-hero .logo.left{ left:16px; }
+    .header-hero .logo.left{ left:16px; height:96px; max-width:48vw; }
     .header-hero .logo.right{ right:16px; }
-    .header-hero .logo.left{ height:96px; max-width:48vw; }
     @media (max-width:480px){
       .header-hero{ height:200px; }
       .header-hero .logo{ height:52px; }
       .header-hero .logo.left{ height:72px; max-width:60vw; }
     }
 
-    /* ===== Navbar ===== */
+    /* ===== Navbar (hamburger, same color) ===== */
     header{
-      position:sticky; top:0; left:0; right:0;
-      background:#9dd5d6; z-index:30;
+      position:sticky;
+      top:0;
+      left:0;
+      right:0;
+      background:#9dd5d6;
+      z-index:30;
       box-shadow:0 2px 5px rgba(0,0,0,0.1);
     }
     .nav-container{
-      max-width:1440px; margin:0 auto;
-      display:flex; justify-content:flex-start; align-items:center; gap:12px;
-      padding:0.75rem 1rem; position:relative;
+      max-width:1440px;
+      margin:0 auto;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap:12px;
+      padding:0.75rem 1rem;
+      position:relative;
     }
     .hamburger{
-      width:44px; height:34px; padding:8px;
-      display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
+      width:44px;
+      height:34px;
+      padding:8px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      cursor:pointer;
+      border-radius:8px;
+      outline:none;
+      border:0;
+      background:transparent;
     }
     .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
     .hamburger div{
-      height:5px; border-radius:3px; background:#fff; transition:all .3s ease;
+      height:5px;
+      border-radius:3px;
+      background:#fff;
+      transition:all .3s ease;
     }
     .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
-    /* Menu – hidden until .show */
+    /* Menu */
     nav ul{
       list-style:none;
       display:none;
@@ -90,45 +127,62 @@
     nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
     nav ul li:last-child{ border-bottom:none; }
     nav ul li a{
-      display:block; padding:1rem 1.25rem;
-      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-      letter-spacing:.2px; transition:background .2s ease;
+      display:block;
+      padding:1rem 1.25rem;
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      font-size:1.05rem;
+      letter-spacing:.2px;
+      transition:background .2s ease;
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.15); }
 
-    /* keep hamburger on desktop too – no @media override */
-
     /* ===== Publication cards ===== */
     .pub-card {
-      background:#fff; border-radius:14px; box-shadow:0 6px 16px rgba(0,0,0,0.08);
-      transition:transform .15s ease, box-shadow .15s ease; overflow:hidden;
+      background:#fff;
+      border-radius:14px;
+      box-shadow:0 6px 16px rgba(0,0,0,0.08);
+      transition:transform .15s ease, box-shadow .15s ease;
+      overflow:hidden;
     }
-    .pub-card:hover { transform:translateY(-2px); box-shadow:0 10px 22px rgba(0,0,0,0.12); }
-    .pub-pill { display:inline-block; padding:.25rem .5rem; font-size:.75rem; font-weight:700; border-radius:999px; background:#e6f5f6; color:#2b6b6d; }
+    .pub-card:hover {
+      transform:translateY(-2px);
+      box-shadow:0 10px 22px rgba(0,0,0,0.12);
+    }
+    .pub-pill {
+      display:inline-block;
+      padding:.25rem .5rem;
+      font-size:.75rem;
+      font-weight:700;
+      border-radius:999px;
+      background:#e6f5f6;
+      color:#2b6b6d;
+    }
   </style>
 </head>
 <body>
 
-  <!-- Header -->
+  <!-- Header (same as people/research) -->
   <div class="header-hero">
     <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
     <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
     <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
 
-  <!-- Header / Nav -->
+  <!-- Navbar (linked to real pages, not anchors) -->
   <header role="banner">
     <div class="nav-container">
       <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
         <div></div><div></div><div></div>
       </button>
-
       <nav role="navigation" class="ml-2">
         <ul id="nav-menu">
-          <li><a href="#top">Home</a></li>
-          <li><a href="#people">People</a></li>
-          <li><a href="#publications">Publications</a></li>
-          <li><a href="#contact">Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </nav>
     </div>
@@ -155,7 +209,7 @@
   </section>
 
   <script>
-    // Hamburger toggle
+    // Hamburger toggle (same as other pages)
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
 
@@ -168,10 +222,13 @@
 
     burger.addEventListener('click', toggleMenu);
     burger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+      }
     });
 
-    // Close menu when clicking outside
+    // Close when clicking outside
     document.addEventListener('click', (e) => {
       if (!menu.contains(e.target) && !burger.contains(e.target)) {
         burger.classList.remove('open');
@@ -180,7 +237,7 @@
       }
     });
 
-    // Close menu after clicking a link
+    // Close after clicking a link
     menu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         burger.classList.remove('open');
@@ -188,10 +245,8 @@
         menu.classList.remove('show');
       });
     });
-  </script>
 
-  <!-- Publications data + renderer -->
-  <script>
+    // Publications data + renderer (your original bit)
     const publications = [
       {
         title: "Cerebral Organoids with Integrated Endothelial Networks Emulate the Neurovascular Unit and Mitigate Core Necrosis",
@@ -222,7 +277,6 @@
     (function renderLatestPubs() {
       const container = document.getElementById("pub-cards");
       if (!container) return;
-
       const latest = [...publications]
         .sort((a,b) => (b.year || 0) - (a.year || 0))
         .slice(0, 6);
@@ -240,12 +294,9 @@
           </h3>
           <p class="text-sm text-gray-700 mb-1">${p.authors}</p>
           <p class="text-sm text-gray-500 mb-4"><em>${p.venue}</em></p>
-          <a
-            href="${p.url}"
-            target="_blank" rel="noopener"
-            class="inline-block px-4 py-2 rounded-md text-white text-sm font-bold hover:opacity-90 transition"
-            style="background-color:#9dd5d6;"
-          >
+          <a href="${p.url}" target="_blank" rel="noopener"
+             class="inline-block px-4 py-2 rounded-md text-white text-sm font-bold hover:opacity-90 transition"
+             style="background-color:#9dd5d6;">
             Read
           </a>
         </article>
