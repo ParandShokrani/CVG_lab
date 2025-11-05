@@ -44,46 +44,54 @@
       <!-- Vertical cards container -->
       <div class="grid gap-6 grid-cols-1 max-w-3xl mx-auto">
         <!-- Pillar 1 -->
-        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
-          <div class="p-6">
-            <div class="flex items-center space-x-3 mb-3">
-              <span class="text-3xl" aria-hidden="true">🧠</span>
-              <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
-            </div>
-            <p class="text-gray-700">
-              Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
-            </p>
+       <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+  <div class="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+    <!-- Left side: text -->
+    <div class="flex-1">
+      <div class="flex items-center space-x-3 mb-3">
+        <span class="text-3xl" aria-hidden="true">🧠</span>
+        <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
+      </div>
+      <p class="text-gray-700">
+        Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
+      </p>
 
-            <button
-              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
-              onclick="toggleCard('pillar1', this)"
-              aria-controls="pillar1"
-              aria-expanded="false"
-            >
-              See projects
-            </button>
+      <button
+        class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+        onclick="toggleCard('pillar1', this)"
+        aria-controls="pillar1"
+        aria-expanded="false"
+      >
+        See projects
+      </button>
 
-            <div id="pillar1" class="mt-4 hidden">
-              <div class="border-t pt-4 space-y-3">
-                <!-- Project card -->    <!--Add more projects for 3D in vitro models here-->
-                <div class="rounded-lg border p-4">
-                  <div class="flex items-center justify-between">
-                    <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
-                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
-                  </div>
-                  <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
-                </div>
-                <div class="rounded-lg border p-4">
-                  <div class="flex items-center justify-between">
-                    <h3 class="font-semibold">Engineering an in vitro brain organoid model </h3>
-                    <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
-                  </div>
-                  <p class="mt-2 text-sm text-gray-600">Researcher: Andres P. Carreño </p>
-                </div>
-              </div>
+      <div id="pillar1" class="mt-4 hidden">
+        <div class="border-t pt-4 space-y-3">
+          <div class="rounded-lg border p-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
+              <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
             </div>
+            <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
           </div>
-        </article>
+          <div class="rounded-lg border p-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold">Engineering an in vitro brain organoid model</h3>
+              <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+            </div>
+            <p class="mt-2 text-sm text-gray-600">Researcher: Andres P. Carreño</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right side: circular images -->
+    <div class="flex space-x-4">
+      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture10.jpg" alt="Project image 1" class="w-24 h-24 rounded-full object-cover shadow-md">
+      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Project image 2" class="w-24 h-24 rounded-full object-cover shadow-md">
+    </div>
+  </div>
+</article>
 
         <!-- Pillar 2 --> <!-- Add more projects for neuro-oncology therapies here -->
         <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
