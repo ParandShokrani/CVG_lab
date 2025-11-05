@@ -7,6 +7,38 @@
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <style>
     html { scroll-behavior: smooth; }
+
+    /* slideshow inside circle */
+    @keyframes fadeSlide {
+      0%, 45% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      50%, 95% {
+        opacity: 0;
+        transform: translateX(-10%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* every image in the slider uses this */
+    .circle-slider img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 9999px;
+      animation: fadeSlide 8s infinite;
+    }
+
+    /* second image starts later */
+    .circle-slider img:nth-child(2) {
+      animation-delay: 4s;
+    }
   </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -16,7 +48,6 @@
     <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center space-x-3">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
-  
       </div>
       <div class="hidden md:block space-x-6">
         <a href="index.html" class="hover:text-blue-600">Home</a>
@@ -37,115 +68,125 @@
     <div class="max-w-6xl mx-auto px-4">
       <h1 class="text-3xl font-bold mb-3">Our Research</h1>
       <p class="text-gray-700 mb-8">
-        Our work focuses on modifying spatial, temporal, and mechanical signals in healthy and diseased brain cells to influence cell fate. 
-    These changes enable us to explore and develop two key areas:
+        Our work focuses on modifying spatial, temporal, and mechanical signals in healthy and diseased brain cells to influence cell fate.
+        These changes enable us to explore and develop two key areas:
       </p>
 
       <!-- Vertical cards container -->
       <div class="grid gap-6 grid-cols-1 max-w-3xl mx-auto">
+
         <!-- Pillar 1 -->
-       <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
-  <div class="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-    <!-- Left side: text -->
-    <div class="flex-1">
-      <div class="flex items-center space-x-3 mb-3">
-        <span class="text-3xl" aria-hidden="true">🧠</span>
-        <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
-      </div>
-      <p class="text-gray-700">
-        Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
-      </p>
-
-      <button
-        class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
-        onclick="toggleCard('pillar1', this)"
-        aria-controls="pillar1"
-        aria-expanded="false"
-      >
-        See projects
-      </button>
-
-      <div id="pillar1" class="mt-4 hidden">
-        <div class="border-t pt-4 space-y-3">
-          <div class="rounded-lg border p-4">
-            <div class="flex items-center justify-between">
-              <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
-              <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
-            </div>
-            <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
-          </div>
-          <div class="rounded-lg border p-4">
-            <div class="flex items-center justify-between">
-              <h3 class="font-semibold">Engineering an in vitro brain organoid model</h3>
-              <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
-            </div>
-            <p class="mt-2 text-sm text-gray-600">Researcher: Andres P. Carreño</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Right side: circular images -->
-    <div class="flex space-x-4">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture10.jpg" alt="Project image 1" class="w-40 h-40 rounded-full object-cover shadow-md">
-      <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Project image 2" class="w-40 h-40 rounded-full object-cover shadow-md">
-    </div>
-  </div>
-</article>
-
-        <!-- Pillar 2 --> <!-- Add more projects for neuro-oncology therapies here -->
         <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
-          <div class="p-6">
-            <div class="flex items-center space-x-3 mb-3">
-              <span class="text-3xl" aria-hidden="true">🧪</span>
-              <h2 class="text-xl font-semibold">Neuro-oncology Therapies</h2>
-            </div>
-            <p class="text-gray-700">The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.
-            </p>
+          <div class="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <!-- Left side: text -->
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-3xl" aria-hidden="true">🧠</span>
+                <h2 class="text-xl font-semibold">3D in&nbsp;vitro neurological disease models</h2>
+              </div>
+              <p class="text-gray-700">
+                Three-dimensional (3D) in vitro culture platforms for studying neurological diseases.
+              </p>
 
-            <button
-              class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
-              onclick="toggleCard('pillar2', this)"
-              aria-controls="pillar2"
-              aria-expanded="false"
-            >
-              See projects
-            </button>
+              <button
+                class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+                onclick="toggleCard('pillar1', this)"
+                aria-controls="pillar1"
+                aria-expanded="false"
+              >
+                See projects
+              </button>
 
-            <div id="pillar2" class="mt-4 hidden">
-              <div class="border-t pt-4 space-y-3">
-                <div class="rounded-lg border p-4">
-                  <div class="flex items-center justify-between">
-                    <h3 class="font-semibold">Developing a biomaterial hydrogel for the treatment of glioblastoma: TrapKill</h3>
-                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+              <div id="pillar1" class="mt-4 hidden">
+                <div class="border-t pt-4 space-y-3">
+                  <div class="rounded-lg border p-4">
+                    <div class="flex items-center justify-between">
+                      <h3 class="font-semibold">Understanding the Glycan Modulation in Gliosis after Traumatic Brain Injury.</h3>
+                      <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600">Researcher: Akash Garhwal</p>
                   </div>
-                     <p class="mt-2 text-sm text-gray-600">Researcher: José Miguel Fernández Real</p>
-                </div>
-                <div class="rounded-lg border p-4">
-                       <div class="flex items-center justify-between">
-                    <h3 class="font-semibold">Development of In Vitro Trap and Kill Therapy for Glioblastoma</h3>
-                    <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+                  <div class="rounded-lg border p-4">
+                    <div class="flex items-center justify-between">
+                      <h3 class="font-semibold">Engineering an in vitro brain organoid model</h3>
+                      <span class="text-xs bg-blue-50 text-blue-700 px-2 py-0.5 rounded-full">PhD</span>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600">Researcher: Andres P. Carreño</p>
                   </div>
-                     <p class="mt-2 text-sm text-gray-600">Researcher: Taryn Clarke</p>
-
                 </div>
               </div>
+            </div>
 
-                  </div>
+            <!-- Right side: circular image slider -->
+            <div class="relative w-40 h-40 rounded-full overflow-hidden shadow-md flex-shrink-0 circle-slider">
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture10.jpg" alt="Project image 1">
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Project image 2">
             </div>
           </div>
         </article>
+
+        <!-- Pillar 2 -->
+        <article class="bg-white rounded-xl shadow hover:shadow-lg transition transform hover:-translate-y-0.5">
+          <div class="p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <!-- Left side: text -->
+            <div class="flex-1">
+              <div class="flex items-center space-x-3 mb-3">
+                <span class="text-3xl" aria-hidden="true">🧪</span>
+                <h2 class="text-xl font-semibold">Neuro-oncology Therapies</h2>
+              </div>
+              <p class="text-gray-700">
+                The identification of potential markers for the design and functionalization of biomaterials, especially for neuro-oncology therapies.
+              </p>
+
+              <button
+                class="mt-4 text-sm font-medium text-blue-600 hover:underline focus:outline-none"
+                onclick="toggleCard('pillar2', this)"
+                aria-controls="pillar2"
+                aria-expanded="false"
+              >
+                See projects
+              </button>
+
+              <div id="pillar2" class="mt-4 hidden">
+                <div class="border-t pt-4 space-y-3">
+                  <div class="rounded-lg border p-4">
+                    <div class="flex items-center justify-between">
+                      <h3 class="font-semibold">Developing a biomaterial hydrogel for the treatment of glioblastoma: TrapKill</h3>
+                      <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600">Researcher: José Miguel Fernández Real</p>
+                  </div>
+                  <div class="rounded-lg border p-4">
+                    <div class="flex items-center justify-between">
+                      <h3 class="font-semibold">Development of In Vitro Trap and Kill Therapy for Glioblastoma</h3>
+                      <span class="text-xs bg-purple-50 text-purple-700 px-2 py-0.5 rounded-full">PhD</span>
+                    </div>
+                    <p class="mt-2 text-sm text-gray-600">Researcher: Taryn Clarke</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right side: circular image slider -->
+            <div class="relative w-40 h-40 rounded-full overflow-hidden shadow-md flex-shrink-0 circle-slider">
+              <!-- you can use different images here -->
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Neuro-oncology image 1">
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture10.jpg" alt="Neuro-oncology image 2">
+            </div>
+          </div>
+        </article>
+
       </div>
 
       <!-- Topics -->
-        <h2 class="text-2xl font-bold mt-12 mb-4 text-center">Key Topics</h2>
+      <h2 class="text-2xl font-bold mt-12 mb-4 text-center">Key Topics</h2>
 
-<div class="bg-white rounded-xl shadow p-6 max-w-3xl mx-auto text-center">
-  <ul class="flex flex-wrap justify-center gap-2">
+      <div class="bg-white rounded-xl shadow p-6 max-w-3xl mx-auto text-center">
+        <ul class="flex flex-wrap justify-center gap-2">
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Gliosis</li>
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Astrocytes</li>
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">3D in&nbsp;vitro models</li>
-          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Organoids</li>      
+          <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Organoids</li>
           <li class="px-3 py-1 rounded-full text-sm bg-gray-100">Mechanobiology</li>
         </ul>
       </div>
