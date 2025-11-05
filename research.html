@@ -2,87 +2,140 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Catalina VG Lab - Research</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Research - Catalina VG Lab</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg_logo_-_Copy-removebg-preview.ico" />
   <style>
     /* Base */
     *,*::before,*::after{ box-sizing:border-box; }
     html,body{
-      margin:0; padding:0; overflow-x:hidden;
+      margin:0;
+      padding:0;
+      overflow-x:hidden;
       font-family:system-ui,sans-serif;
-      background:#f9fafb; color:#2d3748;
-      text-align: justify;
+      background:#f9fafb;
+      color:#2d3748;
     }
+    html { scroll-behavior: smooth; }
 
     /* ===== Header image with overlaid logos ===== */
     .header-hero{
-      position:relative; width:100%; height:240px; overflow:hidden;
+      position:relative;
+      width:100%;
+      height:240px;
+      overflow:hidden;
     }
     .header-hero img.header-image{
-      position:relative; z-index:1; width:100%; height:100%;
-      object-fit:cover; display:block;
+      position:relative;
+      z-index:1;
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
     .header-hero::after{
-      content:""; position:absolute; inset:0;
+      content:"";
+      position:absolute;
+      inset:0;
       background:linear-gradient(0deg, rgba(0,0,0,0.18), rgba(0,0,0,0.18));
       z-index:2;
     }
     .header-hero .logo{
-      position:absolute; top:50%; transform:translateY(-50%);
-      height:64px; max-width:40vw; object-fit:contain;
-      z-index:3; pointer-events:none; background:transparent;
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      height:64px;
+      max-width:40vw;
+      object-fit:contain;
+      z-index:3;
+      pointer-events:none;
+      background:transparent;
     }
-    .header-hero .logo.left{ left:16px; }
+    .header-hero .logo.left{ left:16px; height:96px; max-width:48vw; }
     .header-hero .logo.right{ right:16px; }
-    .header-hero .logo.left{ height:96px; max-width:48vw; }
     @media (max-width:480px){
       .header-hero{ height:200px; }
       .header-hero .logo{ height:52px; }
       .header-hero .logo.left{ height:72px; max-width:60vw; }
     }
 
-    /* ===== Navbar ===== */
+    /* ===== Navbar (hamburger) ===== */
     header{
-      position:sticky; top:0; left:0; right:0;
-      background:#9dd5d6; z-index:30;
+      position:sticky;
+      top:0;
+      left:0;
+      right:0;
+      background:#9dd5d6;
+      z-index:30;
       box-shadow:0 2px 5px rgba(0,0,0,0.1);
     }
     .nav-container{
-      max-width:1440px; margin:0 auto;
-      display:flex; justify-content:flex-start; align-items:center; gap:12px;
-      padding:0.75rem 1rem; position:relative;
+      max-width:1440px;
+      margin:0 auto;
+      display:flex;
+      justify-content:flex-start;
+      align-items:center;
+      gap:12px;
+      padding:0.75rem 1rem;
+      position:relative;
     }
     .hamburger{
-      width:44px; height:34px; padding:8px;
-      display:flex; flex-direction:column; justify-content:space-between;
-      cursor:pointer; border-radius:8px; outline:none; border:0; background:transparent;
+      width:44px;
+      height:34px;
+      padding:8px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      cursor:pointer;
+      border-radius:8px;
+      outline:none;
+      border:0;
+      background:transparent;
     }
     .hamburger:focus{ box-shadow:0 0 0 3px rgba(255,255,255,0.6); }
-    .hamburger div{ height:5px; border-radius:3px; background:#fff; transition:all .3s ease; }
+    .hamburger div{
+      height:5px;
+      border-radius:3px;
+      background:#fff;
+      transition:all .3s ease;
+    }
     .hamburger.open div:nth-child(1){ transform:rotate(45deg) translate(7px,7px); }
     .hamburger.open div:nth-child(2){ opacity:0; }
     .hamburger.open div:nth-child(3){ transform:rotate(-45deg) translate(8px,-8px); }
 
     nav ul{
-      list-style:none; display:none; flex-direction:column;
-      position:absolute; top:64px; left:0; transform:none;
-      background:#9dd5d6; width:260px;
-      border-radius:0 0 8px 8px; box-shadow:0 2px 5px rgba(0,0,0,0.15);
-      padding:0; margin:0; z-index:50; text-align:left;
+      list-style:none;
+      display:none;
+      flex-direction:column;
+      position:absolute;
+      top:64px;
+      left:0;
+      background:#9dd5d6;
+      width:260px;
+      border-radius:0 0 8px 8px;
+      box-shadow:0 2px 5px rgba(0,0,0,0.15);
+      padding:0;
+      margin:0;
+      z-index:50;
+      text-align:left;
     }
     nav ul.show{ display:flex; }
     nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
     nav ul li:last-child{ border-bottom:none; }
     nav ul li a{
-      display:block; padding:1rem 1.25rem;
-      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
-      letter-spacing:.2px; transition:background .2s ease;
+      display:block;
+      padding:1rem 1.25rem;
+      color:#fff;
+      text-decoration:none;
+      font-weight:800;
+      font-size:1.05rem;
+      letter-spacing:.2px;
+      transition:background .2s ease;
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
-    /* slideshow inside circle */
+    /* ===== Circle slider for research cards ===== */
     @keyframes fadeSlide {
       0%, 45% {
         opacity: 1;
@@ -97,8 +150,6 @@
         transform: translateX(0);
       }
     }
-
-    /* every image in the slider uses this */
     .circle-slider img {
       position: absolute;
       inset: 0;
@@ -108,34 +159,37 @@
       border-radius: 9999px;
       animation: fadeSlide 8s infinite;
     }
-
-    /* second image starts later */
     .circle-slider img:nth-child(2) {
       animation-delay: 4s;
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
+
+  <!-- Header with 2 logos -->
+  <div class="header-hero">
+    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
+    <img class="logo right"  src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
+  </div>
 
   <!-- Navbar -->
-  <nav class="bg-white shadow-md">
-    <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
-      <div class="flex items-center space-x-3">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/cvg%20logo.png" alt="CVG Logo" class="h-12"/>
-      </div>
-      <div class="hidden md:block space-x-6">
-        <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="research.html" class="text-blue-600 font-semibold">Research</a>
-        <a href="people.html" class="hover:text-blue-600">People</a>
-        <a href="publications.html" class="hover:text-blue-600">Publications</a>
-        <a href="contact.html" class="hover:text-blue-600">Contact</a>
-      </div>
-      <!-- Simple mobile menu button (optional/no JS toggle for brevity) -->
-      <div class="md:hidden">
-        <a href="#research" class="px-3 py-2 rounded-md text-sm font-medium border hover:bg-gray-50">Menu</a>
-      </div>
+  <header>
+    <div class="nav-container">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-controls="nav-menu" aria-expanded="false">
+        <div></div><div></div><div></div>
+      </button>
+      <nav role="navigation" aria-label="Main navigation">
+        <ul id="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">People</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
     </div>
-  </nav>
+  </header>
 
   <!-- Our Research (Cards, vertical stack) -->
   <section id="research" class="py-16 bg-gray-50">
@@ -243,9 +297,8 @@
 
             <!-- Right side: circular image slider -->
             <div class="relative w-40 h-40 rounded-full overflow-hidden shadow-md flex-shrink-0 circle-slider">
-              <!-- you can use different images here -->
-              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture11.jpg" alt="Neuro-oncology image 1">
-              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture10.jpg" alt="Neuro-oncology image 2">
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/Picture9.jpg" alt="Neuro-oncology image 1">
+              <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/MAX_60-Z-2oif.tif.frames.png" alt="Neuro-oncology image 2">
             </div>
           </div>
         </article>
@@ -275,8 +328,9 @@
     </div>
   </section>
 
-  <!-- Tiny helper script -->
+  <!-- Scripts -->
   <script>
+    // Toggle research project sections
     function toggleCard(id, btn) {
       const el = document.getElementById(id);
       if (!el) return;
@@ -287,9 +341,8 @@
         btn.textContent = expanded ? 'See projects' : 'Hide projects';
       }
     }
-  </script>
-    <script>
-    // Hamburger toggle
+
+    // Hamburger toggle (same behaviour as people page)
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
 
@@ -302,7 +355,10 @@
 
     burger.addEventListener('click', toggleMenu);
     burger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMenu();
+      }
     });
 
     document.addEventListener('click', (e) => {
