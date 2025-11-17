@@ -38,6 +38,12 @@
     .header-hero .logo.left{ left:16px; height:96px; max-width:48vw; }
     .header-hero .logo.right{ right:16px; }
 
+    @media (max-width:480px){
+      .header-hero{ height:200px; }
+      .header-hero .logo{ height:52px; }
+      .header-hero .logo.left{ height:72px; max-width:60vw; }
+    }
+
     /* ===== Navbar ===== */
     header{
       position:sticky; top:0; left:0; right:0;
@@ -66,14 +72,24 @@
       padding:0; margin:0; z-index:50;
     }
     nav ul.show{ display:flex; }
+    nav ul li{ border-bottom:1px solid rgba(255,255,255,0.3); }
+    nav ul li:last-child{ border-bottom:none; }
+    nav ul li a{
+      display:block; padding:1rem 1.25rem;
+      color:#fff; text-decoration:none; font-weight:800; font-size:1.05rem;
+      letter-spacing:.2px; transition:background .2s ease;
+    }
+    nav ul li a:hover{ background:rgba(255,255,255,0.2); }
 
     /* ===== People grid ===== */
-    .custom-container{ max-width:1440px; margin:0 auto; padding:3rem 3rem 4rem; }
+    .custom-container{
+      max-width:1440px; margin:0 auto; padding:3rem 3rem 4rem;
+    }
 
     .grid{
       display:grid; gap:2rem;
       grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-      justify-items:center; /* <-- center items */
+      justify-items:center; /* center all cards in their grid cells */
     }
 
     a.person-card{
@@ -83,29 +99,37 @@
     a.person-card:hover{ opacity:.9; }
 
     a.person-card img{
-      width:180px; height:180px; border-radius:50%;
-      object-fit:cover; margin:0 auto;
-      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+      width:180px; height:180px; margin:0 auto; border-radius:50%;
+      object-fit:cover; box-shadow:0 4px 8px rgba(0,0,0,0.1);
     }
+    a.person-card h4{
+      margin-top:1rem; font-size:1.25rem; font-weight:600; color:#1a202c; white-space:nowrap;
+    }
+    a.person-card p{ font-size:1rem; color:#718096; margin-top:.5rem; }
 
-    /* PI largest */
+    /* ===== PI largest, centered full row ===== */
     .grid a[href="catalinabio.html"]{
-      grid-column:1/-1; /* full width */
+      grid-column: 1 / -1;
+      justify-self:center;
     }
     .grid a[href="catalinabio.html"] img{
-      width:240px; height:240px;
+      width: 240px; height: 240px;
     }
 
-    /* Mid-level (Postdoc) centered automatically by justify-items:center */
+    /* ===== Mid-level person on its own centered row ===== */
+    a.person-card.mid{
+      grid-column: 1 / -1;       /* span full row */
+      justify-self: center;      /* center within row */
+    }
     a.person-card.mid img{
-      width:200px;
-      height:200px;
+      width: 200px;
+      height: 200px;
     }
 
-    /* Centered heading */
+    /* ===== "Current Students" heading, centered ===== */
     .students-heading-wrapper{
-      grid-column:1/-1;
-      text-align:center;      /* centered */
+      grid-column: 1 / -1;
+      text-align:center;
       margin-top:1.5rem;
       margin-bottom:0.5rem;
     }
@@ -115,40 +139,64 @@
       color:#1a202c;
     }
 
-    /* ===== Sliding Banner ===== */
+    /* ===== Sliding Banner (centered) ===== */
     .banner-slider{
-      max-width:1440px; margin:2rem auto 3rem; padding:0 1rem; position:relative;
+      max-width:1440px;
+      margin:2rem auto 3rem;
+      padding:0 1rem;
+      position:relative;
+      display:flex;              /* center inner block */
+      justify-content:center;
     }
     .banner-slider-inner{
-      overflow:hidden; border-radius:8px;
-      display:flex; align-items:center; justify-content:center;
+      overflow:hidden;
+      border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       min-height:320px;
+      width:100%;
+      max-width:1000px;          /* keeps content nicely centered */
     }
     .banner-slider .slide{
-      display:none; width:100%; text-align:center;
+      display:none;
+      width:100%;
+      text-align:center;
     }
-    .banner-slider .slide.active{ display:block; }
-
+    .banner-slider .slide.active{
+      display:block;
+    }
     .banner-img{
       max-height:320px;
       max-width:100%;
-      width:auto; height:auto;
+      width:auto;
+      height:auto;
       object-fit:contain;
+      display:inline-block;
       border-radius:8px;
       box-shadow:0 2px 8px rgba(0,0,0,0.1);
     }
 
     /* Arrows */
-    .slider-btn{
-      position:absolute; top:50%; transform:translateY(-50%);
-      background:rgba(0,0,0,0.35); color:white;
-      border:none; padding:10px 16px; font-size:28px;
-      cursor:pointer; border-radius:6px; z-index:20;
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.35);
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      font-size: 28px;
+      cursor: pointer;
+      border-radius: 6px;
+      z-index: 20;
+      transition: background 0.3s ease;
     }
-    .slider-btn.prev{ left:10px; }
-    .slider-btn.next{ right:10px; }
-    .slider-btn:hover{ background:rgba(0,0,0,0.55); }
-
+    .slider-btn:hover {
+      background: rgba(0,0,0,0.55);
+    }
+    .slider-btn.prev { left: 18px; }
+    .slider-btn.next { right: 18px; }
   </style>
 </head>
 
@@ -156,79 +204,82 @@
 
   <!-- Header -->
   <div class="header-hero">
-    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" />
-    <img class="logo right" src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" />
-    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" />
+    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Header Image" />
+    <img class="logo right" src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway Logo" />
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab Logo" />
   </div>
 
   <!-- Navbar -->
   <header>
     <div class="nav-container">
-      <button class="hamburger" id="hamburger"><div></div><div></div><div></div></button>
-      <nav><ul id="nav-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="people.html">Lab Members</a></li>
-        <li><a href="publications.html">Publications</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul></nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <div></div><div></div><div></div>
+      </button>
+      <nav role="navigation">
+        <ul id="nav-menu">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="research.html">Research</a></li>
+          <li><a href="people.html">Lab Members</a></li>
+          <li><a href="publications.html">Publications</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+      </nav>
     </div>
   </header>
 
   <!-- People Section -->
   <section id="people" class="custom-container">
     <div class="grid">
-
       <!-- PI -->
       <a href="catalinabio.html" class="person-card">
-        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" />
+        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina Vallejo Giraldo" />
         <h4>Catalina Vallejo Giraldo</h4>
         <p>Principal Investigator</p>
       </a>
 
-      <!-- Mid-level person (centered automatically) -->
+      <!-- Postdoc (centered row, medium circle) -->
+      <!-- Replace href + image + text with your real postdoc -->
       <a href="postdoc.html" class="person-card mid">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/postdoc.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/postdoc.jpg" alt="Postdoctoral Researcher" />
         <h4>Postdoctoral Researcher</h4>
         <p>Postdoctoral Fellow</p>
       </a>
 
-      <!-- Centered Heading -->
+      <!-- Centered heading -->
       <div class="students-heading-wrapper">
         <h3 class="students-heading">Current Students</h3>
       </div>
 
       <!-- Students -->
       <a href="akash.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" alt="Akash Garhwal" />
         <h4>Akash Garhwal</h4>
         <p>PhD Student</p>
       </a>
 
       <a href="Taryn.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" alt="Taryn Clarke" />
         <h4>Taryn Clarke</h4>
         <p>PhD Student</p>
       </a>
 
       <a href="Jose.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" alt="José Miguel Fernández Real" />
         <h4>José Miguel Fernández Real</h4>
         <p>PhD Student</p>
       </a>
 
       <a href="Andre.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" alt="Andres P. Carreño" />
         <h4>Andres P. Carreño</h4>
         <p>PhD Student</p>
       </a>
 
       <a href="Yvonne.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" alt="Yvonne Fahy" />
         <h4>Yvonne Fahy</h4>
         <p>PhD Student</p>
       </a>
-
     </div>
   </section>
 
@@ -236,16 +287,16 @@
   <section class="banner-slider">
     <div class="banner-slider-inner">
       <div class="slide active">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png" class="banner-img" alt="Group Photo 1" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg" class="banner-img" alt="Group Photo 2" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png" class="banner-img" alt="Group Photo 3" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png" class="banner-img" alt="Group Photo 4" />
       </div>
     </div>
 
@@ -254,30 +305,53 @@
   </section>
 
   <script>
-    /* Hamburger */
+    /* ===== HAMBURGER ===== */
     const burger = document.getElementById('hamburger');
-    const menu = document.getElementById('nav-menu');
-    burger.addEventListener('click', () => menu.classList.toggle('show'));
+    const menu   = document.getElementById('nav-menu');
 
-    /* Slider */
+    burger.addEventListener('click', () => {
+      const open = menu.classList.toggle('show');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && !burger.contains(e.target)) {
+        menu.classList.remove('show');
+        burger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    /* ===== SLIDER ===== */
     const slides = document.querySelectorAll('.banner-slider .slide');
     let currentSlide = 0;
 
-    function showSlide(i){
+    function showSlide(index) {
       slides[currentSlide].classList.remove('active');
-      currentSlide = (i + slides.length) % slides.length;
+      currentSlide = (index + slides.length) % slides.length;
       slides[currentSlide].classList.add('active');
     }
 
-    let timer = setInterval(()=>showSlide(currentSlide+1),4000);
+    // Auto-slide
+    let slideTimer = setInterval(() => {
+      showSlide(currentSlide + 1);
+    }, 4000);
 
-    function reset(){
-      clearInterval(timer);
-      timer = setInterval(()=>showSlide(currentSlide+1),4000);
+    function resetTimer() {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 4000);
     }
 
-    document.querySelector('.slider-btn.prev').onclick = ()=>{ showSlide(currentSlide-1); reset(); };
-    document.querySelector('.slider-btn.next').onclick = ()=>{ showSlide(currentSlide+1); reset(); };
+    document.querySelector('.slider-btn.prev').addEventListener('click', () => {
+      showSlide(currentSlide - 1);
+      resetTimer();
+    });
+
+    document.querySelector('.slider-btn.next').addEventListener('click', () => {
+      showSlide(currentSlide + 1);
+      resetTimer();
+    });
   </script>
 
 </body>
