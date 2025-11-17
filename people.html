@@ -104,7 +104,7 @@
     }
     a.person-card p{ font-size:1rem; color:#718096; margin-top:.5rem; }
 
-    /* ===== Featured person ===== */
+    /* ===== Featured PI (largest) ===== */
     .grid a[href="catalinabio.html"]{
       grid-column: 1 / -1;
     }
@@ -115,6 +115,25 @@
       .grid a[href="catalinabio.html"] img{
         width: 240px; height: 240px;
       }
+    }
+
+    /* ===== Mid-level person between PI and students ===== */
+    a.person-card.mid img{
+      width: 200px;
+      height: 200px;
+    }
+
+    /* ===== "Current Students" heading inside grid ===== */
+    .students-heading-wrapper{
+      grid-column: 1 / -1;
+      text-align:left;  /* change to center if you prefer */
+      margin-top:1.5rem;
+      margin-bottom:0.5rem;
+    }
+    .students-heading{
+      font-size:1.4rem;
+      font-weight:700;
+      color:#1a202c;
     }
 
     /* ===== Sliding Banner ===== */
@@ -130,7 +149,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      min-height:320px; /* consistent height for all slides */
+      min-height:320px;
     }
     .banner-slider .slide{
       display:none;
@@ -141,11 +160,11 @@
       display:block;
     }
     .banner-img{
-      max-height:320px;      /* control vertical size */
-      max-width:100%;        /* don’t overflow horizontally */
+      max-height:320px;
+      max-width:100%;
       width:auto;
       height:auto;
-      object-fit:contain;    /* show full image, no cropping */
+      object-fit:contain;
       display:inline-block;
       border-radius:8px;
       box-shadow:0 2px 8px rgba(0,0,0,0.1);
@@ -177,15 +196,15 @@
 
   <!-- Header -->
   <div class="header-hero">
-    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" />
-    <img class="logo right" src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" />
-    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" />
+    <img class="header-image" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Picture1.png" alt="Catalina VG Lab header image" />
+    <img class="logo right" src="https://stemma.universityofgalway.ie/wp-content/themes/mi-2022/assets/images/logo-uog.png" alt="University of Galway logo" />
+    <img class="logo left" src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/cvg_logo_-_Copy-removebg-preview.png" alt="CVG Lab logo" />
   </div>
 
   <!-- Navbar -->
   <header>
     <div class="nav-container">
-      <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <button class="hamburger" id="hamburger" aria-label="Toggle navigation" aria-expanded="false">
         <div></div><div></div><div></div>
       </button>
       <nav role="navigation">
@@ -203,33 +222,53 @@
   <!-- People Section -->
   <section id="people" class="custom-container">
     <div class="grid">
+      <!-- PI (largest, full width) -->
       <a href="catalinabio.html" class="person-card">
-        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" />
+        <img src="https://impact.universityofgalway.ie/wp-content/uploads/2024/12/Catalina-Vallejo-Giraldo.jpg" alt="Catalina Vallejo Giraldo" />
         <h4>Catalina Vallejo Giraldo</h4>
         <p>Principal Investigator</p>
       </a>
+
+      <!-- Mid-level person between PI and students -->
+      <!-- TODO: update href, image, name, role -->
+      <a href="postdoc.html" class="person-card mid">
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/postdoc.jpg" alt="Postdoctoral Researcher" />
+        <h4>Postdoctoral Researcher</h4>
+        <p>Postdoctoral Fellow</p>
+      </a>
+
+      <!-- "Current Students" heading -->
+      <div class="students-heading-wrapper">
+        <h3 class="students-heading">Current Students</h3>
+      </div>
+
+      <!-- PhD Students -->
       <a href="akash.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" alt="Akash Garhwal" />
         <h4>Akash Garhwal</h4>
         <p>PhD Student</p>
       </a>
+
       <a href="Taryn.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" alt="Taryn Clarke" />
         <h4>Taryn Clarke</h4>
         <p>PhD Student</p>
       </a>
+
       <a href="Jose.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" alt="José Miguel Fernández Real" />
         <h4>José Miguel Fernández Real</h4>
         <p>PhD Student</p>
       </a>
+
       <a href="Andre.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" alt="Andres P. Carreño" />
         <h4>Andres P. Carreño</h4>
         <p>PhD Student</p>
       </a>
+
       <a href="Yvonne.html" class="person-card">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" />
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" alt="Yvonne Fahy" />
         <h4>Yvonne Fahy</h4>
         <p>PhD Student</p>
       </a>
@@ -240,16 +279,16 @@
   <section class="banner-slider">
     <div class="banner-slider-inner">
       <div class="slide active">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png" class="banner-img" alt="Catalina VG Lab group photo 1" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg" class="banner-img" alt="Catalina VG Lab group photo 2" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png" class="banner-img" alt="Catalina VG Lab group photo 3" />
       </div>
       <div class="slide">
-        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png" class="banner-img"/>
+        <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png" class="banner-img" alt="Catalina VG Lab group photo 4" />
       </div>
     </div>
 
