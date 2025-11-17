@@ -127,17 +127,26 @@
     .banner-slider-inner{
       overflow:hidden;
       border-radius:8px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:320px; /* consistent height for all slides */
     }
     .banner-slider .slide{
       display:none;
+      width:100%;
+      text-align:center;
     }
     .banner-slider .slide.active{
       display:block;
     }
     .banner-img{
-      width:100%;
-      height:300px;
-      object-fit:cover;
+      max-height:320px;      /* control vertical size */
+      max-width:100%;        /* don’t overflow horizontally */
+      width:auto;
+      height:auto;
+      object-fit:contain;    /* show full image, no cropping */
+      display:inline-block;
       border-radius:8px;
       box-shadow:0 2px 8px rgba(0,0,0,0.1);
     }
@@ -164,7 +173,6 @@
     .slider-btn.next { right: 10px; }
   </style>
 </head>
-
 <body>
 
   <!-- Header -->
@@ -180,7 +188,6 @@
       <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
         <div></div><div></div><div></div>
       </button>
-
       <nav role="navigation">
         <ul id="nav-menu">
           <li><a href="index.html">Home</a></li>
@@ -201,31 +208,26 @@
         <h4>Catalina Vallejo Giraldo</h4>
         <p>Principal Investigator</p>
       </a>
-
       <a href="akash.html" class="person-card">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg2/refs/heads/main/SMALL-AkashGarhwal-5464-5464.jpg" />
         <h4>Akash Garhwal</h4>
         <p>PhD Student</p>
       </a>
-
       <a href="Taryn.html" class="person-card">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture1.jpg" />
         <h4>Taryn Clarke</h4>
         <p>PhD Student</p>
       </a>
-
       <a href="Jose.html" class="person-card">
         <img src="https://raw.githubusercontent.com/ParandShokrani/cvg/refs/heads/main/Picture2.jpg" />
         <h4>José Miguel Fernández Real</h4>
         <p>PhD Student</p>
       </a>
-
       <a href="Andre.html" class="person-card">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Andre.jpg" />
         <h4>Andres P. Carreño</h4>
         <p>PhD Student</p>
       </a>
-
       <a href="Yvonne.html" class="person-card">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/Yvonne1.jpg" />
         <h4>Yvonne Fahy</h4>
@@ -237,23 +239,18 @@
   <!-- Sliding Banner -->
   <section class="banner-slider">
     <div class="banner-slider-inner">
-
       <div class="slide active">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png" class="banner-img"/>
       </div>
-
       <div class="slide">
         <img src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg" class="banner-img"/>
       </div>
-
       <div class="slide">
         <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png" class="banner-img"/>
       </div>
-
       <div class="slide">
         <img src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png" class="banner-img"/>
       </div>
-
     </div>
 
     <!-- Buttons -->
@@ -298,15 +295,22 @@
       showSlide(currentSlide + 1);
     }, 4000);
 
+    function resetTimer() {
+      clearInterval(slideTimer);
+      slideTimer = setInterval(() => {
+        showSlide(currentSlide + 1);
+      }, 4000);
+    }
+
     // Buttons
     document.querySelector('.slider-btn.prev').addEventListener('click', () => {
-      clearInterval(slideTimer);
       showSlide(currentSlide - 1);
+      resetTimer();
     });
 
     document.querySelector('.slider-btn.next').addEventListener('click', () => {
-      clearInterval(slideTimer);
       showSlide(currentSlide + 1);
+      resetTimer();
     });
   </script>
 
