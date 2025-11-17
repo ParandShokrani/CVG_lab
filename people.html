@@ -81,6 +81,36 @@
       letter-spacing:.2px; transition:background .2s ease;
     }
     nav ul li a:hover{ background:rgba(255,255,255,0.2); }
+
+    /* ===== Banner (base) ===== */
+    .banner{
+      max-width:1440px; margin:2rem auto 0; padding:0 1rem;
+      display:grid; grid-template-columns:1fr; gap:1rem;
+    }
+    @media(min-width:768px){
+      .banner{ grid-template-columns:1fr 1fr; }
+    }
+    .banner-img{
+      width:100%; height:300px;
+      object-fit:cover; border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ===== Sliding banner overrides ===== */
+    .banner-slider{
+      display:block;           /* override grid */
+      position:relative;
+      margin:2rem auto 3rem;
+    }
+    .banner-slider-inner{
+      position:relative;
+      overflow:hidden;
+    }
+    .banner-slider .slide{
+      display:none;
+    }
+    .banner-slider .slide.active{
+      display:block;
     }
 
     /* ===== People grid ===== */
@@ -103,19 +133,6 @@
       margin-top:1rem; font-size:1.25rem; font-weight:600; color:#1a202c; white-space:nowrap;
     }
     a.person-card p{ font-size:1rem; color:#718096; margin-top:.5rem; }
-    
-    /* ===== Banner images side by side ===== */
-    .banner{
-      max-width:1440px; margin:2rem auto 0; padding:0 1rem;
-      display:grid; grid-template-columns:1fr; gap:1rem;
-    }
-    @media(min-width:768px){
-      .banner{ grid-template-columns:1fr 1fr; }
-    }
-    .banner-img{
-      width:100%; height:300px;
-      object-fit:cover; border-radius:8px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.1);
 
     /* ===== Featured person ===== */
     .grid a[href="catalinabio.html"]{
@@ -159,20 +176,6 @@
     </div>
   </header>
 
-  <!-- Banner Images -->
-  <section class="banner">
-    <img
-      src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png"
-      alt="Catalina VG Lab Team"
-      class="banner-img"
-    />
-    <img
-      src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg"
-      alt="Catalina VG Lab Work"
-      class="banner-img"
-    />
-  </section>
-
   <!-- People Section -->
   <section id="people" class="custom-container">
     <div class="grid">
@@ -209,38 +212,43 @@
     </div>
   </section>
 
+  <!-- Sliding Banner Images (moved below People) -->
+  <section class="banner banner-slider">
+    <div class="banner-slider-inner">
+      <div class="slide active">
+        <img
+          src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g1.png"
+          alt="Catalina VG Lab Team"
+          class="banner-img"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://raw.githubusercontent.com/ParandShokrani/CVG_lab/refs/heads/main/g2.jpeg"
+          alt="Catalina VG Lab Work"
+          class="banner-img"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo1.png"
+          alt="Catalina VG Lab Work"
+          class="banner-img"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://raw.githubusercontent.com/cvglab1/CVG_lab/refs/heads/main/group%20photo2.png"
+          alt="Catalina VG Lab Work"
+          class="banner-img"
+        />
+      </div>
+    </div>
+  </section>
+
   <script>
     // Hamburger toggle
     const burger = document.getElementById('hamburger');
     const menu   = document.getElementById('nav-menu');
 
-    function toggleMenu() {
-      burger.classList.toggle('open');
-      const open = burger.classList.contains('open');
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      menu.classList.toggle('show', open);
-    }
-
-    burger.addEventListener('click', toggleMenu);
-    burger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
-    });
-
-    document.addEventListener('click', (e) => {
-      if (!menu.contains(e.target) && !burger.contains(e.target)) {
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded', 'false');
-        menu.classList.remove('show');
-      }
-    });
-
-    menu.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        burger.classList.remove('open');
-        burger.setAttribute('aria-expanded','false');
-        menu.classList.remove('show');
-      });
-    });
-  </script>
-</body>
-</html>
+    functi
